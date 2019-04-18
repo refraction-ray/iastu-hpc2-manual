@@ -1,4 +1,4 @@
 # Summary
 
-* [User's Manual](users/READEME.md)
+* [User's Manual](users/README.md)
 * [Administrator's Manual](administrators/README.md)
