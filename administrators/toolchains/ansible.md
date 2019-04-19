@@ -15,6 +15,23 @@ In this section, some aspects on ansible is discussed.
 ### Conditionals
 
 * `when`: the argument is rendered by jinja2, but no need for bracket `or`, `and`, `not`
+* compare operator in general language is ok to use in the condition statement, linke `!=`, `>=`
+
+### Loops
+
+* `loop`: list or list of hash, corresponding variables in leading task
+* some moudules directly support list argument
+* register of a loop task, has attr `results` as a list
+
+### Useful keywords
+
+* `environment`: config the env variables, `http_proxy:http://blah`, play level or task level
+
+## CLI commands
+
+* `ansible-vault`, encrypt protected info by given password, used as `!value|eencrypted strings` in playbooks
+* `ansible-galaxy init`: create the directory structure for ansible roles
+* `ansible-playbook -e "var=value"`, overwrite var with highest priority
 
 ## Jinja Template Extension in Ansible
 
@@ -58,4 +75,4 @@ tasks:
 
 ### My comments
 
-In general, ansible playbooks is definitely a type of domain specific language (DSL). There are so many fields, that config files (json or yaml) have been evolving into DSL which go far beyond the scope of some nouns, but also complicated adjective and verbs in the configurations. In some sense, it is always a question, that whether such a scheme is really simple and efficient enough as claimed? Maybe, say playbooks in this case, is easier to handle and suitable for more complicated cases when implemented directly as python scripts instead of a indirect level of abstraction (yml, which one needs reinvent basically all grammars in a Turing complete language and still has less power than a Turing complete language). Of course, it is just my personal thought.
+In general, ansible playbooks is definitely a type of domain specific language (DSL). There are so many fields, that config files (json or yaml) have been evolving into DSL which go far beyond the scope of some nouns, but also complicated adjective and verbs in the configurations. In some sense, it is always a question, that whether such a scheme is really simple and efficient enough as claimed? Maybe, say playbooks in this case, is easier to handle and suitable for more complicated cases when implemented directly as python scripts instead of a indirect level of abstraction (yml, which one needs reinvent basically all wheels of grammars in a Turing complete language like if and for, and still has less expression power than a Turing complete language). Of course, it is just my personal thought.

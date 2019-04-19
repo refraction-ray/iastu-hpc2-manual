@@ -23,6 +23,10 @@ Quicksync is optional for this version of server.
 
 ### Rack
 
+4 post 19 inch width standard(?) rack
+
+### UPS
+
 ### Switch
 
 * Huawei S1720-28GWR-4P
@@ -32,6 +36,8 @@ Quicksync is optional for this version of server.
 * Huawei S1700-16G-AC
 
 ### Ethernet cable
+
+Cat6 2m or 5m
 
 ### Wireless AP
 
@@ -45,6 +51,7 @@ Quicksync is optional for this version of server.
 * KVM switch: one IO set control multiple nodes
 * SAS vs. SATA: [see the comparison](https://www.diffen.com/difference/SATA_vs_Serial_Attached_SCSI)
 * Link aggregation: one logical channel with more than one physical channel of ethernet
+* Port security and isolation: [term in switch configuration](https://cshihong.github.io/2017/11/16/%E7%AB%AF%E5%8F%A3%E5%AE%89%E5%85%A8%E5%92%8C%E7%AB%AF%E5%8F%A3%E9%9A%94%E7%A6%BB/)
 
 ## General References
 

@@ -10,6 +10,7 @@
 
     * [Toolset for DELL servers](administrators/toolchains/dell_server_toolset.md)
     * [Ansible](administrators/toolchains/ansible.md)
+    * [Further considerations](administrators/toolchains/considerations.md)
 
   * [History](administrators/history/README.md)
 
