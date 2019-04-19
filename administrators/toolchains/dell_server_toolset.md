@@ -2,7 +2,21 @@ This section focuses on toolkit with DELL servers provided by DELL.
 
 ## Open Manage
 
+Two parts: sever administrator (1 to 1, server management) and essentials (1 to many, cluster management)
 
+**Reference**:
+
+* [Review and doc index on iDRAC and open manage](https://www.dell.com/support/article/us/en/04/sln129295/dell-poweredge-%E5%A6%82%E4%BD%95%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%85%8D%E7%BD%AEidrac%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E9%80%89%E9%A1%B9?lang=zh)
+* [Open manage essentials: User's guide](https://www.dell.com/support/manuals/us/en/04/dell-openmanage-essentials-v2.1/omeug-v4/about-openmanage-essentials?guid=guid-f21468fb-0f16-4adb-8d29-41c5b1d32395&lang=en-us)
 
 ## iDRAC
 
+iDRAC might be configure by LCD if the server has. [Basic on iDRAC config](https://www.dell.com/support/article/us/en/04/sln129356/start-up-page-for-dell-poweredge-server-of-12th-and-13th-generation-r620-r630?lang=en), [default username and password for iDRAC](https://www.dell.com/support/article/us/en/04/sln306783/dell-poweredge-what-is-the-default-username-and-password-for-idrac?lang=en)
+
+It has its own ip assigned (though not a fan of this feature)
+
+### CLI tool - racadm
+
+ [Basic command of racadm](https://blog.51cto.com/wuyanc/1864022)
+
+### Life Cycle Controler

@@ -1,0 +1,1 @@
+In this section, I would record all operations and configuration changes on both hardware and software level of HPC2. 
