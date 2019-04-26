@@ -6,12 +6,22 @@ In this part, I would keep some notes on tools or softwares that I haven't fully
 
 [Cool wiki list on what tools they contained](https://github.com/openhpc/ohpc/wiki/Component-List-v1.3.7), and possible an important list of softwares that might be useful for HPC in general.
 
+Not a valid option for debian?
+
 ## Spack
 
 [repo](https://github.com/spack/spack)
+
+*currently under investigation to include, package manager alternative for openhpc*
 
 ## Singularity
 
 *a runtime container*
 
 [site](http://singularity.lbl.gov/)
+
+## Modules
+
+[site](http://modules.sourceforge.net/)
+
+Not a fan of this due to the language it utilized.

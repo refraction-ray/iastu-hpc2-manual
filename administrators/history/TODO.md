@@ -23,11 +23,17 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] locale to en.US for all systems
 - [ ] ntp server for master node
 - [ ] nfs settings
+- [ ] dhcp server for master node
 
 ### DevOp softwares
 
 - [ ] crobbler
 - [ ] ansible
+  - [ ] create playbooks for:
+    - [ ] user management and their ssh key
+    - [ ] apt tools install
+    - [ ] service state management
+    - [ ] network configuration (dhcp server with fix ip on master and dhcp auto on nodes)
 - [ ] nagios
 - [ ] *ganglia*
 - [ ] *modules*
@@ -35,7 +41,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 ### HPC softwares
 
 - [ ] slurm
-- [ ] intel parallel studio
+- [ ] intel parallel studio (ifort icc intelmpi intelpython and mkl included)
 - [ ] Eigen and armadillo
 - [ ] boost
 - [ ] *GSL*

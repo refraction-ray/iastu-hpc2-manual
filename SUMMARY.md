@@ -15,6 +15,7 @@
   * [History](administrators/history/README.md)
 
     * [ToDo](administrators/history/TODO.md)
+    * [VM test](administrators/history/VM.md)
 
     ​
 
