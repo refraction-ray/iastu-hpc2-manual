@@ -24,6 +24,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] ntp server for master node
 - [ ] nfs settings
 - [ ] dhcp server for master node
+- [ ] apt and pip source change
 
 ### DevOp softwares
 
@@ -46,7 +47,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] boost
 - [ ] *GSL*
 - [ ] *distributed mathematica*
-- [ ] *SLEPc PETSc and external solver packages*
+- [ ] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*
 
 ### Modern cloud and distributed system tools
@@ -54,4 +55,9 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] *OpenStack*
 - [ ] *Spark*
 - [ ] *Kubernetes*
+
+## Main problems to address
+
+- [ ] unifomity of user
+- [ ] uniformity of environment variables
 
