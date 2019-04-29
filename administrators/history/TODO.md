@@ -25,22 +25,24 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] nfs settings
 - [ ] dhcp server for master node
 - [ ] apt and pip source change
+- [ ] ? shutdown password login in LAN
 
 ### DevOp softwares
 
-- [ ] crobbler
+- [ ] cobbler
 - [ ] ansible
   - [ ] create playbooks for:
     - [ ] user management and their ssh key
     - [ ] apt tools install
     - [ ] service state management
-    - [ ] network configuration (dhcp server with fix ip on master and dhcp auto on nodes)
+    - [ ] network configuration (dhcp server with fix ip on master and dhcp auto on nodes and nat)
 - [ ] nagios
 - [ ] *ganglia*
 - [ ] *modules*
 
 ### HPC softwares
 
+- [ ] spack
 - [ ] slurm
 - [ ] intel parallel studio (ifort icc intelmpi intelpython and mkl included)
 - [ ] Eigen and armadillo
@@ -56,8 +58,20 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] *Spark*
 - [ ] *Kubernetes*
 
-## Main problems to address
+## Miscs
+
+### tasks to explore
 
 - [ ] unifomity of user
 - [ ] uniformity of environment variables
+
+### warning
+
+- [ ] name system with version number
+- [ ] try install all useful things in opt which is going to be export
+
+### design principle
+
+* more on master, less on slave
+* more on ansible playbooks, less by hand
 

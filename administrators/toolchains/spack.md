@@ -1,0 +1,1 @@
+In this section, I will give some information on the package manager designed for HPC. It would be ideal that all computation related software is under the control of spack.

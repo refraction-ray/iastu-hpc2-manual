@@ -34,7 +34,7 @@ To simulate the cluster network topology in VM clusters, see my blog [here](http
 
 ### Python3 preparation
 
-The operations below only on master VM.
+The operations below only on master VM. *Since ansible can be installed directly via apt, the python part might be moved later which controled by ansible*
 
 * apt source [change to tuna](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)
 
@@ -63,9 +63,11 @@ The operations below only on master VM.
   target=/home/user/.local/lib/python3.6/site-packages
   ```
 
+  It is worth noting that, after this user specific config, the installation of package is home dir even if we use sudo. Only `sudo su` to root can the installation dir change back to opt.
+
 ### NFS and NTP
 
-*Note this section is just a test on whether python can work on nfs system consistent, in production these steps should be configured after ansible management*
+*NTP part can be controled by ansible later in production*
 
 * on master, `sudo apt install nfs-kernel-server`.
 * config `/etc/exports`, note there should not be any space after comma. `/opt 192.168.48.0/24 (rw,sync)`.
@@ -90,3 +92,25 @@ server ntp.tuna.tsinghua.edu.cn prefer
 * `ssh-keygen -b 4096`, and vim `authorized_keys` to add the publick key line, chmod 600 for the key file. And now one can ssh hostname freely without password.
 
 ### Ansible
+
+* on master, `sudo apt install ansible`
+
+* ~~edit `/etc/ansible/hosts` for a temporary ping test `ansible all -m ping`~~ (Just follow an all in one roles package)
+
+  ```bash
+  [ln]
+  master
+  [cn]
+  node1
+  node2
+  [all:vars]
+  ansible_python_interpreter=/usr/bin/python3
+  ```
+
+  For the vars part, actually you must specify python3, otherwise python is consulted while it doesn't exist on ubuntu18.04 by default. See [this issue](https://github.com/ansible/ansible/issues/19605) for reference.
+
+* create a standalone dir for ansible roles and config management.
+
+* `ansible-playbook site.yml -vv --ask-become-pass`
+
+* backup the ansible roles to other server: `rsync -avz -e "ssh -p port" hpc/ user@ip:/home/user/`

@@ -8,12 +8,6 @@ In this part, I would keep some notes on tools or softwares that I haven't fully
 
 Not a valid option for debian?
 
-## Spack
-
-[repo](https://github.com/spack/spack)
-
-*currently under investigation to include, package manager alternative for openhpc*
-
 ## Singularity
 
 *a runtime container*

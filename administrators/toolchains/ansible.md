@@ -9,6 +9,7 @@ In this section, some aspects on ansible is discussed.
 * user
 * service
 * setup: get basic facts as variables collecting from nodes
+* template: backup=yes
 
 ## General syntax in playbooks
 
@@ -26,12 +27,15 @@ In this section, some aspects on ansible is discussed.
 ### Useful keywords
 
 * `environment`: config the env variables, `http_proxy:http://blah`, play level or task level
+* `become`: the user after ssh
+* `remote_user`: the user used for ssh
 
 ## CLI commands
 
 * `ansible-vault`, encrypt protected info by given password, used as `!value|eencrypted strings` in playbooks
 * `ansible-galaxy init`: create the directory structure for ansible roles
 * `ansible-playbook -e "var=value"`, overwrite var with highest priority
+* `-vv`: verbose mode
 
 ## Jinja Template Extension in Ansible
 
@@ -72,6 +76,12 @@ tasks:
 ```
 
 ## Misc
+
+### Cautions
+
+* In template system, just use `{{}}` instead of quote `""` outside.
+* indent in jinja template config files: [blog](https://tech.just-imho.net/2016/06/09/ansible-indenting-in-templates/)
+* ansible_facts, the key should rip the ansible part off, which is ...
 
 ### My comments
 
