@@ -19,3 +19,7 @@ Not a valid option for debian?
 [site](http://modules.sourceforge.net/)
 
 Not a fan of this due to the language it utilized.
+
+## Lmod
+
+alternatives to modules

@@ -26,11 +26,13 @@ Use screen sharing in mac to access the VNC desktop to finish the installation, 
 
 **VM delete:** `virsh destroy domain && virsh undefine domain` to drop the VM, but still one need to delete the image. Try `virsh vol-list default` and `virsh vol-delete --pool default name`. The pool is find by `virsh pool-list`.
 
+**VM volume resize**: `sudo virsh vol-resize master.qcow2 --pool default 10G`, `sudo virsh vol-info master.qcow2 --pool default`. Never resize for a online VM, it is easy to corrupt the disk!!! For the resize operation on VM, see my blog [here](https://re-ra.xyz/KVM-%E7%A1%AC%E7%9B%98%E6%89%A9%E5%AE%B9/).
+
 ### Network configuration
 
 To simulate the cluster network topology in VM clusters, see my blog [here](https://re-ra.xyz/KVM-%E8%99%9A%E6%8B%9F%E9%9B%86%E7%BE%A4%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E8%AE%BE%E7%BD%AE/).
 
-## Basic on master
+## Basic
 
 ### Python3 preparation
 
@@ -114,3 +116,51 @@ server ntp.tuna.tsinghua.edu.cn prefer
 * `ansible-playbook site.yml -vv --ask-become-pass`
 
 * backup the ansible roles to other server: `rsync -avz -e "ssh -p port" hpc/ user@ip:/home/user/`
+
+* parallel ad-hoc commands `ansible all -a "bash /blah/proxy.cfg"`
+
+## slurm
+
+### munge
+
+come with slurm on ubuntu apt, change the file `/etc/munge/munge.key` to the same and restart service munge. Test see [here](https://github.com/dun/munge/wiki/Installation-Guide).
+
+### debug
+
+`slurmd -Dcvv`
+
+Somehow the service slurmctld and slurmd may get very messy, one may first `ps aux|grep slurm` and kill them totally by pid, and then try start the service again.
+
+### integrate with mpi
+
+Note intel-mpi is a little different to use! A direct `srun` doesn't work. See [here](https://slurm.schedmd.com/mpi_guide.html). Instead use sbatch script as follows
+
+```bash
+#!/bin/sh
+export I_MPI_PROCESS_MANAGER=mpd
+mpirun -n 3 ./a.out
+```
+
+
+
+### Hopefully workflow
+
+How to achieve minimal steps.
+
+* For master node
+  * OS installation
+  * create user account with sudo
+  * two ethernet cable plugin and enable the wan network
+  * sshd enable and run and generate ssh-keygen
+  * apt install ansible
+  * config inventory and vars for ansible roles
+  * run ansible on master only
+* For slave node
+  * OS installation
+  * create user account with the same name and password
+  * ethernet cable to master switch
+  * sshd enable and run
+  * paste the pub key to authorized keys
+* For master node
+  * add slave node on ansible inventory
+  * run ansible again for all nodes

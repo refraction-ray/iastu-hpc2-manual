@@ -10,6 +10,12 @@ In this section, some aspects on ansible is discussed.
 * service
 * setup: get basic facts as variables collecting from nodes
 * template: backup=yes
+* authorized_keys
+* [git](https://docs.ansible.com/ansible/latest/modules/git_module.html)
+* lineinfile
+* apt
+* make
+* hostname
 
 ## General syntax in playbooks
 
@@ -81,7 +87,12 @@ tasks:
 
 * In template system, just use `{{}}` instead of quote `""` outside.
 * indent in jinja template config files: [blog](https://tech.just-imho.net/2016/06/09/ansible-indenting-in-templates/)
-* ansible_facts, the key should rip the ansible part off, which is ...
+* `ansible_facts`, the key should rip the ansible part off, which is ...
+* but for `host_vars[hostname]` to access the facts, the ansible prefix is must, which is in contrast with `ansible_facts`...
+* lookup plugin dont take `become: yes` as a thing, it just cannot cat other user's file….
+* for `copy` to copy files without permission, use remote_src: yes option, otherwise `become` is also useless...
+* the dest path cannot be a relative one, but use `{{role_path}}` instead
+* each task has it own ssh session and shell: [how source work with ansible](https://stackoverflow.com/questions/22256884/not-possible-to-source-bashrc-with-ansible/27541856#27541856). The default shell of ansible is `sh`, while source is a bash builtin instead of sh.
 
 ### My comments
 
