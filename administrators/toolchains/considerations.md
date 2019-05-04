@@ -14,6 +14,8 @@ Not a valid option for debian?
 
 [site](http://singularity.lbl.gov/)
 
+It seems quite interesting for this container scheme and share strong similarity with docker.
+
 ## Modules
 
 [site](http://modules.sourceforge.net/)
@@ -22,4 +24,18 @@ Not a fan of this due to the language it utilized.
 
 ## Lmod
 
-alternatives to modules
+alternatives to modules, merged to the main workflow under spack
+
+## Lustre or BeeGFS
+
+lustre file system for HPC
+
+## Dask
+
+python module for parallel computing. Maybe the scheme to utilize distributed computation source with one jupyter notebook frontend.
+
+[site](https://dask.org/)
+
+[use dask on HPC style clusters](https://docs.dask.org/en/latest/setup/hpc.html)
+
+## CGGROUP

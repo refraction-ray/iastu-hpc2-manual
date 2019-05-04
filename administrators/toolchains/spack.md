@@ -13,11 +13,13 @@ git checkout releases/v0.12
 ## Commands
 
 * `spack list`
+* `spack add <pack>`: to be installed but not now
 * `spack install <pack>`
 * `spack versions <pack>`: see available versions of pack
 * `spack find`: look for installed packs
 * `spack uninstall <pack>`: `-R` remove dependents
 * `spack env create <proj>`: virt spack env
+* `spack extention <pack>`: for example, numpy is the extension of python [doc](https://spack.readthedocs.io/en/latest/basic_usage.html#extensions-python-support)
 
 ### Syntax for version
 
@@ -38,13 +40,36 @@ git checkout releases/v0.12
 
 Using lsmod.
 
-`spack install lsmod`
+`spack install lmod`
 
 ` . $(spack location -i lmod)/lmod/lmod/init/bash`
 
 `. share/spack/setup-env.sh`
 
 then you can use `spack load` and module system. Somehow spack system require python2.
+
+## Customize repo and package file recipe
+
+[doc](https://spack.readthedocs.io/en/latest/tutorial_packaging.html) **recommended for careful reading**
+
+`spack repo add $SPACK_ROOT/var/spack/repos/tutorial/`
+
+`spack create` to create package
+
+`spack edit <pack>`: change the package recipe py
+
+`spack info <pack>`: some info on the package
+
+spec obj to access internal info
+
+by this mechanism, basically you can put all software under control of spack
+
+## Misc
+
+### interaction
+
+* singularity
+* docker
 
 ## Issues with specific packages
 

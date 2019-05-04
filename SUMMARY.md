@@ -10,6 +10,8 @@
 
     * [Toolset for DELL servers](administrators/toolchains/dell_server_toolset.md)
     * [Ansible](administrators/toolchains/ansible.md)
+    * [Spack](administrators/toolchains/spack.md)
+    * [Toolset for log](administrators/toolchains/log.md)
     * [Further considerations](administrators/toolchains/considerations.md)
 
   * [History](administrators/history/README.md)

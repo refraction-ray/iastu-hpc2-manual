@@ -52,9 +52,7 @@ The operations below only on master VM. *Since ansible can be installed directly
   index-url=https://pypi.tuna.tsinghua.edu.cn/simple
   ```
 
-  and then `sudo pip3 install` for every packagecd
-
-   you want. `export PYTHONPATH=/opt/python3/dist-packages` for python3 to auto include it in sys.path.
+  and then `sudo pip3 install` for every packages you want. `export PYTHONPATH=/opt/python3/dist-packages` for python3 to auto include it in sys.path.
 
 * One can upgrade pip by `sudo pip3 install pip -U`, and in bashrc `alias pip3="python3 -m pip"`.
 
@@ -141,9 +139,11 @@ export I_MPI_PROCESS_MANAGER=mpd
 mpirun -n 3 ./a.out
 ```
 
+For intel mpi, the path should be something like `./a.out` though for openmpi, `a.out` is enough.
 
+Note the different implementation of PMI interface, which is the key for srun to work as expected. But it is ok srun itself doesn't work. We can combine sbatch and mpirun to achieve the same effect.
 
-### Hopefully workflow
+###  Hopefully workflow
 
 How to achieve minimal steps.
 

@@ -81,6 +81,10 @@ tasks:
       when: my_var is match ("bl*")
 ```
 
+## Development consideration
+
+* [practical example of modules and action plugins](https://ndemengel.github.io/2015/01/20/ansible-modules-and-action-plugins/)
+
 ## Misc
 
 ### Cautions
