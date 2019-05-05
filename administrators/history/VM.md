@@ -143,6 +143,18 @@ For intel mpi, the path should be something like `./a.out` though for openmpi, `
 
 Note the different implementation of PMI interface, which is the key for srun to work as expected. But it is ok srun itself doesn't work. We can combine sbatch and mpirun to achieve the same effect.
 
+Note slurm can also interact with containers such as docker or sigularity in principle.
+
+### account
+
+* `sudo apt install slurmdbd mysql-server python-mysqldb`
+* `sudo service mysql status`
+* `GRANT ALL PRIVILEGES ON slurm_acct_db.* TO 'slurm'@'localhost';` in mysql
+* possible mysql table missing issue: [issue](https://github.com/giovtorres/docker-centos7-slurm/issues/3)
+* slurmdbd behavior is somewhat very weird and require explicit acctmgr cluster add as well as restart service for slrumdbd and slrumctld many times in some sorts of order.
+* seems a bug with systemctl for slurmdbd, slurmdbd itself works.
+* Anyways, slurm together with its eco and doc, is… totally a mess, Good luck
+
 ###  Hopefully workflow
 
 How to achieve minimal steps.

@@ -8,7 +8,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
   - [ ] config on MTU of servers
   - [ ] config on MTU of switches, Jumbo
 - [ ] Divide S1720 switch into two **VLAN**
-- [ ] DHCP on the master node with very long lease time
+- [x] DHCP on the master node with very long lease time
 
 ### Server related
 
@@ -20,17 +20,17 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 ### OS related
 
-- [ ] locale to en.US for all systems
-- [ ] ntp server for master node
-- [ ] nfs settings
-- [ ] dhcp server for master node
-- [ ] apt and pip source change
+- [x] locale to en.US for all systems and timezone
+- [x] ntp server for master node
+- [x] nfs settings
+- [x] dhcp server for master node
+- [x] apt and pip source change
 - [ ] ? shutdown password login in LAN
 
 ### DevOp softwares
 
 - [ ] cobbler
-- [ ] ansible
+- [x] ansible
   - [ ] create playbooks for:
     - [ ] user management and their ssh key
     - [ ] apt tools install
@@ -42,10 +42,10 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 ### HPC softwares
 
-- [ ] spack
-- [ ] slurm
+- [x] spack
+- [x] slurm
 - [ ] intel parallel studio (ifort icc intelmpi intelpython and mkl included)
-- [ ] Eigen and armadillo
+- [x] Eigen and armadillo
 - [ ] boost
 - [ ] *GSL*
 - [ ] *distributed mathematica*
@@ -62,13 +62,13 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 ### tasks to explore
 
-- [ ] unifomity of user
-- [ ] uniformity of environment variables
+- [x] unifomity of user
+- [x] uniformity of environment variables
 
 ### warning
 
-- [ ] name system with version number
-- [ ] try install all useful things in opt which is going to be export
+- [x] name system with version number
+- [x] ?try install all useful things in opt or home which is going to be export
 
 ### design principle
 

@@ -1,4 +1,4 @@
-In this section, I will review some aspects on the log related softwares such as syslog, nagios and ganglia.
+In this section, I will review some aspects on the log and monitoring related softwares such as syslog, nagios and ganglia.
 
 ## Nagios
 
