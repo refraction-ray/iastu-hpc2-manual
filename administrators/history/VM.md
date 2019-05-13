@@ -123,6 +123,8 @@ server ntp.tuna.tsinghua.edu.cn prefer
 
 come with slurm on ubuntu apt, change the file `/etc/munge/munge.key` to the same and restart service munge. Test see [here](https://github.com/dun/munge/wiki/Installation-Guide).
 
+Error: munged: Error: Logfile is insecure: world-writable permissions without sticky bit. `chmod o+t /var`
+
 ### debug
 
 `slurmd -Dcvv`
@@ -149,11 +151,13 @@ Note slurm can also interact with containers such as docker or sigularity in pri
 
 * `sudo apt install slurmdbd mysql-server python-mysqldb`
 * `sudo service mysql status`
+* Ubuntu mysql has default root user with empty password, but can only log in by sudo
+* `CREATE USER 'slurm'@'localhost' IDENTIFIED BY 'pw';`
 * `GRANT ALL PRIVILEGES ON slurm_acct_db.* TO 'slurm'@'localhost';` in mysql
 * possible mysql table missing issue: [issue](https://github.com/giovtorres/docker-centos7-slurm/issues/3)
 * slurmdbd behavior is somewhat very weird and require explicit acctmgr cluster add as well as restart service for slrumdbd and slrumctld many times in some sorts of order.
-* seems a bug with systemctl for slurmdbd, slurmdbd itself works.
 * Anyways, slurm together with its eco and doc, is… totally a mess, Good luck
+* Note that pid is configured twice (one in etc one in service), make them consistent for all three services. slurmd, slurmdbd, slurmctld.
 
 ###  Hopefully workflow
 
@@ -174,5 +178,4 @@ How to achieve minimal steps.
   * sshd enable and run
   * paste the pub key to authorized keys
 * For master node
-  * add slave node on ansible inventory
   * run ansible again for all nodes

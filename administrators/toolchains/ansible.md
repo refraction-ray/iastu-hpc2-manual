@@ -16,6 +16,8 @@ In this section, some aspects on ansible is discussed.
 * apt
 * make
 * hostname
+* [mysql_user](https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html): mysql-python package missing issue: [post](https://github.com/geerlingguy/ansible-role-mysql/issues/42), `apt: name=python3-mysqldb state=present` is enough, however `pip install mysql-python` wouldn't work.
+* pip
 
 ## General syntax in playbooks
 
@@ -29,6 +31,7 @@ In this section, some aspects on ansible is discussed.
 * `loop`: list or list of hash, corresponding variables in leading task
 * some moudules directly support list argument
 * register of a loop task, has attr `results` as a list
+* `with_items`, register.results is automatically a list, see [this post](https://stackoverflow.com/questions/29512443/register-variables-in-with-items-loop-in-ansible-playbook/29564339)
 
 ### Useful keywords
 
@@ -81,9 +84,14 @@ tasks:
       when: my_var is match ("bl*")
 ```
 
+## Ansible Vault
+
+* [doc](https://ansible-tran.readthedocs.io/en/latest/docs/playbooks_vault.html)
+
 ## Development consideration
 
 * [practical example of modules and action plugins](https://ndemengel.github.io/2015/01/20/ansible-modules-and-action-plugins/)
+* Future plan: a spack module for ansible
 
 ## Misc
 
