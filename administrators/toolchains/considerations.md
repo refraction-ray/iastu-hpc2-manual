@@ -1,5 +1,9 @@
 In this part, I would keep some notes on tools or softwares that I haven't fully determined to merge into the main workflow on HPC2, it is kept for possible future technology selections.
 
+List of softwares in a typical HPC:
+
+*  [uchicago](https://rcc.uchicago.edu/docs/software/modules/index.html)
+
 ## OpenHPC
 
 [Official repo](https://github.com/openhpc/ohpc/), *note it has a github wiki page*
@@ -39,3 +43,7 @@ python module for parallel computing. Maybe the scheme to utilize distributed co
 [use dask on HPC style clusters](https://docs.dask.org/en/latest/setup/hpc.html)
 
 ## CGGROUP
+
+## ThinLinc
+
+A remote server specially desinged for clusters: [site](https://www.cendio.com/thinlinc/what-is-thinlinc)

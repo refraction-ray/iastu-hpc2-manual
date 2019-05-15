@@ -12,6 +12,22 @@ To make them consistent, there are two approaches. Firstly, compile slurm with m
 
 Therefore, the best practice with minimal maintence effort here is always using `mpirun` within sbatch script and avoid `srun`. But sbatch script is still highly recommended way to submit tasks instead of directly using `mpirun -host <hostname,list>`. Firstly, the sbatch task management is under the control and accounting of slurm, and the task would be running even after logout. Secondly, the enviroment variables in the master node would broadcast to the computing nodes before the task is beginning which is very handy.
 
+### MPI and OPENMP hybrid
+
+Remember the `-fopenmp` flag for `mpicc`,(use `-openmp` for the Intel compiler and `-mp` for the PGI compiler) the others are similar to mpi workflow. See [here](https://rcc.uchicago.edu/docs/running-jobs/hybrid/index.html) for a demo.
+
+### cron like job
+
+See [here](https://rcc.uchicago.edu/docs/running-jobs/cron/index.html)
+
+### parallel job array submission
+
+See [here](https://rcc.uchicago.edu/docs/running-jobs/srun-parallel/index.html) and [here](https://rcc.uchicago.edu/docs/running-jobs/array/index.html)
+
+### allocate computation node interactively
+
+See [this blog](https://yunmingzhang.wordpress.com/2015/06/29/how-to-use-srun-to-get-an-interactive-node/) for details. For short, `srun -N 1 -n 1 -w node1 --pty bash -i`.
+
 ## Management and Accounting
 
 Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk/niflheim/Slurm_accounting) (better than the official doc)
@@ -29,3 +45,5 @@ Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk
 **References:**
 
 * <https://community.wolfram.com/groups/-/m/t/984003>
+* <https://rcc.uchicago.edu/docs/software/environments/mathematica/index.html> mathematica usage as some hpc manual
+* <https://www.wolfram.com/products/applications/sem/manual.pdf>
