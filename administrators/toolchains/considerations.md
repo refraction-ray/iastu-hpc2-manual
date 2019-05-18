@@ -3,6 +3,7 @@ In this part, I would keep some notes on tools or softwares that I haven't fully
 List of softwares in a typical HPC:
 
 *  [uchicago](https://rcc.uchicago.edu/docs/software/modules/index.html)
+*  [pku-math](http://bicmr.pku.edu.cn/~wenzw/pages/softwares.html)
 
 ## OpenHPC
 
@@ -44,6 +45,21 @@ python module for parallel computing. Maybe the scheme to utilize distributed co
 
 ## CGGROUP
 
-## ThinLinc
+## Desktop 
+
+### ThinLinc
 
 A remote server specially desinged for clusters: [site](https://www.cendio.com/thinlinc/what-is-thinlinc)
+
+### X11 forward
+
+See [here](http://bicmr.pku.edu.cn/~wenzw/pages/gui.html)
+
+## Scheme beyond MPI
+
+* [Nice blog reflects the drawbacks of MPI style and compare it to spark or chapel](https://www.dursi.ca/post/hpc-is-dying-and-mpi-is-killing-it.html)
+
+### hadoop
+
+### spark
+### chapel

@@ -38,7 +38,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
     - [ ] network configuration (dhcp server with fix ip on master and dhcp auto on nodes and nat)
 - [ ] nagios
 - [ ] *ganglia*
-- [ ] *modules*
+- [x] *modules*
 
 ### HPC softwares
 
@@ -57,6 +57,8 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] *OpenStack*
 - [ ] *Spark*
 - [ ] *Kubernetes*
+- [ ] *Elasticsearch*
+- [ ] *ceph*
 
 ## Miscs
 

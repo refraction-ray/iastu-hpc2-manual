@@ -22,13 +22,17 @@ See [here](https://rcc.uchicago.edu/docs/running-jobs/cron/index.html)
 
 ### parallel job array submission
 
-See [here](https://rcc.uchicago.edu/docs/running-jobs/srun-parallel/index.html) and [here](https://rcc.uchicago.edu/docs/running-jobs/array/index.html)
+See [here](https://rcc.uchicago.edu/docs/running-jobs/srun-parallel/index.html) and [here](https://rcc.uchicago.edu/docs/running-jobs/array/index.html) and [here in Mandarin](http://bicmr.pku.edu.cn/~wenzw/pages/slurm.html)
+
+For job arrays, some import notes. Use `# SBATCH --array=1-5` to name the job as `jobid_1` and so on. In the sbatch script, use env var `${SLURM_ARRAY_TASK_ID}` to call the id for specific tast. And for `-N` or `-n`  in slurm, just use the value for one task. %A in the #SBATCH line becomes the job ID%a in the #SBATCH line becomes the array index. See [here](https://crc.pitt.edu/multiplejobs) for more user case demo.
 
 ### allocate computation node interactively
 
 See [this blog](https://yunmingzhang.wordpress.com/2015/06/29/how-to-use-srun-to-get-an-interactive-node/) for details. For short, `srun -N 1 -n 1 -w node1 --pty bash -i`.
 
 ## Management and Accounting
+
+Use `Weight` option in NodeName line in `slurm.conf` to change the priority of assinged nodes, see [this post](https://stackoverflow.com/questions/28035631/how-do-i-set-the-order-of-nodes-for-a-slurm-job).
 
 Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk/niflheim/Slurm_accounting) (better than the official doc)
 

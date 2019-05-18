@@ -2,6 +2,12 @@ In this section, I will review some aspects on the log and monitoring related so
 
 ## rsyslog
 
+## logrotate
+
+## Logstash
+
+Pipeline from log to elastic search, see [this blog](https://www.cnblogs.com/yincheng/p/logstash.html) for introduction.
+
 ## Nagios
 
 ### Installation

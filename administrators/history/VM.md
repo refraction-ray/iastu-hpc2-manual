@@ -38,6 +38,8 @@ To simulate the cluster network topology in VM clusters, see my blog [here](http
 
 The operations below only on master VM. *Since ansible can be installed directly via apt, the python part might be moved later which controled by ansible*
 
+Final decision: change python under spack manage.
+
 * apt source [change to tuna](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)
 
 * `sudo apt update && sudo apt install python3-pip`
