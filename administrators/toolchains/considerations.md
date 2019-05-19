@@ -3,6 +3,7 @@ In this part, I would keep some notes on tools or softwares that I haven't fully
 List of softwares in a typical HPC:
 
 *  [uchicago](https://rcc.uchicago.edu/docs/software/modules/index.html)
+*  [princeton](https://researchcomputing.princeton.edu/software)
 *  [pku-math](http://bicmr.pku.edu.cn/~wenzw/pages/softwares.html)
 
 ## OpenHPC
@@ -62,4 +63,5 @@ See [here](http://bicmr.pku.edu.cn/~wenzw/pages/gui.html)
 ### hadoop
 
 ### spark
+
 ### chapel

@@ -161,6 +161,50 @@ Note slurm can also interact with containers such as docker or sigularity in pri
 * Anyways, slurm together with its eco and doc, is… totally a mess, Good luck
 * Note that pid is configured twice (one in etc one in service), make them consistent for all three services. slurmd, slurmdbd, slurmctld.
 
+
+## Experiments on hadoop & spark
+
+`spack install spark +hadoop ^jdk@1.8.0_212`. Cautions: 1. spark is not well supported by jdk 9+. There maybe `java.lang.IllegalArgumentException` in pyspark running for java >= 9. See [this blog](https://towardsdatascience.com/how-to-get-started-with-pyspark-1adc142456ec). 2 It make things much worse by the fact that spack couldn't handle jdk install well due to some invalid url or cookies or licences issue for oracle java (the newest version jdk seems ok to install by spack though). 
+
+My workaround: install jdk 8 by `sudo apt install openjdk-8-jdk`. Then add jdk as external package by editing packages.yaml for spack. And remember to `spack install jdk@1.8.0_212` to add it to the spack db. Then try spack install command as shown at the beginning.
+
+To use pyspark, `spack load hadoop spark jdk`. Then directly use the python interpreter provided by spark as `pyspark`. Or `pip install pyspark` for some python, and use pyspark in the python by `import pyspark`. Remember to set both env vars `PYSPARK_PYTHON=python3` and `PYSPARK_DRIVER_PYTHON=python3`, to avoid python version mix of spark worker if you choose original python.
+
+### cluster mode settings
+
+Reference on this [post](http://dblab.xmu.edu.cn/blog/1714-2/)
+
+In `spark/conf`, `cp slave.templates slave`, and add slave hostname into slave file. `cp spark-env.sh.template spark-env.sh` and add following lines.
+
+```bash
+source /home/sxz/spack/share/spack/setup-env.sh
+export SPARK_DIST_CLASSPATH=$(`spack location -i hadoop`/bin/hadoop classpath)
+export HADOOP_CONF_DIR=`spack location -i hadoop`/etc/hadoop
+export SPARK_MASTER_IP=<master ip>
+```
+
+Make sure the conf dir is sync with all nodes (which is by default if spack install in home and home is shared within cluster).
+
+Start hadoop first  \`spack location -i hadoop\`/sbin/start-all.sh.
+
+Then start spark master and slaves. \`spack location -i spark\`/sbin/start-master.sh and start-slaves.sh
+
+Task submission `pyspark --master spark://master:7077`. (Note hadoop might have some issue in the above setting and running scheme.) Actually, one should edit `etc/yarn-site.xml` to make `pyspark --master yarn` work as expected. It may be due to memory limit of VMs. See [post here](https://dongkelun.com/2018/04/16/sparkOnYarnConf/). 
+
+```bash
+<property>
+    <name>yarn.nodemanager.pmem-check-enabled</name>
+    <value>false</value>
+</property>
+
+<property>
+    <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+</property>
+```
+
+Moreover, one still need a slaves file in hadoop/etc, though not exist for the installation?
+
 ## Hopefully workflow
 
 How to achieve minimal steps.

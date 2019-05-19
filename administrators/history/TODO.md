@@ -46,8 +46,8 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] slurm
 - [ ] intel parallel studio (ifort icc intelmpi intelpython and mkl included)
 - [x] Eigen and armadillo
-- [ ] boost
-- [ ] *GSL*
+- [x] boost
+- [x] *GSL*
 - [ ] *distributed mathematica*
 - [ ] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*

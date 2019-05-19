@@ -123,7 +123,9 @@ packages:
     buildable: False
 ```
 
+## jdk
 
+spack seems to have issue for installing jdk for certain old versions. Dont want to comment on Oracle...
 
 ## Issues with specific packages
 
