@@ -33,6 +33,8 @@ Quicksync is optional for this version of server.
 
 [Web configure guide](https://support.huawei.com/enterprise/zh/doc/EDOC1000169678)
 
+192.168.1.253 is not a static ip. It could be assigned to other ips if there is a DHCP server on the upstream of it.
+
 * Huawei S1700-16G-AC
 
 ### Ethernet cable

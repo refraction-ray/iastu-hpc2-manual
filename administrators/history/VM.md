@@ -119,6 +119,14 @@ server ntp.tuna.tsinghua.edu.cn prefer
 
 * parallel ad-hoc commands `ansible all -a "bash /blah/proxy.cfg"`
 
+### Desktop
+
+* Edit sshd_config in server side by turning on X11Forwading option.
+* check there is xauth binary in the server, `which xauth`
+* For client, use `ssh -X`, or add `ForwardX11 yes ` in `.ssh/config`
+* For mac client, install XQuatrz for X11 display support
+* Such desktop forwarding can be even forwarded more than once, say from A ssh -X to B and from B ssh -X to C, then `xclock` in C will redirect the display of clock on A's screen.
+
 ## slurm
 
 ### munge
@@ -213,6 +221,7 @@ How to achieve minimal steps.
   * OS installation
   * create user account with sudo
   * two ethernet cable plugin and enable the wan network
+  * manually `ip addr add ip dev lan_nic` 
   * sshd enable and run and generate ssh-keygen
   * apt install ansible
   * config inventory and vars for ansible roles

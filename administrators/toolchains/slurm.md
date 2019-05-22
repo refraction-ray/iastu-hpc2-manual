@@ -44,6 +44,10 @@ Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk
 
 `mpirun -n 2 python3 pympi.py`, see [here](https://www.rc.fas.harvard.edu/resources/documentation/software-development-on-odyssey/mpi-for-python-mpi4py-on-odyssey/) for a slurm working example.
 
+#### ipyparallel
+
+*To be detailed studied*
+
 ### Mathematica
 
 **References:**

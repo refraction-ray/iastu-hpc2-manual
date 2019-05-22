@@ -11,9 +11,13 @@ Two parts: sever administrator (1 to 1, server management) and essentials (1 to 
 
 ## iDRAC
 
+The general term: BMC (Baseboard Management Controller). See [this post](https://medium.com/@lioukiki1/bmc%E6%98%AF%E4%BB%80%E9%BA%BC-%E8%83%BD%E5%90%83%E5%97%8E-bee457ea5c37)
+
 iDRAC might be configure by LCD if the server has. [Basic on iDRAC config](https://www.dell.com/support/article/us/en/04/sln129356/start-up-page-for-dell-poweredge-server-of-12th-and-13th-generation-r620-r630?lang=en), [default username and password for iDRAC](https://www.dell.com/support/article/us/en/04/sln306783/dell-poweredge-what-is-the-default-username-and-password-for-idrac?lang=en)
 
 It has its own ip assigned (though not a fan of this feature)
+
+Share port with OS: [post](https://www.dell.com/community/PowerEdge-Hardware-General/iDRAC-8-NIC-Port-Sharing/td-p/5078061)
 
 ### CLI tool - racadm
 

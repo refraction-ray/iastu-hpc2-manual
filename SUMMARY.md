@@ -12,6 +12,7 @@
     * [Ansible](administrators/toolchains/ansible.md)
     * [Slurm](administrators/toolchains/slurm.md)
     * [Spack](administrators/toolchains/spack.md)
+    * [Container](administrators/toolchains/container.md)
     * [Toolset for log](administrators/toolchains/log.md)
     * [Further considerations](administrators/toolchains/considerations.md)
 

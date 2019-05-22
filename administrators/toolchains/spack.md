@@ -123,11 +123,11 @@ packages:
     buildable: False
 ```
 
-## jdk
-
-spack seems to have issue for installing jdk for certain old versions. Dont want to comment on Oracle...
 
 ## Issues with specific packages
 
 * Intel family [doc](https://spack.readthedocs.io/en/latest/build_systems/intelpackage.html)
 * python external packages cannot be recognized by packages.yaml paths settings.
+* Possible issue for some packages in air gapped computers. [issue](https://github.com/spack/spack/issues/7848). Solution: `git config --global url.https://github.com/.insteadOf git://github.com/`
+* virtual management on mathematica module
+* jdk: spack seems to have issue for installing jdk for certain old versions. Dont want to comment on Oracle...

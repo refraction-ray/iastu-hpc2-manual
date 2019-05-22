@@ -16,3 +16,7 @@ Pipeline from log to elastic search, see [this blog](https://www.cnblogs.com/yin
 * Install on ubuntu 18.04 cluster and basic configuration, [post](https://help.ubuntu.com/lts/serverguide/nagios.html.en)
 
 ## Ganglia
+
+### Installation
+
+* [ubuntu16.04](https://hostpresto.com/community/tutorials/how-to-install-and-configure-ganglia-monitor-on-ubuntu-16-04/)
