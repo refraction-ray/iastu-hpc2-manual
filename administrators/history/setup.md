@@ -22,11 +22,9 @@ The leftmost RJ45 port is utilized. (not the one for iDRAC) The nic name is eno1
 
 ### outdated server
 
-centos 6.6, name as d1.
+centos 6.6, name as d1. For operations on this server, please refer [this section](./oldtimes.md).
 
-* hostname change in `/etc/sysconfig/network`
-* search domain change in `/etc/resolv.conf`
-* static ip and gateway change in `/etc/sysconfig/network-scripts/ifcfg-Auto_em1`
+**Note:** d1 is not ready to open to users.
 
 ## software
 
@@ -55,6 +53,8 @@ Please see the ansible playbooks in HPC2.
 
 ### spack
 
+*into ansible workflow*
+
 Just see the practice on [spack](../toolchains/spack.md). Combine spack with lmod to provide consitent interface on package management.
 
 ### intel parallel studio XE
@@ -64,6 +64,8 @@ Since the cluster is in an air-gapped enviroment, and the rpm downloading seems 
 Remember to include cluster helper for MKL library which is omitted by default.
 
 ### python
+
+*into ansible workflow and intel parallel studio installation*
 
 prefered way: intel python+spack pip. `spack load intel-parallel-studio`, `spack load py-setuptools`, `spack load py-pip`.
 
@@ -77,6 +79,8 @@ Installed by the bash script on /opt/mathematica/verno. And the script is in the
 
 ### ganglia
 
+*into ansible workflow*
+
 `apt-get install ganglia-monitor ganglia-monitor-python gmetad ganglia-webfrontend`
 
 ganglia-monitor is client side gmond. 
@@ -88,6 +92,16 @@ Please reference [this post](https://hostpresto.com/community/tutorials/how-to-i
 The workflow of ganglia configuration and installation have been merged to ansible playbooks.
 
 gmetric can be customized to report certain spec. See temperature example [here](http://cutler.io/2011/11/lm-sensors-on-ganglia/).
+
+### quota
+
+See reference on ubuntu 18.04 quota command: [digital ocean](https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-18-04), it is very well write up.
+
+`sudo apt install quota`
+
+*need further experiments on VM cluster first before apply it, always be carful for disk stuff*
+
+See the VM corresponding part for operations.
 
 ## some benchmarks
 
@@ -111,3 +125,11 @@ Available frequency is 2400, though the param is 2666, the speed is limited by C
   * master ssd:  1.3 GB/s
   * master /DATA, sdb1: 1.3GB/s (? cannot understand), similar results for sdc in master, it is weird though.
   * dn1: sdb2 557MB/s, similar result for sdb, sda (under lvm): 471MB/s
+
+## some scenarios
+
+### add a new user
+
+* Add user account and password info into ansible user playbook and run it.
+* `sacctmgr add user <name> account=n3` to make user available to slurm. (already merged into ansible workflow)
+* `sudo setquota -u <name> 60G 80G 0 0 /`

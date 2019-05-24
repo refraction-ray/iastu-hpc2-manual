@@ -135,3 +135,4 @@ Further summary: better also add intel-mpi and intel-mkl interface as external p
 * armadillo by default detect whether you have installed mkl and firstly link to it, it has nothing to do with whether intel-mkl is a dependent of spack syntax or not. Though mkl is default, armadillo installation fails somehow when provided intel-parallel-studio as mkl.
 * To use mkl, it is better to stay with icc instead of gcc, which can make the world simpler.
 * numactl seems to be only supported by gcc
+* an seemingly promising spec for slepc install: `spack install -v slepc ~arpack ^petsc+mpi~int64 ^intel-parallel-studio`, but the installation always stop in pestc configure part with mpi check.

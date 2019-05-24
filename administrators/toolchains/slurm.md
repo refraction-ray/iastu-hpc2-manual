@@ -1,5 +1,7 @@
 In this section, I will discuss on slurm and its ecosystem, including how can it interacts with mpi, python, mathematica and so on.
 
+In a word, slurm is very powerful but has really bad presentation of documentation.
+
 ## MPI
 
 ### PMI
@@ -28,13 +30,54 @@ For job arrays, some import notes. Use `# SBATCH --array=1-5` to name the job as
 
 ### allocate computation node interactively
 
-See [this blog](https://yunmingzhang.wordpress.com/2015/06/29/how-to-use-srun-to-get-an-interactive-node/) for details. For short, `srun -N 1 -n 1 -w node1 --pty bash -i`.
+See [this blog](https://yunmingzhang.wordpress.com/2015/06/29/how-to-use-srun-to-get-an-interactive-node/) for details. For short, `srun -N 1 -n 1 -w node1 --pty bash -i`. A slurm way of ssh.
 
 ## Management and Accounting
 
 Use `Weight` option in NodeName line in `slurm.conf` to change the priority of assinged nodes, see [this post](https://stackoverflow.com/questions/28035631/how-do-i-set-the-order-of-nodes-for-a-slurm-job).
 
 Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk/niflheim/Slurm_accounting) (better than the official doc)
+
+### QOS
+
+QOS settings by saccmgr: [ref](https://slurm.schedmd.com/qos.html). 
+
+User system hierachy: cluster-account-user, the triple system is called association.
+
+`AccountingStorageEnforce=limits,qos` This line is important for qos to work in slurm.conf. limits implies association option, indicating user who are not added to slurm cannot use slurm.
+
+**Note**: A user's account can not be changed directly. A new association needs to be created for the user with the new account. Then the association with the old account can be deleted.
+
+```bash
+sacctmgr show tres
+sacctmgr add qos limited
+sacctmgr modify qos limited set MaxTRESPerUser=node=1
+sacctmgr modify user test set qos=limited
+sacctmgr show assoc format=cluster,account,user,qos
+```
+
+Note usename is the same for OS and slurm.
+
+### PAM module
+
+*merged into ansible workflow*
+
+[reference](https://slurm.schedmd.com/pam_slurm_adopt.html)
+
+*
+
+* `sudo apt install libpam-slurm`
+
+* vim /etc/pam.d/sshd, add line `account    required      pam_slurm_adopt.so`. The order of plugins is very important. pam_slurm_adopt.so should be the last PAM module in the account stack.  And line `account    required      pam_access.so` following.
+
+* Edit /etc/security/access.conf, add the following
+
+  ```bash
+  +:sudo:ALL
+  -:ALL:ALL
+  ```
+
+  ​
 
 ## Working with other tools
 

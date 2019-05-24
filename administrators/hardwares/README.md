@@ -17,7 +17,7 @@ product no., the second digit is for the generation of Dell servers. 4 here is f
 
 **Notes**:
 
-Quicksync is optional for this version of server.
+Quicksync is optional for this version of server. Seems no quicksync in our machines.
 
 ## Others
 

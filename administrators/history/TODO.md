@@ -26,6 +26,10 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] dhcp server for master node
 - [x] apt and pip source change
 - [ ] ? shutdown password login in LAN
+- [ ] user resource limit
+  - [ ] disk limit in home
+  - [ ] resource limit in master
+  - [ ] qos in slurm
 
 ### DevOp softwares
 

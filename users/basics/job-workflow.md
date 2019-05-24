@@ -10,11 +10,11 @@ When intel mkl is utilized in the code, explicitly or implicitly, we strongly re
 #SBATCH --array=1-8
 #SBATCH --cpus-per-task=14
 
-source /home/ubuntu/spack/share/spack/setup-env.sh
-source $(spack location -i lmod)/lmod/lmod/init/bash
+source /etc/spack-load
 
 spack load intel-parallel-studio %intel
 
-python calculate.py output-${SLURM_ARRAY_TASK_ID}
+python calculate.py output-${SLURM_ARRAY_TASK_ID}.txt
 ```
 
+`srun -w master -n 1 hostname` specify the node to use

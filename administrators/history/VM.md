@@ -127,6 +127,17 @@ server ntp.tuna.tsinghua.edu.cn prefer
 * For mac client, install XQuatrz for X11 display support
 * Such desktop forwarding can be even forwarded more than once, say from A ssh -X to B and from B ssh -X to C, then `xclock` in C will redirect the display of clock on A's screen.
 
+### quota
+
+* apt install quota 
+* edit /etc/fstab, use usrquota,grpquota instead of defaults for root /. being sure to separate all options with a comma and no spaces.
+* `sudo mount -o remount /` to remount root
+* check the effect by `cat /proc/mounts | grep ' / '`
+* `sudo quotacheck -ugm /`, This command creates the files `/aquota.user` and `/aquota.group`. 
+* `sudo quotaon -v /` turn on quota
+* `sudo setquota -u test 200M 220M 0 0 /` block s h node s h fs.
+* `sudo repquota -s /` generate reports for user usage on the disk.
+
 ## slurm
 
 ### munge

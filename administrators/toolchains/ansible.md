@@ -26,6 +26,7 @@ In this section, some aspects on ansible is discussed.
 
 * `when`: the argument is rendered by jinja2, but no need for bracket `or`, `and`, `not`
 * compare operator in general language is ok to use in the condition statement, linke `!=`, `>=`
+* `changed_when`, `failed_when`
 
 ### Loops
 
@@ -93,7 +94,7 @@ tasks:
 ## Development consideration
 
 * [practical example of modules and action plugins](https://ndemengel.github.io/2015/01/20/ansible-modules-and-action-plugins/)
-* Future plan: a spack module for ansible
+* Future plan: a spack module for ansible (settled by `changed_when` to avoid changed report of command)
 
 ## Misc
 
