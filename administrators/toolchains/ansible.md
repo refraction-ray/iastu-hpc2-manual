@@ -5,6 +5,7 @@ In this section, some aspects on ansible is discussed.
 * file
 * copy
 * command
+* cron: name attr must be specfied, otherwise, the crontab task shall be added repeatedly
 * debug: `msg` info to be printed
 * user
 * service
@@ -45,6 +46,7 @@ In this section, some aspects on ansible is discussed.
 * `ansible-galaxy init`: create the directory structure for ansible roles
 * `ansible-playbook -e "var=value"`, overwrite var with highest priority
 * `-vv`: verbose mode
+* example: `ansible -i ~/hpc/hosts cn -m apt -a "name=iperf state=present" --become -K`
 
 ## Jinja Template Extension in Ansible
 

@@ -55,3 +55,4 @@ Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk
 * <https://community.wolfram.com/groups/-/m/t/984003>
 * <https://rcc.uchicago.edu/docs/software/environments/mathematica/index.html> mathematica usage as some hpc manual
 * <https://www.wolfram.com/products/applications/sem/manual.pdf>
+* <https://taoofmac.com/space/blog/2016/08/10/0830> mathematica on rasberry cluster

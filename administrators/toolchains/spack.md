@@ -123,11 +123,15 @@ packages:
     buildable: False
 ```
 
+Further summary: better also add intel-mpi and intel-mkl interface as external packages. intel-parallel-studio will automatically activate intel python. The PS1 is still missing as the activation script coming with the vendor (still dont know why this line exist). Add `tcl:intel-parallel-studio:filter: environment_blacklist:: [PS1]` to avoid this change in loading.
 
 ## Issues with specific packages
 
-* Intel family [doc](https://spack.readthedocs.io/en/latest/build_systems/intelpackage.html)
-* python external packages cannot be recognized by packages.yaml paths settings.
+* Intel family [doc](https://spack.readthedocs.io/en/latest/build_systems/intelpackage.html), better to also set up intel-mpi and intel-mkl for flexibility
 * Possible issue for some packages in air gapped computers. [issue](https://github.com/spack/spack/issues/7848). Solution: `git config --global url.https://github.com/.insteadOf git://github.com/`
-* virtual management on mathematica module
+* virtual management on external non-existing mathematica module
 * jdk: spack seems to have issue for installing jdk for certain old versions. Dont want to comment on Oracle...
+* m4: install issue with non gcc compiler: [issue](https://github.com/spack/spack/issues/4883), workaround: always use `^m4%gcc` in spack syntax
+* armadillo by default detect whether you have installed mkl and firstly link to it, it has nothing to do with whether intel-mkl is a dependent of spack syntax or not. Though mkl is default, armadillo installation fails somehow when provided intel-parallel-studio as mkl.
+* To use mkl, it is better to stay with icc instead of gcc, which can make the world simpler.
+* numactl seems to be only supported by gcc

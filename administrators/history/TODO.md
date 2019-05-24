@@ -5,16 +5,16 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 ### Network related
 
 - [ ] Enable **jumboframe** in LAN
-  - [ ] config on MTU of servers
-  - [ ] config on MTU of switches, Jumbo
-- [ ] Divide S1720 switch into two **VLAN**
+    - [ ] config on MTU of servers
+    - [ ] config on MTU of switches, Jumbo
+- [x] Divide S1720 switch into two **VLAN**
 - [x] DHCP on the master node with very long lease time
 
 ### Server related
 
 - [ ] iDRAC configuration
 - [ ] Open manage configuration
-- [ ] *include more old machines into the cluster*
+- [x] *include more old machines into the cluster*
 
 ## Software Level
 
@@ -31,20 +31,21 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 - [ ] cobbler
 - [x] ansible
-  - [ ] create playbooks for:
-    - [ ] user management and their ssh key
-    - [ ] apt tools install
-    - [ ] service state management
-    - [ ] network configuration (dhcp server with fix ip on master and dhcp auto on nodes and nat)
-- [ ] nagios
-- [ ] *ganglia*
+  - [x] create playbooks for:
+    - [x] user management and their ssh key
+    - [x] apt tools install
+    - [x] service state management
+    - [x] network configuration (dhcp server with fix ip on master and dhcp auto on nodes and nat)
+- [ ] *nagios*
+- [x] ganglia
 - [x] *modules*
+- [x] backup tools
 
 ### HPC softwares
 
 - [x] spack
 - [x] slurm
-- [ ] intel parallel studio (ifort icc intelmpi intelpython and mkl included)
+- [x] intel parallel studio (ifort icc intelmpi intelpython and mkl included)
 - [x] Eigen and armadillo
 - [x] boost
 - [x] *GSL*
