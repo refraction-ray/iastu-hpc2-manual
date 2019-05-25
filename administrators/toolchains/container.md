@@ -12,3 +12,6 @@ It seems quite interesting for this container scheme and share strong similarity
 
 ### singularity hub
 
+### Integrated with Kubernetes
+
+reference: <https://www.sylabs.io/2019/04/the-singularity-kubernetes-integration-from-a-deep-learning-use-case-to-the-technical-specifics/>

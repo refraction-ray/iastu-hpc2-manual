@@ -68,7 +68,7 @@ Note usename is the same for OS and slurm.
 
 * `sudo apt install libpam-slurm`
 
-* vim /etc/pam.d/sshd, add line `account    required      pam_slurm_adopt.so`. The order of plugins is very important. pam_slurm_adopt.so should be the last PAM module in the account stack.  And line `account    required      pam_access.so` following.
+* vim /etc/pam.d/sshd, add line `account    required      pam_slurm.so`. The order of plugins is very important. pam_slurm_adopt.so should be the last PAM module in the account stack.  And line `account    required      pam_access.so` following.
 
 * Edit /etc/security/access.conf, add the following
 
@@ -77,7 +77,7 @@ Note usename is the same for OS and slurm.
   -:ALL:ALL
   ```
 
-  ​
+Issue: seems always fail to ssh even if there is some task on the corresponding nodes. Though it is not a big issue that there is always a slurm version of ssh works. **Solved:** this issue is due to the mismatch between pam slurm and pam slurm adopt.
 
 ## Working with other tools
 

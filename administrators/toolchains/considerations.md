@@ -7,6 +7,7 @@ List of softwares in typical HPCs:
 *  [ulhpc](https://ulhpc-tutorials.readthedocs.io/en/latest/)
 *  [pku-math](http://bicmr.pku.edu.cn/~wenzw/pages/softwares.html)
 *  [CWRU](https://sites.google.com/a/case.edu/hpc-upgraded-cluster/available-software)
+*  [sherlock-standford](https://www.sherlock.stanford.edu/)
 
 ## OpenHPC
 

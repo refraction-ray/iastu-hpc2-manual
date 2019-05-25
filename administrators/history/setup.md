@@ -47,6 +47,8 @@ $ sudo crontab -l
 
 And add old machines (currently d1) into ~/.ssh/config.
 
+The backup crontab and fstab mount config have not included into ansible workflow due to flexibility consideration.
+
 ### ansible
 
 Please see the ansible playbooks in HPC2.
@@ -77,6 +79,10 @@ Installed by the bash script on /opt/mathematica/verno. And the script is in the
 
 **Possible issue:** The activation need to be carried out per user per node basis. Maybe have a look at MathML in the future.
 
+### singularity
+
+`spack install singularity`
+
 ### ganglia
 
 *into ansible workflow*
@@ -102,6 +108,20 @@ See reference on ubuntu 18.04 quota command: [digital ocean](https://www.digital
 *need further experiments on VM cluster first before apply it, always be carful for disk stuff*
 
 See the VM corresponding part for operations.
+
+Not included in ansible due to flexibility consideration.
+
+### ulimit
+
+*merged into ansible workflow*
+
+user level vs shell level: [ref](https://www.ibm.com/developerworks/cn/linux/l-cn-ulimit/index.html).
+
+hard limit can only be changed by root and soft limit is something that anyone can change, but firstly, you need to change it.
+
+ulimit config file in `/etc/security/limit.d`, see [demo](https://access.redhat.com/solutions/61334)
+
+check by `ulimit -a` for individual users.
 
 ## some benchmarks
 
