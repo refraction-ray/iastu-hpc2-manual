@@ -1,5 +1,7 @@
 Module systems and its integration to the package manager spack is the key part in our HPC, and it is necessay to understand the basics about spack and lmod to utilize softwares in our HPC. Otherwise, no softwares can be used with the bare system apart from gcc and openmpi. 
 
+When you first log into the cluster, you'll be presented with a default, bare bone environment with minimal software available. The module system is used to manage the user environment and to activate software packages on demand. In order to use software installed, you must first load the corresponding software module.
+
 We highly recommend you to read through the section and find packages you need by spack instead of installing them again in your own home directory, which is both a waste of space and time. If the softwares and modules you need is not listed in `spack find`, and you believe the package is somewhat universal to the users, please contact the adminstrator to install.
 
 ## spack
@@ -88,6 +90,25 @@ Currently we have the following spack environments.
 
   Enviroments that supports the usage on armadillo package for matrix calculation in C++.
 
+## Using module directly
+
+It is in general possible to avoid using spack and use `module` command directly. The only problem is that the module name is not so neat and hard to memorize compared to package syntax for `spack load`. However you can still do this.
+
+```bash
+$ module avail ## show all avilable software modules in the system
+$ module spider slepc ## see the module name related to slepc
+----------------------------------------------------------------------------------------------------------------------------------------------------
+  slepc-3.11.1-intel-2019-2x: slepc-3.11.1-intel-2019-2x
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    This module can be loaded directly: module load slepc-3.11.1-intel-2019-2x
+$ module load slepc-3.11.1-intel-2019-2x ## here you go
+$ module whatis slepc-3.11.1-intel-2019-2x ## see the one-line information of the module
+slepc-3.11.1-intel-2019-2x: Scalable Library for Eigenvalue Problem Computations.
+```
+
+**Note:** spack package syntax doesn't work for `module load`. You  must specify the full module name.
+
 ## used within scripts
 
 **Must read:** Spack is only activated when you log in. It indicates that spack is not accessible by default in scripts such as sbtach scripts. Namely, the following scripts would fail when submitting jobs.
@@ -109,3 +130,4 @@ spack load armadillo
 mpirun ...
 ```
 
+**Warn:** Even if you are trying to use module system directly in sbatch script, like `module load slepc-3.11.1-intel-2019-2x`. `source /etc/spack-load` line should still be there to make `module` work. In sum, always write down  `source /etc/spack-load`  in your sbatch script whatever the case is. It has no side effects anyway.

@@ -71,6 +71,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 ## Miscs
 
 - [ ] opensource the ansible playbooks in this HPC
+- [ ] ansible authorized key double check
 
 ### tasks to explore
 

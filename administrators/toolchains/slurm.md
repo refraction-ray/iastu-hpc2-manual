@@ -20,7 +20,26 @@ Remember the `-fopenmp` flag for `mpicc`,(use `-openmp` for the Intel compiler a
 
 ### cron like job
 
-See [here](https://rcc.uchicago.edu/docs/running-jobs/cron/index.html)
+See [here](https://rcc.uchicago.edu/docs/running-jobs/cron/index.html), and example sbatch script below.
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=cron
+#SBATCH --begin=now+7days
+#SBATCH --dependency=singleton
+#SBATCH --time=00:02:00
+#SBATCH --mail-type=FAIL
+
+
+## Insert the command to run below. Here, we're just storing the date in a
+## cron.log file
+date -R >> $HOME/cron.log
+
+## Resubmit the job for the next execution
+sbatch $0
+```
+
+
 
 ### parallel job array submission
 

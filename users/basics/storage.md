@@ -1,5 +1,7 @@
 **Note:** User files have no backup and no guaranteen unless special request to the administrator. So never ever store valuable files only in the cluster.
 
+No matter where your files stored, it is highly recommend that all of your files are save in a directory named after your user name.
+
 **TL;DR**
 
 **Rule of thumb**:

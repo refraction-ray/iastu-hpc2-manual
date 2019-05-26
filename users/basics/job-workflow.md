@@ -41,7 +41,7 @@ Let's read the sbtach script line by line.
 
 The first line is just shebang, indication the intepreter of the script. You don't need to change it for most of the time.
 
-The second line is begin with `#SBATCH`, which indicates parameters of sbatch, there are more parameters, which can be written down line by line. But `-N` is the must-have one, it indicates how manty nodes are required for this task. Please `man sbatch` for other parameters.
+The second line is begin with `#SBATCH`, which indicates parameters of sbatch, there are more parameters, which can be written down line by line. But `-N` is the must-have one, it indicates how manty nodes are required for this task. Please `man sbatch` for other parameters. Some more parameters on compute resource request are recommended, such as `--cpus-per-task`, `—ntasks`, `--mem-per-cpu`.
 
 The following line is to activate spack, it is required when you want to load some modules. Since it is so common, so **it would be better to always keep this line in the beginning of the script:** `source /etc/spack-load`.
 
@@ -50,6 +50,8 @@ The fourth line implies that we want to load intel module, which includes MKL, I
 Finally the fifth line tells slurm to run a mpi task with 56 threads.
 
 You can submit the task by `sbatch run.sh`, and check the status of the task by `squeue`.
+
+You can check the stdout of the job by `slurm-<jobid>.out`.
 
 You can cancel the task by `scancel <task_id>`, task id can be obtained by squeue.
 
@@ -77,5 +79,15 @@ python calculate.py output-${SLURM_ARRAY_TASK_ID}.txt
 
 ### interactive sessions
 
-1. `srun -N 1 -n 1 -w node1 --pty bash -i`
-2. `salloc -n2 -N1 -t 1:00:00`, and then ssh to the assigned node.
+1. `srun -N 1 -n 1 -w c3 --pty bash -i`，run a bash shell on c3 node with one node and one cpu core.
+2. `salloc -n2 -N1 -t 1:00:00`, and then ssh to the assigned node `ssh [-X] cn`.
+
+```
+ Optional arguments for salloc:
+        -n      number of CPU cores to request 
+        -N      number of nodes to request
+        -m      memory amount to request
+        -t      time limit, format hh:mm:ss
+```
+
+**Warning:** If you try to ssh to a compute node without any active job allocation, the connection wil be denied. By connection closed prompt.
