@@ -5,6 +5,7 @@
     * [basic info](users/basics/info.md)
     * [storage](users/basics/storage.md)
     * [workflow on jobs](users/basics/job-workflow.md)
+    * [module system](users/basics/module_spack.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)
 

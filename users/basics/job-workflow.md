@@ -6,7 +6,9 @@ Login nodes master are not for running computation intensive jobs in general. Bu
 
 ## submit jobs
 
-Before arranging your jobs on the cluster, you should first learn about hardware specs (CPU and memory info in particular) for each nodes to better utilize the computation resource. See hardware specs [here](../../aministrators/hardwares/README.md).
+Before arranging your jobs on the cluster, you should first learn about hardware specs (CPU and memory info in particular) for each nodes to better utilize the computation resource. See hardware specs [here](../../administrators/hardwares/README.md).
+
+In our cluster, we use SLURM as resource and job managers. Ideally, all jobs should be submitted via slurm.
 
 ## use slurm to submit jobs
 

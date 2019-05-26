@@ -121,7 +121,7 @@ See reference on ubuntu 18.04 quota command: [digital ocean](https://www.digital
 
 See the VM corresponding part for operations.
 
-Not included in ansible due to flexibility consideration.
+Not included in ansible due to flexibility consideration. Only use in master node.
 
 ### ulimit
 
