@@ -7,6 +7,7 @@
     * [storage (**must-read**)](users/basics/storage.md)
     * [module system (**must-read**)](users/basics/module_spack.md)
     * [workflow on jobs](users/basics/job-workflow.md)
+  * [softwares](users/softwares/README.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)
 

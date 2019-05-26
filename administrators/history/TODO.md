@@ -59,6 +59,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] *distributed mathematica*
 - [x] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*
+- [ ] ipyparallel
 
 ### Modern cloud and distributed system tools
 

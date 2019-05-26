@@ -85,6 +85,10 @@ prefered way: intel python+spack pip. `spack load intel-parallel-studio`, `spack
 
 Never use admin account's global pip. Reason: the package would be installed in ~/.pip. However, if later spack-pip install some packages, the dependece is automatically used if it is already in ~/.pip. But this folder is not accessible by other user which may lead to a chaos on python packages. However, for normal user, global pip3 is the recommended way to download packages.
 
+### jupyter
+
+Use intel python and pip as root, `pip install jupyter`.
+
 ### mathematica
 
 Installed by the bash script on /opt/mathematica/verno. And the script is in the bin subdirectory of the above path. Add it as a package in spack, and `spack load mathematica` to use it.

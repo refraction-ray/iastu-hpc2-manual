@@ -84,7 +84,7 @@ Currently we have the following spack environments.
 
 * pyml
 
-  Enviroments for python and machine learning. Python 3.6.8 optimized by intel with tensorflow, pytorch and keras. All comes with GPU support. Other packages include pandas, numpy, scipy, scikit-learn, mpi4py, quspin (ED calculation) and more.
+  Enviroments for python and machine learning. Python 3.6.8 optimized by intel with tensorflow, pytorch and keras. All comes with GPU support. Other packages include pandas, numpy, scipy, scikit-learn, mpi4py, quspin (ED calculation), jupyter environment and more.
 
 * arma
 

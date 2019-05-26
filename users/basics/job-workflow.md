@@ -1,6 +1,6 @@
 **Note:** Since users' computation tasks are usually depending on other packages and softwares, it would be better to read the [module section](./module_spack.md) first. In that section, you would be told how to load softwares you want to use or link with. If you don't load any softwares, the system has very limited default softwares like gcc and openmpi, which in general cannot meet your research needs.
 
-In the following, you will be introduced to the general workflow of using the cluster.
+In the following, you will be introduced to the general workflow of using the cluster. We assume that the users have adequate knowledge of compiling source code, linking shared library, running executable and mpi programming  in single node Linux. If not, please learn basics about Linux based programming first.
 
 ## connecting
 
