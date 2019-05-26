@@ -65,6 +65,18 @@ Since the cluster is in an air-gapped enviroment, and the rpm downloading seems 
 
 Remember to include cluster helper for MKL library which is omitted by default.
 
+### PETSC+SLEPC
+
+configure for petsc: dont set compiler when set with-mpi-dir 
+
+`export PETSC_DIR= &&export PETSC_ARCH=`
+
+```
+./configure  --download-superlu_dist --download-mumps --download-hypre --download-scalapack --download-metis --with-blaslapack-dir=/opt/intel/mkl CFLAGS=-fPIC CXXFLAGS=-fPIC FFLAGS=-fPIC FCFLAGS=-fPIC F90FLAGS=-fPIC F77FLAGS=-fPIC --with-debugging=0 --with-mpi-dir=/opt/intel/impi/2019.3.199/intel64 --with-cxx-dialect=C++11
+```
+
+for sinvert project, `cmake -DMACHINE=linux -DCMAKE_C_COMPILER=icc -DCMAKE_CXX_COMPILER=icpc ../src`. It turns out as a cmake error where default openmpi has been utilized.
+
 ### python
 
 *into ansible workflow and intel parallel studio installation*

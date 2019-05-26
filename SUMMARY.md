@@ -3,6 +3,7 @@
 * [User's Manual](users/README.md)
   * [basics](users/basics/README.md)
     * [basic info](users/basics/info.md)
+    * [storage](users/basics/storage.md)
     * [workflow on jobs](users/basics/job-workflow.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)

@@ -6,7 +6,7 @@ All user directories in home dir are in the ssd of master node. And home directo
 
 ## /DATA
 
-/DATA dir is in the hdd of master node, which has size of **2T** in total. Every users has read and write permission in this dir. The best practice is to firstly create a subdir in /DATA with the username for later use. Large data file should be stored in this dir.
+/DATA dir is in the hdd of master node, which has size of **2T** in total. Every users has read and write permission in this dir.  This dir is also shared via NFS and accessible to all computation nodes. The best practice is to firstly create a subdir in /DATA with the username for later use. Large data file should be stored in this dir.
 
 ## /tmp
 
@@ -14,4 +14,10 @@ In general, the IO data files are recommended to save in `/DATA/<user>` dirs. Ho
 
 ## /BACKUP
 
-This dir is in another hdd of master node, which also has **2T** size in total. This dir is for important backups and normal users only have read permissions without write permission.
+This dir is in another hdd of master node, which also has **2T** size in total. This dir is for important backups and normal users only have read permissions without write permission. For normal users, they shouldn't care about this dir. And if users have some need to backup locally, they can contact the administrator for the backup, and the backup file will go here.
+
+## /DATA2
+
+This directory is shared by nfs, and lives in an old machine with **9T** space in total (by hardware raid controller). Therefore, all IO in this dir would go through NFS no matter in master or computation nodes. So it is slow. Besides, the disk is aged and not under good maintenance, so the risk of data lost is high.  Moreover, the account system is different in /DATA2, so all files would lose owner attributes, and the permission control is somewaht chaotic.
+
+Therefore, unless you have lots of unimportant data file to save, we strongly recommend you choose /DATA as the IO dir. However if the data file of your project is beyond the size of /DATA dir, /DATA2 would be the only choice.

@@ -6,9 +6,35 @@ This section deals with hardwares utilized or considered on building HPC2.
 
 *Tower workstation*
 
+We have one T7920 as our login/master node.
+
+#### specs
+
+Intel XEON Gold 5120 14 cores 28 threads * 2
+
+256G DDR4 memory
+
+512G SSD
+
+2T HDD*2
+
+Nvidia RTX 2080Ti
+
 ### DELL PowerEdge R740 
 
 *2U rack server*
+
+We currently have 3 R740 as our computation nodes.
+
+#### specs
+
+Intel XEON Gold 5120 14 cores 28 threads * 2
+
+128G DDR4 memory
+
+512G SSD
+
+#### misc
 
 product no., the second digit is for the generation of Dell servers. 4 here is for 14 generation. As for the first digit, it seems that the larger number the more powerful computer it is.
 
@@ -27,6 +53,10 @@ Quicksync is optional for this version of server. Seems no quicksync in our mach
 
 ### UPS
 
+ Uninterruptible power supply
+
+control wire?
+
 ### Switch
 
 * Huawei S1720-28GWR-4P
@@ -42,6 +72,8 @@ Quicksync is optional for this version of server. Seems no quicksync in our mach
 Cat6 2m or 5m
 
 ### Wireless AP
+
+TP_LINK
 
 ## Hardware knowledges
 

@@ -31,6 +31,9 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
   - [x] resource limit in master
   - [x] qos in slurm
   - [x] pam in slrum
+- [ ] sshfs
+
+
 
 ### DevOp softwares
 
