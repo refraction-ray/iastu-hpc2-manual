@@ -1,6 +1,6 @@
 In this part, I would keep some notes on tools or softwares that I haven't fully determined to merge into the main workflow on HPC2, it is kept for possible future technology selections.
 
-List of softwares in typical HPCs:
+List of typical HPCs:
 
 *  [uchicago](https://rcc.uchicago.edu/docs/software/modules/index.html)
 *  [princeton](https://researchcomputing.princeton.edu/software)

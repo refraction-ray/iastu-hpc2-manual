@@ -32,7 +32,7 @@ To specify a package in spack, you must provide a legal syntax as described abov
 * Want to use icc, ifort or intel mpi, intel mkl or optimized intel python? `spack load intel-parallel-studio%intel`.
 * Want to use some advanced linear algebra wrapper instead of bare lapack API? Try `spack load eigen` or see following on `spack env activate arma` .
 * Want to use mathematica? `spack load mathematica`.
-* Want to use a very fast python with scientific packages? See following `spack env activate pyml`.
+* Want to use a very fast python3 with scientific packages? See following `spack env activate pyml`.
 * [Advanced] Want to use a container solution to make the deploy of tasks simpler? `spack load singularity`.
 
 ## prepared environments
@@ -74,7 +74,7 @@ $ spack env status
 ==> No active environment
 ```
 
-
+Currently we have the following spack environments.
 
 * dised
 
@@ -90,12 +90,13 @@ $ spack env status
 
 ## used within scripts
 
-**Must read:** Spack is only activated when you log in. It indicates that spack is not accessible by default in scripts such as sbtach scripts. Namely, the following scripts would fail as sbatch submission file.
+**Must read:** Spack is only activated when you log in. It indicates that spack is not accessible by default in scripts such as sbtach scripts. Namely, the following scripts would fail when submitting jobs.
 
 ```bash
 #! /bin/bash
 # A wrong version of script
 spack load armadillo
+mpirun ...
 ```
 
 The correct way to call spack in scripts is firstly activate spack itself by `source /etc/spack-load`. So the correct version should looks like
@@ -105,5 +106,6 @@ The correct way to call spack in scripts is firstly activate spack itself by `so
 # A correct version of script
 source /etc/spack-load # this is very important, always add this line in sbatch script in case of error
 spack load armadillo
+mpirun ...
 ```
 

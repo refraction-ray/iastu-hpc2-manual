@@ -52,3 +52,21 @@ You can transfer files via **scp** or **rsync** which can be called via CLI envi
 
    I cannot help Windows users, maybe you could find similar things...
 
+## Remote desktop support
+
+The cluster comes with X11 forward support. If you want to use some softwares with GUI, you should ssh into the server with `ssh -X` option. From client side, such X11 forward is supported natively in linux. For mac, it is recommended to download **Xquatrz** software. There are similar softwares on Windows, too.
+
+It is worthing noting such X11 forward is chained, i.e. you can also use GUI tools in computation nodes. Below is an example to use mathematica GUI from HPC.
+
+```bash
+# in your desktop
+(local)$ ssh -X <user>@<server_ip>
+(master)$ salloc -N1 -n1 -t 1:00:00 # alloc resource first to enable ssh to cn
+(master)$ squeue # find the job in now in c1 node
+(master)$ ssh -X c1
+(c1)$ spack load mathematica
+(c1)$ mathematica # mathematica will open in your local desktop
+```
+
+
+
