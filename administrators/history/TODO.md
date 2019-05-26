@@ -32,8 +32,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
   - [x] qos in slurm
   - [x] pam in slrum
 - [ ] sshfs
-
-
+- [ ] rclone
 
 ### DevOp softwares
 
@@ -58,7 +57,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] boost
 - [x] *GSL*
 - [ ] *distributed mathematica*
-- [ ] *SLEPc PETSc and external linear and eigen solver packages*
+- [x] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*
 
 ### Modern cloud and distributed system tools
@@ -70,6 +69,8 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] *ceph*
 
 ## Miscs
+
+- [ ] opensource the ansible playbooks in this HPC
 
 ### tasks to explore
 
@@ -83,6 +84,6 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 ### design principle
 
-* more on master, less on slave
+* more on master, less on slave, everything is slave should be included in ansible workflows
 * more on ansible playbooks, less by hand
 

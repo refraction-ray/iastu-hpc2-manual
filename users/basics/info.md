@@ -1,8 +1,8 @@
 ## Information
 
-IASTU-HPC2 is a mini cluster which meets high performance computation(HPC) needs in physics research.
+IASTU-HPC2 is a mini cluster which meets high performance computation(HPC) needs in advanced physics research.
 
-It is free to use for any member from Yao's group. The user account shall be assigned upon request to the administrators.
+It is free to use for any member from Yao's group. The user account shall be assigned upon request to the administrators. **Never ever give your accounts to others**. The account would get banned if abnormal behaviors are detected.
 
 The cluster provide both state-of-the-art hardwares and sophisticated modern software stacks for HPC.
 

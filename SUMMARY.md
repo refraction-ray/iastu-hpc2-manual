@@ -3,9 +3,10 @@
 * [User's Manual](users/README.md)
   * [basics](users/basics/README.md)
     * [basic info](users/basics/info.md)
-    * [storage](users/basics/storage.md)
+    * [connecting](users/basics/connecting.md)
+    * [storage (**must-read**)](users/basics/storage.md)
+    * [module system (**must-read**)](users/basics/module_spack.md)
     * [workflow on jobs](users/basics/job-workflow.md)
-    * [module system](users/basics/module_spack.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)
 
@@ -24,7 +25,7 @@
   * [History](administrators/history/README.md)
 
     * [ToDo](administrators/history/TODO.md)
-    * [VM test](administrators/history/VM.md)
-    * [setup](administrators/history/setup.md)
+    * [VM Test](administrators/history/VM.md)
+    * [Real Setup](administrators/history/setup.md)
 
 

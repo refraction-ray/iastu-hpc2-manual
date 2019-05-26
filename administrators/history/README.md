@@ -1,1 +1,1 @@
-In this section, I would record all operations and configuration changes on both hardware and software level of HPC2. 
+In this section, I would record all operations and configuration changes on both hardware and software levels of our cluster. It is not only a debug logs for later days but is also a good tutorials for building HPC in administrators' perspective. 

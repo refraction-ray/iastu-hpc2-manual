@@ -30,7 +30,7 @@ For job arrays, some import notes. Use `# SBATCH --array=1-5` to name the job as
 
 ### allocate computation node interactively
 
-See [this blog](https://yunmingzhang.wordpress.com/2015/06/29/how-to-use-srun-to-get-an-interactive-node/) for details. For short, `srun -N 1 -n 1 -w node1 --pty bash -i`. A slurm way of ssh.
+See [this blog](https://yunmingzhang.wordpress.com/2015/06/29/how-to-use-srun-to-get-an-interactive-node/) for details. For short, `srun -N 1 -n 1 -w node1 --pty bash -i`. A slurm way of ssh. Or `salloc -n2 -N1 -t 1:00:00` to allocate a node with give time and resource (2CPU cores). Then ssh to it (-X is support in this case).
 
 ## Management and Accounting
 

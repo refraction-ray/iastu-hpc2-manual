@@ -1,3 +1,5 @@
+**Note:** Since users' computation tasks are usually depending on other packages and softwares, it would be better to read the [module section](./module_spack.md) first. In that section, you would be told how to load softwares you want to use or link with. If you don't load any softwares, the system has very limited default softwares like gcc and openmpi, which in general cannot meet your research needs.
+
 ## compile jobs
 
 When intel mkl is utilized in the code, explicitly or implicitly, we strongly recommended to use intel compiler to compile the program to avoid boring and fragile linking flags for gcc.
