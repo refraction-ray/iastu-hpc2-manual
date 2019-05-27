@@ -1,3 +1,3 @@
 ## IASTU-HPC2
 
-This is a complete guide to HPC2 for both users and administrators.
+This is a complete guide to IASTU-HPC2 computation resource for both users and administrators.

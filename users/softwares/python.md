@@ -1,6 +1,6 @@
 ## Pip
 
-We don't recommand to use pip in the bare enviroment, instead use conda to manage your python workflow as below.
+We don't recommand to use pip in the bare enviroment. instead, you should use conda to manage your python workflow as below.
 
 ## Conda
 
@@ -38,3 +38,7 @@ $ ssh -N -L <local_port>:<remote_hostname>:<remote_port> <ssh_user>@<ssh_server_
 ```
 
 Such an ssh tunnel can make us visit both jupyter server in master node and in compute nodes.
+
+## sbatch
+
+The use of sbatch script for python is similar for usual scripts, just use `python some.py` is enough (and remember source /etc/spack-load and prepare the environment).

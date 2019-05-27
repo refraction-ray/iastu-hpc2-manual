@@ -64,6 +64,8 @@ You can cancel the task by `scancel <task_id>`, task id can be obtained by squeu
 
 ### job arrays
 
+Use the `--array` option in sbatch and the env vars `SLURM_ARRAY_TASK_ID`. Noe in such a script, both N and n are specified for one task.
+
 ```bash
 #! /bin/bash
 #SBATCH -N 1
@@ -77,7 +79,7 @@ spack load intel-parallel-studio %intel
 python calculate.py output-${SLURM_ARRAY_TASK_ID}.txt
 ```
 
-### interactive sessions
+### interactive sessions on compute nodes
 
 1. `srun -N 1 -n 1 -w c3 --pty bash -i`，run a bash shell on c3 node with one node and one cpu core.
 2. `salloc -n2 -N1 -t 1:00:00`, and then ssh to the assigned node `ssh [-X] cn`.

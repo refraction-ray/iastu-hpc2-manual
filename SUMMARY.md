@@ -8,7 +8,8 @@
     * [module system (**must-read**)](users/basics/module_spack.md)
     * [workflow on jobs](users/basics/job-workflow.md)
   * [softwares](users/softwares/README.md)
-    * [python](user/softwares/python.md)
+    * [python](users/softwares/python.md)
+    * [commond line tools](users/softwares/cli-tools.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)
 

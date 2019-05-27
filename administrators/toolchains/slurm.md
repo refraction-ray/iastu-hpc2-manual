@@ -116,6 +116,8 @@ SSH forward with four machines: [post](https://www.ibm.com/developerworks/cn/lin
 
 *To be detailed studied*
 
+[Combine slurm, ipyparallel and celery](https://ulhpc-tutorials.readthedocs.io/en/latest/python/advanced/jupyter-celery/)
+
 ### Mathematica
 
 **References:**
