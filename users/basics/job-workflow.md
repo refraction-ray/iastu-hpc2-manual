@@ -49,7 +49,7 @@ The fourth line implies that we want to load intel module, which includes MKL, I
 
 Finally the fifth line tells slurm to run a mpi task with 56 threads.
 
-You can submit the task by `sbatch run.sh`, and check the status of the task by `squeue`.
+You can submit the task by `sbatch run.sh`, and check the status of the task by `squeue` or `squeue -o %all` if you really enjoy lots of info.
 
 You can check the stdout of the job by `slurm-<jobid>.out`.
 

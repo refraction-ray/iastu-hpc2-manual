@@ -81,13 +81,13 @@ for sinvert project, `cmake -DMACHINE=linux -DCMAKE_C_COMPILER=icc -DCMAKE_CXX_C
 
 *into ansible workflow and intel parallel studio installation*
 
-prefered way: intel python+spack pip. `spack load intel-parallel-studio`, `spack load py-setuptools`, `spack load py-pip`.
+prefered way: ~~intel python+spack pip~~. `spack load intel-parallel-studio`, `spack load py-setuptools`, `spack load py-pip`. Intel python+conda create enviroment
 
 Never use admin account's global pip. Reason: the package would be installed in ~/.pip. However, if later spack-pip install some packages, the dependece is automatically used if it is already in ~/.pip. But this folder is not accessible by other user which may lead to a chaos on python packages. However, for normal user, global pip3 is the recommended way to download packages.
 
 ### jupyter
 
-Use intel python and pip as root, `pip install jupyter`.
+Use intel python and pip as root, `pip install jupyter ipyparallel jupyter_contrib_nbextensions`. Somehow the cluster tab works after several trials. Dont know exact solution though.
 
 ### mathematica
 

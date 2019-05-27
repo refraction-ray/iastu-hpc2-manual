@@ -31,7 +31,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
   - [x] resource limit in master
   - [x] qos in slurm
   - [x] pam in slrum
-- [ ] sshfs
+- [x] sshfs
 - [ ] rclone
 
 ### DevOp softwares
@@ -57,9 +57,11 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] boost
 - [x] *GSL*
 - [ ] *distributed mathematica*
+  - [ ] automatically activation
+  - [ ] remote kernel on cluster
 - [x] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*
-- [ ] ipyparallel
+- [x] ipyparallel
 
 ### Modern cloud and distributed system tools
 

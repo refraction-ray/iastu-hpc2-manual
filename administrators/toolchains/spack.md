@@ -85,6 +85,8 @@ The first one in to just install packages provided by `spack extensions python`,
 
 For other packages, one can install by spack local pip. First you should `spack install py-pip ^python@ver`. Then to use this pip, you should load `py-pip` AND `py-setuptools`. The second one is necessary for pip to work. Then `pip install` can work as expected and all packages are in spack local site-packages directory, which can be used directly by spack python without load (on contrast of the packages managed in the first approach).
 
+**Updates:** Just use intel python and intel conda enviroment as the standard workflow.
+
 ### Intel
 
 See [doc](https://spack.readthedocs.io/en/latest/build_systems/intelpackage.html) for workflow to manage intel family, especially parallel studio.
