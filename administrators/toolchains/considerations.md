@@ -12,6 +12,7 @@ List of typical HPCs:
 *  [PKU](http://hpc.pku.edu.cn/)
 *  [UIOWA](https://wiki.uiowa.edu/display/hpcdocs)
 *  [Yale](https://docs.ycrc.yale.edu/clusters-at-yale/)
+*  [Sheffield]([http://docs.hpc.shef.ac.uk](http://docs.hpc.shef.ac.uk/))
 
 ## OpenHPC
 

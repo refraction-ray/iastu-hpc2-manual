@@ -49,11 +49,7 @@ The fourth line implies that we want to load intel module, which includes MKL, I
 
 Finally the fifth line tells slurm to run a mpi task with 56 threads.
 
-You can submit the task by `sbatch run.sh`, and check the status of the task by `squeue` or `squeue -o %all` if you really enjoy lots of info.
-
-You can check the stdout of the job by `slurm-<jobid>.out`.
-
-You can cancel the task by `scancel <task_id>`, task id can be obtained by squeue.
+Submit the task by `sbatch run.sh`.
 
 **Warn:** 
 
@@ -61,6 +57,15 @@ You can cancel the task by `scancel <task_id>`, task id can be obtained by squeu
 
 
 2. Better not use srun directly for submitting jobs. Since such jobs would be killed as long as the ssh connection is off.
+
+### view jobs
+
+Check the status of the task by `squeue` or `squeue -o %all` if you really enjoy lots of info. Better use `squeue -u <user> ` to view only your jobs. If the job ST is PD(pending) and the reason is QOSResourceLimit, it indicates that the total amount of your job is exceed the limit of normal user. Otherwise, if the reason is Resources, it means the cluster has no more compute resource for your job, i.e. the cluster is somewhat full load.
+
+You can check the stdout of the job by slurm-<jobid>.out. But the important output is better written to some formatted output datafile.
+
+You can cancel the task by scancel <task_id>, task id can be obtained by squeue.
+
 
 ### job arrays
 

@@ -1,6 +1,6 @@
 In this section, I will discuss on slurm and its ecosystem, including how can it interacts with mpi, python, mathematica and so on.
 
-In a word, slurm is very powerful but has really bad presentation of documentation.
+In a word, slurm is very powerful but honestly speaking, it has a really bad presentation of documentation and not so good and large community.
 
 ## MPI
 
@@ -49,11 +49,13 @@ For job arrays, some import notes. Use `# SBATCH --array=1-5` to name the job as
 
 See [this blog](https://yunmingzhang.wordpress.com/2015/06/29/how-to-use-srun-to-get-an-interactive-node/) for details. For short, `srun -N 1 -n 1 -w node1 --pty bash -i`. A slurm way of ssh. Or `salloc -n2 -N1 -t 1:00:00` to allocate a node with give time and resource (2CPU cores). Then ssh to it (-X is support in this case).
 
+`x11` forward option for srun: [doc](https://portal.supercomputing.wales/index.php/index/slurm/interactive-use-job-arrays/x11-gui-forwarding/)
+
 ? Still have no clear idea on `-n` and the real number of cpu cores the job can use.
 
 ## Management and Accounting
 
-Use `Weight` option in NodeName line in `slurm.conf` to change the priority of assinged nodes, see [this post](https://stackoverflow.com/questions/28035631/how-do-i-set-the-order-of-nodes-for-a-slurm-job).
+Use `Weight` option in NodeName line in `slurm.conf` to change the priority of assinged nodes, see [this post](https://stackoverflow.com/questions/28035631/how-do-i-set-the-order-of-nodes-for-a-slurm-job). Also, the cpu cores, sockets must by given in slurm.conf, slurm has no ability to auto detect.
 
 Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk/niflheim/Slurm_accounting) (better than the official doc)
 
@@ -77,13 +79,14 @@ sacctmgr show assoc format=cluster,account,user,qos
 
 Note usename is the same for OS and slurm.
 
+Node QOS is weird. It seems the system takes each task as a node. Even more tasks are shared with the same node, the node count increases. Instead, try limit by cpu. Is cpu for cores or threades? Experiments: cpu in qos context is by cores, say `cpu=28` may limit to 56 threads. It is worth noting however, `--cpus-per-task` is given by threads! Slurm seems to have a mix conception of cpu.
+
 ### PAM module
 
 *merged into ansible workflow*
 
 [reference](https://slurm.schedmd.com/pam_slurm_adopt.html)
 
-*
 
 * `sudo apt install libpam-slurm`
 
@@ -97,6 +100,11 @@ Note usename is the same for OS and slurm.
   ```
 
 Issue: seems always fail to ssh even if there is some task on the corresponding nodes. Though it is not a big issue that there is always a slurm version of ssh works. **Solved:** this issue is due to the mismatch between pam slurm and pam slurm adopt.
+
+### misc
+
+* No conf to randomize node assignment: [post](https://serverfault.com/questions/881099/randomize-slurm-node-allocation), somewhat hard to believe
+* In some system, squeue is aliased to `alias squeue="squeue -u <user>"`, therefore you cannot directly view others' jobs. But you can `unalias squeue`, and then `squeue` can check all jobs by all users.
 
 ## Working with other tools
 
@@ -116,9 +124,53 @@ SSH forward with four machines: [post](https://www.ibm.com/developerworks/cn/lin
 
 *To be detailed studied*
 
+[ipcluster command line](https://ipyparallel.readthedocs.io/en/latest/process.html)
+
 [Combine slurm, ipyparallel and celery](https://ulhpc-tutorials.readthedocs.io/en/latest/python/advanced/jupyter-celery/)
 
 ### Mathematica
+
+#### remote kernel with the help of  Tunnel
+
+See [manual](https://github.com/sakra/Tunnel/blob/master/MANUAL.md) of tunnel tool. Or more general reference of mma doc ParallelTools/tutorial/ConnectionMethods.
+
+Some recaps: copy `tunnel.m` into `/opt/mathematica/11.0.1/Kernels/Packages`, and add both `tunnel.sh` and `tunnel_sub.sh` into `~/.Mathematica/FrondEnd`, `chmod +x` for the two scripts. (It may be possible to configure the tunnel sh in system wide context?)
+
+tunnel.sh is for remote control kernel, with GUI to launch, tunnel_sub.sh is for compute kernels, launched indirectly by control kernel.
+
+Use local GUI call mathematica remote kernels in master node, 
+
+```bash
+# Arguments to MLOpen
+-LinkMode Listen -LinkProtocol TCPIP -LinkOptions MLDontInteract -LinkHost 127.0.0.1
+
+# Lauch command
+"`userbaseDirectory`/FrontEnd/tunnel.sh" "<user>@<ip>" "/opt/mathematica/11.0.1/Executables/WolframKernel" "`linkname`"
+```
+
+Of course you need to configure passwordless ssh login for user or add password above. The two files in launch command are for tunnel.sh and math kernel.
+
+On master node, further call more remote kernels on compute nodes. You can achieve a 224 threads parallel table in our cluster!
+
+```mathematica
+Needs["SubKernels`RemoteKernels`"]
+
+$RemoteCommand = 
+ "\"" <> $UserBaseDirectory <> 
+  "/FrontEnd/tunnel_sub.sh\" \"`1`\" \
+\"/opt/mathematica/11.0.1/Executables/MathKernel\" \"`2`\""
+
+kernel = RemoteMachine["<user>@<hostname>", 2, LinkHost -> "127.0.0.1"]
+(* 2 is the kernel number on hostname, if the user name is the same, which is the case in our HPC, <user>@ part can be omitted, a cn for host is enough *)
+
+LaunchKernels[kernel]
+
+ParallelTable[$MachineName, {i, 1, Length[Kernels[]]}] (* A test on real parallel fashion *)
+
+CloseKernels[{19, 20, 21}] (*close kernels 19,20,21 *)
+```
+
+ The standard mathematica parallel and remot kernel workflow is decided as above.
 
 **References:**
 
@@ -126,6 +178,7 @@ SSH forward with four machines: [post](https://www.ibm.com/developerworks/cn/lin
 * <https://rcc.uchicago.edu/docs/software/environments/mathematica/index.html> mathematica usage as some hpc manual
 * <https://www.wolfram.com/products/applications/sem/manual.pdf>
 * <https://taoofmac.com/space/blog/2016/08/10/0830> mathematica on rasberry cluster
+* <https://mathematica.stackexchange.com/questions/31518/how-to-change-front-end-setting-parallel-kernel-configuration-in-the-code/31834#31834> remote kernel launching
 ### spark
 
 The slurm sbatch script to utlize spark cluster: [demo script](https://www.sherlock.stanford.edu/docs/software/using/spark/)

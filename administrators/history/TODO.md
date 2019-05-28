@@ -58,7 +58,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] *GSL*
 - [ ] *distributed mathematica*
   - [ ] automatically activation
-  - [ ] remote kernel on cluster
+  - [ ] launch remote kernel via cli
 - [x] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*
 - [x] ipyparallel
@@ -73,8 +73,8 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 ## Miscs
 
-- [ ] opensource the ansible playbooks in this HPC
-- [ ] ansible authorized key double check
+- [x] opensource the ansible playbooks in this HPC
+- [x] ansible authorized key double check
 
 ### tasks to explore
 
