@@ -115,6 +115,31 @@ The workflow of ganglia configuration and installation have been merged to ansib
 
 gmetric can be customized to report certain spec. See temperature example [here](http://cutler.io/2011/11/lm-sensors-on-ganglia/).
 
+Apache password protected sites: [digitalocean](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04)
+
+### ELK
+
+*into ansible workflow*
+
+* add elastic repo and key
+* apt install elasticsearch
+* apt install kibana and configure nginx reverse proxy
+* apt install logstash and configure the pipe
+* apt install filebeat
+* `sudo filebeat setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'`
+* `sudo filebeat setup -e -E output.logstash.enabled=false -E output.elasticsearch.hosts=['localhost:9200'] -E setup.kibana.host=localhost:5601`
+* work test `curl -X GET "localhost:9200/_cat/indices?v"`
+* disable logstash ssl (seems to be disable by default)
+* edit the index of logstash output (add beat.hostname in index name)
+
+**Misc note:**
+
+* For debug test on es, curl will go proxy!!
+* no specified JAVA_HOME warning in es service log doesn't matter
+* logstash config [intro](https://www.elastic.co/guide/en/logstash/current/advanced-pipeline.html#configuring-geoip-plugin), grok [official guide](https://www.elastic.co/guide/en/logstash/7.1/plugins-filters-grok.html)
+* actually it is ok, but the log from compute node is just too small compared to master…. It is not an issue due to ELK stack, but issue of non uptodate syslog.
+* [timezone issue of syslog](https://stackoverflow.com/questions/22853026/ubuntu-change-timezone-to-utc-does-not-affect-the-time-of-syslog): every damon can see the timezone issue only solved by service restart! **case solved**
+
 ### quota
 
 See reference on ubuntu 18.04 quota command: [digital ocean](https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-18-04), it is very well write up.
@@ -176,6 +201,7 @@ Available frequency is 2400, though the param is 2666, the speed is limited by C
 All in master nodes, keep the bottom line that all tasks on compute node should merged into ansible workflow.
 
 * hard disk mount and fstab configure (one time forever, required before **basic roles**, actually can easily merged into basic role)
+* Possible nvidia drivers install and reboot if GPU is available. Cuda and cudnn can be managed by spack.
 * quota initial configure (one time forever, required before **user roles)**
 * intel parallel studio install (one time forever) (no need to install before any roles, possible issue for python path maybe in **python roles**)
 * mathematica install and add virtual mathematica packages in spack (one time forever) (no need to install before any roles)
@@ -183,3 +209,4 @@ All in master nodes, keep the bottom line that all tasks on compute node should 
 * python packages install and jupyter configure (continuing work) (no need to install before any roles)
 * spack packages install by specs and spack env maintenance (continuing work) (no need to install before any roles)
 * sacctmgr cluster, qos and account add (continuing work for advanced scenario, minimum setup required before **user roles** after slurm roles)
+* two line of commands to final set up ELK stack on master (should find some more elegant way in the future)

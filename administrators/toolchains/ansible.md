@@ -15,6 +15,8 @@ In this section, some aspects on ansible is discussed.
 * [git](https://docs.ansible.com/ansible/latest/modules/git_module.html)
 * lineinfile
 * apt
+* [apt_key](https://docs.ansible.com/ansible/2.5/modules/apt_key_module.html)
+* [apt repository](https://docs.ansible.com/ansible/2.5/modules/apt_repository_module.html)
 * make
 * hostname
 * [mysql_user](https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html): mysql-python package missing issue: [post](https://github.com/geerlingguy/ansible-role-mysql/issues/42), `apt: name=python3-mysqldb state=present` is enough, however `pip install mysql-python` wouldn't work.
@@ -95,6 +97,7 @@ tasks:
 
 * [practical example of modules and action plugins](https://ndemengel.github.io/2015/01/20/ansible-modules-and-action-plugins/)
 * Future plan: a spack module for ansible (settled by `changed_when` to avoid changed report of command)
+* [lots of cool posts on ansible](https://everythingshouldbevirtual.com/year-archive/)
 
 ## Misc
 

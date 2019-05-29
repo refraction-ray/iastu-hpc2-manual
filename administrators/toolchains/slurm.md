@@ -104,7 +104,16 @@ Issue: seems always fail to ssh even if there is some task on the corresponding 
 ### misc
 
 * No conf to randomize node assignment: [post](https://serverfault.com/questions/881099/randomize-slurm-node-allocation), somewhat hard to believe
+
 * In some system, squeue is aliased to `alias squeue="squeue -u <user>"`, therefore you cannot directly view others' jobs. But you can `unalias squeue`, and then `squeue` can check all jobs by all users.
+
+* PrivateData controls whether some info is accessible to normal users
+
+  > **PrivateData**
+  >
+  >  This controls what type of information is hidden from regular users. By default, all information is visible to all users. User **SlurmUser** and **root** can always view all information. Multiple values may be specified with a comma separator. Acceptable values include: 
+  >
+  > accounts, jobs, nodes, users and so on.
 
 ## Working with other tools
 

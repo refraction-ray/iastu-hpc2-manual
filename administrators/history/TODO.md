@@ -32,7 +32,9 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
   - [x] qos in slurm
   - [x] pam in slrum
 - [x] sshfs
-- [ ] rclone
+- [ ] *rclone*
+- [x] *rsyslog forward* (by ELK stack)
+- [ ] *gitlab*
 
 ### DevOp softwares
 
@@ -56,19 +58,20 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] Eigen and armadillo
 - [x] boost
 - [x] *GSL*
-- [ ] *distributed mathematica*
+- [x] *distributed mathematica*
   - [ ] automatically activation
-  - [ ] launch remote kernel via cli
+  - [x] launch remote kernel via cli
 - [x] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*
 - [x] ipyparallel
+- [ ] *Matlab*
 
 ### Modern cloud and distributed system tools
 
 - [ ] *OpenStack*
 - [ ] *Spark*
 - [ ] *Kubernetes*
-- [ ] *Elasticsearch*
+- [x] *Elasticsearch*
 - [ ] *ceph*
 
 ## Miscs

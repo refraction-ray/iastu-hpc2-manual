@@ -20,3 +20,13 @@ Pipeline from log to elastic search, see [this blog](https://www.cnblogs.com/yin
 ### Installation
 
 * [ubuntu16.04](https://hostpresto.com/community/tutorials/how-to-install-and-configure-ganglia-monitor-on-ubuntu-16-04/)
+
+## ELK
+
+~~Elasticsearch + logstash+kibana, to be dployed soon, firstly install on VM environment~~
+
+initial install finished
+
+[simple intro](https://www.ibm.com/developerworks/cn/opensource/os-cn-elk/index.html)
+
+[Installation of ELK on ubuntu18.04 by digital ocean](https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-18-04)
