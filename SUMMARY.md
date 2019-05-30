@@ -9,6 +9,8 @@
     * [workflow on jobs](users/basics/job-workflow.md)
   * [softwares](users/softwares/README.md)
     * [python](users/softwares/python.md)
+    * [mathematica](users/softwares/mathematica.md)
+    * [singularity](users/softwares/singularity.md)
     * [commond line tools](users/softwares/cli-tools.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)

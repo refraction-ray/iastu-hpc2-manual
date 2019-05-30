@@ -69,7 +69,7 @@ You can cancel the task by scancel <task_id>, task id can be obtained by squeue.
 
 ### job arrays
 
-Use the `--array` option in sbatch and the env vars `SLURM_ARRAY_TASK_ID`. Noe in such a script, both N and n are specified for one task.
+Use the `--array` option in sbatch and the env vars `SLURM_ARRAY_TASK_ID`. Noe in such a script, both N and n are specified for each one task of the array.
 
 ```bash
 #! /bin/bash
@@ -97,4 +97,4 @@ python calculate.py output-${SLURM_ARRAY_TASK_ID}.txt
         -t      time limit, format hh:mm:ss
 ```
 
-**Warning:** If you try to ssh to a compute node without any active job allocation, the connection wil be denied. By connection closed prompt.
+**Warning:** If you try to ssh to a compute node without any active job allocation, the connection wil be denied by a connection closed prompt. So the correct way to access a compute node, is by 2. Namely, firstly `salloc` the resource and then ssh to the assigned node.

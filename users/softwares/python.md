@@ -18,7 +18,7 @@ $ conda init bash  # after this, intel python is by default when log in
 
 The python3 intepreter in this conda env is still provided by Intel.
 
-For packages only available to pip, please refer to [this article](https://www.anaconda.com/using-pip-in-a-conda-environment/) on possible conflict issue and solution workflows.
+For packages only available to pip, please refer to [this article](https://www.anaconda.com/using-pip-in-a-conda-environment/) on possible conflict issues and solution workflows.
 
 ## Jupyter notebooks
 
@@ -41,4 +41,4 @@ Such an ssh tunnel can make us visit both jupyter server in master node and in c
 
 ## sbatch
 
-The use of sbatch script for python is similar for usual scripts, just use `python some.py` is enough (and remember source /etc/spack-load and prepare the environment).
+The use of sbatch script for python is similar for usual scripts, just use `python some.py` is enough (and remember `source /etc/spack-load` and prepare the environment).

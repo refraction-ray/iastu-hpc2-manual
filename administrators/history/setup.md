@@ -49,9 +49,13 @@ And add old machines (currently d1) into ~/.ssh/config.
 
 The backup crontab and fstab mount config have not included into ansible workflow due to flexibility consideration.
 
+In terms of network and nfs, ntp,apt setups, please see relevant section in [Virtual Machine](./VM.md) part.
+
 ### ansible
 
-Please see the ansible playbooks in HPC2.
+`sudo apt install ansible` on master node.
+
+Please see the ansible playbooks in HPC2. The playbooks went opensource, see [here](https://github.com/refraction-ray/hpc-build-ansible-playbooks).
 
 ### spack
 
@@ -63,11 +67,13 @@ Just see the practice on [spack](../toolchains/spack.md). Combine spack with lmo
 
 Since the cluster is in an air-gapped enviroment, and the rpm downloading seems not work well through http and ftp proxy, so one can directly download all rpms in another computer which has web connections by the online installer provided by intel and rsync the final tar to the cluster to finish the installing. And I prefer the intelpython as the favored version of python since it is very fast.
 
-Remember to include cluster helper for MKL library which is omitted by default.
+**Warn:** Remember to include cluster helper for MKL library which is omitted by default.
 
 ### PETSC+SLEPC
 
 configure for petsc: dont set compiler when set with-mpi-dir 
+
+Installed externally to spack.
 
 `export PETSC_DIR= &&export PETSC_ARCH=`
 
@@ -81,7 +87,7 @@ for sinvert project, `cmake -DMACHINE=linux -DCMAKE_C_COMPILER=icc -DCMAKE_CXX_C
 
 *into ansible workflow and intel parallel studio installation, always use intel python and its conda for users*
 
-prefered way: ~~intel python+spack pip~~. `spack load intel-parallel-studio`, `spack load py-setuptools`, `spack load py-pip`. Intel python+conda create enviroment
+prefered way: ~~intel python+spack pip~~. `spack load intel-parallel-studio`, `spack load py-setuptools`, `spack load py-pip`. **Intel python+conda create enviroment**.
 
 Never use admin account's global pip. Reason: the package would be installed in ~/.pip. However, if later spack-pip install some packages, the dependece is automatically used if it is already in ~/.pip. But this folder is not accessible by other user which may lead to a chaos on python packages. However, for normal user, global pip3 is the recommended way to download packages.
 
@@ -91,13 +97,17 @@ Use intel python and pip as root, `pip install jupyter ipyparallel jupyter_contr
 
 ### mathematica
 
-Installed by the bash script on /opt/mathematica/verno. And the script is in the bin subdirectory of the above path. Add it as a package in spack, and `spack load mathematica` to use it.
+Installed by the bash script on /opt/mathematica/verno. And the script is in the bin subdirectory of the above path. Add it as a package in spack override repo, and `spack load mathematica` to use it.
 
 **Possible issue:** The activation need to be carried out per user per node basis. Maybe have a look at MathML in the future.
 
+To utilize remote kernel launching with a better interface, add tunnel.m at Kernels/packages. Besides, one should also add tunnel.sh and tunnel_sub.sh in their home directory `~/.Mathematica/FrontEnd`.
+
+One liner for user to be accessible `ansible -i /home/ubuntu/hpc/hosts all -m command -a "/usr/bin/python3 /home/ubuntu/softwares/mmaact/automma.py '/opt/mathematica/11.0.1/bin/math'" --become-user=<user> -Kvv --become`.
+
 ### singularity
 
-`spack install singularity`
+`spack install singularity`, remember to check `spack edit singularity`, there is an after install warn prompt asking you run a script which would change the permission of some files with s bit. It is crucial for singularity run by normal users.
 
 ### ganglia
 
@@ -124,8 +134,8 @@ Apache password protected sites: [digitalocean](https://www.digitalocean.com/com
 * add elastic repo and key
 * apt install elasticsearch
 * apt install kibana and configure nginx reverse proxy
-* apt install logstash and configure the pipe
-* apt install filebeat
+* apt install logstash and configure the pipe, note the ip binding of beat input configure (there are `""` for string ip)
+* apt install filebeat (on all nodes)
 * `sudo filebeat setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'`
 * `sudo filebeat setup -e -E output.logstash.enabled=false -E output.elasticsearch.hosts=['localhost:9200'] -E setup.kibana.host=localhost:5601`
 * work test `curl -X GET "localhost:9200/_cat/indices?v"`
@@ -170,8 +180,6 @@ check by `ulimit -a` for individual users.
 
 * iperf, the master to compuation node bandwidth is around 940Mbit/s, which is near to the limit of the Gigabit nic.
 
-### IO
-
 ### cpu
 
 ### memory
@@ -201,7 +209,7 @@ Available frequency is 2400, though the param is 2666, the speed is limited by C
 All in master nodes, keep the bottom line that all tasks on compute node should merged into ansible workflow.
 
 * hard disk mount and fstab configure (one time forever, required before **basic roles**, actually can easily merged into basic role)
-* Possible nvidia drivers install and reboot if GPU is available. Cuda and cudnn can be managed by spack.
+* Possible nvidia drivers install and reboot if GPU is available. (one time forever) Cuda and cudnn can be managed by spack.
 * quota initial configure (one time forever, required before **user roles)**
 * intel parallel studio install (one time forever) (no need to install before any roles, possible issue for python path maybe in **python roles**)
 * mathematica install and add virtual mathematica packages in spack (one time forever) (no need to install before any roles)

@@ -36,7 +36,9 @@ To simulate the cluster network topology in VM clusters, see my blog [here](http
 
 ### Python3 preparation
 
-The operations below only on master VM. *Since ansible can be installed directly via apt, the python part might be moved later which controled by ansible*
+The operations below only on master VM. *Since ansible can be installed directly via apt, the python part might be moved later which controled by ansible* 
+
+*The following workflows on python is somehow deprecated for our cluster real settings*
 
 Final decision: change python under spack manage.
 
@@ -119,7 +121,7 @@ server ntp.tuna.tsinghua.edu.cn prefer
 
 * parallel ad-hoc commands `ansible all -a "bash /blah/proxy.cfg"`
 
-### Desktop
+### Remote Desktop
 
 * Edit sshd_config in server side by turning on X11Forwading option.
 * check there is xauth binary in the server, `which xauth`
@@ -130,7 +132,7 @@ server ntp.tuna.tsinghua.edu.cn prefer
 ### quota
 
 * apt install quota 
-* edit /etc/fstab, use usrquota,grpquota instead of defaults for root /. being sure to separate all options with a comma and no spaces.
+* edit /etc/fstab, use usrquota, grpquota instead of defaults for root /. being sure to separate all options with a comma and no spaces.
 * `sudo mount -o remount /` to remount root
 * check the effect by `cat /proc/mounts | grep ' / '`
 * `sudo quotacheck -ugm /`, This command creates the files `/aquota.user` and `/aquota.group`. 
@@ -168,7 +170,7 @@ Note the different implementation of PMI interface, which is the key for srun to
 
 Note slurm can also interact with containers such as docker or sigularity in principle.
 
-### account
+### account slurmdbd
 
 * `sudo apt install slurmdbd mysql-server python-mysqldb`
 * `sudo service mysql status`

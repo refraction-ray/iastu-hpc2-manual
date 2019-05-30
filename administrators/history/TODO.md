@@ -35,6 +35,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] *rclone*
 - [x] *rsyslog forward* (by ELK stack)
 - [ ] *gitlab*
+- [ ] *syncthing*
 
 ### DevOp softwares
 
@@ -59,7 +60,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] boost
 - [x] *GSL*
 - [x] *distributed mathematica*
-  - [ ] automatically activation
+  - [x] automatically activation
   - [x] launch remote kernel via cli
 - [x] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*
