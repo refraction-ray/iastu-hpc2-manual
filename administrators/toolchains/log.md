@@ -6,6 +6,8 @@ In this section, I will review some aspects on the log and monitoring related so
 
 ## Logstash
 
+*Merged into elk stack*
+
 Pipeline from log to elastic search, see [this blog](https://www.cnblogs.com/yincheng/p/logstash.html) for introduction.
 
 ## Nagios
@@ -25,8 +27,29 @@ Pipeline from log to elastic search, see [this blog](https://www.cnblogs.com/yin
 
 ~~Elasticsearch + logstash+kibana, to be dployed soon, firstly install on VM environment~~
 
-initial install finished
+initial install finished on the cluster
 
 [simple intro](https://www.ibm.com/developerworks/cn/opensource/os-cn-elk/index.html)
 
 [Installation of ELK on ubuntu18.04 by digital ocean](https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-18-04)
+
+ganglia input plugin for logstash: [doc](https://www.elastic.co/guide/en/logstash/current/plugins-inputs-ganglia.html)
+
+multiple input for logstash and type label: [so](https://stackoverflow.com/questions/18330541/how-to-handle-multiple-heterogeneous-inputs-with-logstash)
+
+```bash
+ganglia {
+    port => 28649
+    host => "{{ master_ip }}"
+    type => "ganglia"
+    
+  }
+  
+  udp_send_channel {
+  host = {{ master_name }}
+  port = 28649
+  ttl = 1
+}
+```
+
+ganglia doesn;t work well

@@ -90,6 +90,9 @@ Currently we have the following spack environments.
 
   Enviroments that supports the usage on armadillo package for matrix calculation in C++.
 
+A shortcut for activate certian env with modules auto loaded. To load this environment, type:
+`source /home/ubuntu/spack/var/spack/environments/{env_name}/loads`
+
 ## Using module directly
 
 It is in general possible to avoid using spack and use `module` command directly. The only problem is that the module name is not so neat and hard to memorize compared to package syntax for `spack load`. However you can still do this.

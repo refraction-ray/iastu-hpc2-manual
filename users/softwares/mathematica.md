@@ -21,7 +21,7 @@ This X11 forward work for both master and compute nodes. We suggest the users us
 
 In this workflow, you can use your own native mathematica app in your desktop, while using math kernel on our cluster. This approach is elegant and suitable for daily interactive use.
 
-First, copy tunnel.sh and tunnel_sub.sh [here](https://github.com/sakra/Tunnel/tree/master/scripts) to `~/.Mathematica/FrontEnd/` on master cluster, and remeber `chown +x` for these two scripts. Now configure your native desktop mathematica, by Evaluation-Kernel Configuration Options-Add. Give a kernel name and choose advanced options. Fill the following two blank with the following two lines:
+First, copy tunnel.sh and tunnel_sub.sh [here](https://github.com/sakra/Tunnel/tree/master/scripts) to `~/.Mathematica/FrontEnd/` on master cluster, and remember `chown +x` for these two scripts. Now configure your native desktop mathematica, by Evaluation-Kernel Configuration Options-Add. Give a kernel name and choose advanced options. Fill the following two blank with the following two lines:
 
 Arguments to MLOpen: `-LinkMode Listen -LinkProtocol TCPIP -LinkOptions MLDontInteract -LinkHost 127.0.0.1` .
 
@@ -33,7 +33,7 @@ Launch command:
 
 Click on OK, and your are ready to go, just change Evaluation-Notebook Kernel-The new kenel name.
 
-You can call more kernels for parallel calculation in mathematica, just `LaunchKernels[6]`, where 6 is the number of kernel you want.
+You can call more kernels for parallel calculation in mathematica, just `LaunchKernels[6]`, where 6 is the number of kernels you want.
 
 ### Advanced
 
@@ -52,7 +52,7 @@ $RemoteCommand =
 \"/opt/mathematica/11.0.1/Executables/MathKernel\" \"`2`\""
 
 kernel = RemoteMachine["<hostname>", 2, LinkHost -> "127.0.0.1"]
-(* hostname is our case, is cn depending on your salloc result. 2 is the kernel number on hostname, if the user name is the same, which is the case in our HPC, <user>@ part can be omitted, a cn for host is enough *)
+(* hostname in our case, is cn depending on your salloc result. 2 is the kernel number on hostname, if the user name is the same, which is the case in our HPC, <user>@ part can be omitted, a cn for host is enough *)
 
 LaunchKernels[kernel]
 

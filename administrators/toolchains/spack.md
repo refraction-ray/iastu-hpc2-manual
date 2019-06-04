@@ -5,7 +5,7 @@ In this section, I will give some information on the package manager designed fo
 ```bash
 git clone https://github.com/spack/spack
 cd spack
-git checkout releases/v0.12
+git checkout releases/v0.12 ## not necessary
 # add to env var
  . share/spack/setup-env.sh
 ```
@@ -135,7 +135,7 @@ Further summary: better also add intel-mpi and intel-mkl interface as external p
 * jdk: spack seems to have issue for installing jdk for certain old versions. Dont want to comment on Oracle...
 * m4: install issue with non gcc compiler: [issue](https://github.com/spack/spack/issues/4883), workaround: always use `^m4%gcc` in spack syntax
 * armadillo by default detect whether you have installed mkl and firstly link to it, it has nothing to do with whether intel-mkl is a dependent of spack syntax or not. Though mkl is default, armadillo installation fails somehow when provided intel-parallel-studio as mkl.
-* To use mkl, it is better to stay with icc instead of gcc, which can make the world simpler.
+* To use mkl, it is better to stay with icc instead of gcc, which can make the world simpler without mysteirous linking flags.
 * numactl seems to be only supported by gcc
 * an seemingly promising spec for slepc install: `spack install -v slepc ~arpack ^petsc+mpi~int64 ^intel-parallel-studio`, but the installation always stop in pestc configure part with mpi check. Actually lead to zombie process.
 * PETSC install should load intel-parallel-studio first? and external mumps not works well. Actually that should be the case? since with-mpms option wants a tar instead of an installed path of mumps. A successful spec for petsc: ` spack install -v petsc@3.11.0  ^intel-parallel-studio`, `spack  install -v  slepc ~arpack ^intel-parallel-studio ^petsc@3.11.0`. But no modules auto generated for this two packages, dont know why. The pair of softwares cannot be used, there is segmentfaut at runtime. 

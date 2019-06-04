@@ -5,6 +5,7 @@ List of typical HPCs:
 *  [uchicago](https://rcc.uchicago.edu/docs/software/modules/index.html)
 *  [princeton](https://researchcomputing.princeton.edu/software)
 *  [ulhpc](https://ulhpc-tutorials.readthedocs.io/en/latest/)
+*  [qmul]([https://docs.hpc.qmul.ac.uk](https://docs.hpc.qmul.ac.uk/))
 *  [pku-math](http://bicmr.pku.edu.cn/~wenzw/pages/softwares.html)
 *  [CWRU](https://sites.google.com/a/case.edu/hpc-upgraded-cluster/available-software)
 *  [sherlock-standford](https://www.sherlock.stanford.edu/)

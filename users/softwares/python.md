@@ -1,3 +1,5 @@
+We strongly suggest all users use intelpython for better speed and builtin conda enviroment. Just `spack load intel-parallel-studio %intel`.
+
 ## Pip
 
 We don't recommand to use pip in the bare enviroment. instead, you should use conda to manage your python workflow as below.
