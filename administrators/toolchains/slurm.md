@@ -107,6 +107,8 @@ Issue: seems always fail to ssh even if there is some task on the corresponding 
 
 * In some system, squeue is aliased to `alias squeue="squeue -u <user>"`, therefore you cannot directly view others' jobs. But you can `unalias squeue`, and then `squeue` can check all jobs by all users.
 
+* singularity plugin [readme](https://github.com/sylabs/singularity/blob/master/docs/2.x-slurm/README.md)
+
 * PrivateData controls whether some info is accessible to normal users
 
   > **PrivateData**
@@ -190,4 +192,18 @@ CloseKernels[{19, 20, 21}] (*close kernels 19,20,21 *)
 * <https://mathematica.stackexchange.com/questions/31518/how-to-change-front-end-setting-parallel-kernel-configuration-in-the-code/31834#31834> remote kernel launching
 ### spark
 
-The slurm sbatch script to utlize spark cluster: [demo script](https://www.sherlock.stanford.edu/docs/software/using/spark/)
+The slurm sbatch script to utlize spark cluster: [demo script](https://www.sherlock.stanford.edu/docs/software/using/spark/), [so](https://serverfault.com/questions/776687/how-can-i-run-spark-on-a-cluster-using-slurm).
+
+spark enabled jupyter: [doc](https://researchcomputing.princeton.edu/faq/spark-via-slurm), [blog](https://blog.sicara.com/get-started-pyspark-jupyter-guide-tutorial-ae2fe84f594f).
+
+```bash
+export PYSPARK_DRIVER_PYTHON=/path/to/your/jupyter
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+export PYSPARK_PYTHON=`which python`
+```
+
+`[Pyspark: Exception: Java gateway process exited before sending the driver its port number](https://stackoverflow.com/questions/31841509/pyspark-exception-java-gateway-process-exited-before-sending-the-driver-its-po)`: spack load jdk to set `JAVA+HOME`, otherwise this error when create spark sc.
+
+### database
+
+use database instance in HPC: [doc](https://www.sherlock.stanford.edu/docs/software/using/mariadb/)

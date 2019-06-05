@@ -109,6 +109,18 @@ One liner for user to be accessible `ansible -i /home/ubuntu/hpc/hosts all -m co
 
 `spack install singularity`, remember to check `spack edit singularity`, there is an after install warn prompt asking you run a script which would change the permission of some files with s bit. It is crucial for singularity run by normal users.
 
+### spark
+
+`spack install` as described in VM part. 
+
+TODO: add `SPARK_HOME` to spark module file.
+
+*only test on user conda env*: `pip install findspark`, to call spark context in python more smoothly.
+
+### dask
+
+*only test on user conda env*: `conda install dask`. Fix tornado version in a pinned file at conda-meta dir for conda virtual enviroment. Otherwise, dask would upgrade tornado which break down jupyter notebook! See [this issue](https://github.com/jupyter/notebook/issues/3595) for jupyter notebook breakdown.
+
 ### ganglia
 
 *into ansible workflow*

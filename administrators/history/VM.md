@@ -226,6 +226,9 @@ Task submission `pyspark --master spark://master:7077`. (Note hadoop might have 
 
 Moreover, one still need a slaves file in hadoop/etc, though not exist for the installation?
 
+* standalone mode [doc](https://spark.apache.org/docs/latest/spark-standalone.html), prefer this approach now.
+* env vars `SPARK_MASTER_WEBUI_PORT` for webui port
+
 ## Hopefully workflow
 
 How to achieve minimal steps.

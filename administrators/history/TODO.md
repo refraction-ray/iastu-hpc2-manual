@@ -70,7 +70,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 ### Modern cloud and distributed system tools
 
 - [ ] *OpenStack*
-- [ ] *Spark*
+- [x] *Spark*
 - [ ] *Kubernetes*
 - [x] *Elasticsearch*
 - [ ] *ceph*

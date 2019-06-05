@@ -24,7 +24,7 @@ Nvidia RTX 2080Ti
 
 *2U rack server*
 
-We currently have 3 R740 as our computation nodes.
+We currently have **3** R740 as our computation nodes.
 
 #### specs
 
