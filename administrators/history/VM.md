@@ -228,6 +228,45 @@ Moreover, one still need a slaves file in hadoop/etc, though not exist for the i
 
 * standalone mode [doc](https://spark.apache.org/docs/latest/spark-standalone.html), prefer this approach now.
 * env vars `SPARK_MASTER_WEBUI_PORT` for webui port
+* `[Pyspark: Exception: Java gateway process exited before sending the driver its port number](https://stackoverflow.com/questions/31841509/pyspark-exception-java-gateway-process-exited-before-sending-the-driver-its-po)`: spack load jdk to set `JAVA+HOME`, otherwise this error when create spark sc.
+
+## CGROUP
+
+setup on Ubuntu16.04 for a test. [ref](http://www.fernandoalmeida.net/blog/how-to-limit-cpu-and-memory-usage-with-cgroups-on-debian-ubuntu/), [ref](https://www.paranoids.at/cgroup-ubuntu-18-04-howto/). [cgroup: cpu setting](https://segmentfault.com/a/1190000008323952).
+
+* `sudo apt install cgroup-tools`
+
+* sudo vim `/etc/cgconfig.conf`
+
+  ```bash
+  group app/calculation {
+    cpu {
+      cpu.shares = 600;
+    }
+    memory {
+      memory.limit_in_bytes = 20000000000;
+    }
+  }
+  ```
+
+* `sudo vim /etc/cgrules`
+
+  ```bash
+  user:process cpu,memory app/calculation/
+  ```
+
+* ```bash
+  sudo cgconfigparser -l /etc/cgconfig.conf
+  sudo cgrulesengd
+  ```
+
+* check cgroup working status: ` cat /sys/fs/cgroup/cpu/app/calculation/tasks`
+
+### Misc
+
+* To limit the cpu usage, combine cpu.cfs_quota_us and cpu.cfs_period_us. The ratio is the number of kernels one can maxilmally utilize. This is somewhat a hard limit comparing to cpu.shares which is just a soft limit and a nice like primitive.
+* check supported cgroup subsystem: `cat /proc/cgroups`
+* check process in which cgroup: `cat /proc/777/cgroup`
 
 ## Hopefully workflow
 

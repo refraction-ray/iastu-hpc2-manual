@@ -202,8 +202,6 @@ export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 export PYSPARK_PYTHON=`which python`
 ```
 
-`[Pyspark: Exception: Java gateway process exited before sending the driver its port number](https://stackoverflow.com/questions/31841509/pyspark-exception-java-gateway-process-exited-before-sending-the-driver-its-po)`: spack load jdk to set `JAVA+HOME`, otherwise this error when create spark sc.
-
 ### database
 
 use database instance in HPC: [doc](https://www.sherlock.stanford.edu/docs/software/using/mariadb/)

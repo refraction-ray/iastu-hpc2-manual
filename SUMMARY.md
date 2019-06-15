@@ -12,6 +12,8 @@
     * [mathematica](users/softwares/mathematica.md)
     * [spark](users/softwares/spark.md)
     * [singularity](users/softwares/singularity.md)
+    * [fortran, C, C++](users/softwares/fc.md)
+    * [java](users/softwares/java.md)
     * [commond line tools](users/softwares/cli-tools.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)
@@ -25,6 +27,7 @@
     * [Slurm](administrators/toolchains/slurm.md)
     * [Spack](administrators/toolchains/spack.md)
     * [Container](administrators/toolchains/container.md)
+    * [BigData](administrators/toolchains/BigData.md)
     * [Toolset for logging and monitoring](administrators/toolchains/log.md)
     * [Further considerations](administrators/toolchains/considerations.md)
 
