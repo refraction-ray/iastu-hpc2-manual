@@ -4,6 +4,19 @@
 
 [k8s, HPC, slurm and MPI](https://www.stackhpc.com/k8s-mpi.html)
 
+## Cgroup
+
+- check supported cgroup subsystem: `cat /proc/cgroups`
+- check process in which cgroup: `cat /proc/777/cgroup`
+- [cgroup on ubuntu user basis limit](http://www.litrin.net/2016/11/18/ubuntu%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%9A%84cgroup%E8%AE%BE%E7%BD%AE/)
+- [cgroup on ubuntu 18.04](https://www.paranoids.at/cgroup-ubuntu-18-04-howto/), seems not so built in on ubuntu, need to add systemd service by hands if you wanna auto start with boot….
+- [cpu set on numa architecture](https://www.cnblogs.com/shishaochen/p/9735114.html). When using cpuset.cpus, cpuset.mems must also be specified to make it work. The value for mems, is the node number of the cpu binding mems.
+- [introduction to cgroup in fs level: series](https://segmentfault.com/a/1190000006917884)
+- my experience: say if you want to apply cgroup policy on existing proc, especially these service, then you need restart these service to make the policy work
+- [syntax of cgrules](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/resource_management_guide/sec-moving_a_process_to_a_control_group), `@group`.
+- [cpu subsystem parameters and default value](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu), by some test, the default value is around 1000 for cpu.share.
+- Possible issue: confilict between external cgroup on users and slurm cgroup. Syndrome: task submit failure on cgroup enabled node. `slurmstepd-master: error: Failed to invoke task plugins: task_p_pre_launch error`. More specifically, the error is happen due to external cpuset subsystem from cgroup. My guess is that the cpu core binding external to slurm is unknown to slurmctld, and the assigned cpu cores would be failed by sbatch. Possible solution: 1 easy way (which I took), use cpu instead of cpuset subsystem to limit user cpu usage in cgroup. 2 hard way (which I guess itt should work), in principle, we can assign cpu binding in slurm.conf to avoid assigenment failure. Note this is not a big issue in general, since it is rare when slurmd (which usually only on compute nodes) and cgroup (which usually only configured on login nodes) are both exist in the same machine.
+
 ## Singularity
 
 a runtime container suitable for HPC

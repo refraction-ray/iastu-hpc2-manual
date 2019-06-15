@@ -75,7 +75,3 @@ See [here](http://bicmr.pku.edu.cn/~wenzw/pages/gui.html). Merged to the main wo
 
 language designed for parallel
 
-## CGroup
-
-* [cgroup on ubuntu user basis limit](http://www.litrin.net/2016/11/18/ubuntu%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%9A%84cgroup%E8%AE%BE%E7%BD%AE/)
-* [cgroup on ubuntu 18.04](https://www.paranoids.at/cgroup-ubuntu-18-04-howto/), seems not so built in on ubuntu, need to add systemd service by hands….

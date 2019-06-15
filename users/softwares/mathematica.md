@@ -1,4 +1,4 @@
-No matter which way you would like to use mathematica, you should first load it by `spack load mathematica`. Besides, mathematica is a commercial software which need licence to access. The software need activation be default. For details, users should contact the administrator.
+No matter which way you would like to use mathematica, you should first load it by `spack load mathematica`. Besides, mathematica is a commercial software which need licence to access. The software need activation by default. For details, users should contact the administrator.
 
 ## GUI forward
 

@@ -265,8 +265,6 @@ setup on Ubuntu16.04 for a test. [ref](http://www.fernandoalmeida.net/blog/how-t
 ### Misc
 
 * To limit the cpu usage, combine cpu.cfs_quota_us and cpu.cfs_period_us. The ratio is the number of kernels one can maxilmally utilize. This is somewhat a hard limit comparing to cpu.shares which is just a soft limit and a nice like primitive.
-* check supported cgroup subsystem: `cat /proc/cgroups`
-* check process in which cgroup: `cat /proc/777/cgroup`
 
 ## Hopefully workflow
 
