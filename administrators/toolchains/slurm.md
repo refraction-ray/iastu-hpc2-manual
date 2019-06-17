@@ -79,7 +79,9 @@ sacctmgr show assoc format=cluster,account,user,qos
 
 Note usename is the same for OS and slurm.
 
-Node QOS is weird. It seems the system takes each task as a node. Even more tasks are shared with the same node, the node count increases. Instead, try limit by cpu. Is cpu for cores or threades? Experiments: cpu in qos context is by cores, say `cpu=28` may limit to 56 threads. It is worth noting however, `--cpus-per-task` is given by threads! Slurm seems to have a mix conception of cpu.
+Node QOS is weird. It seems the system takes each task as a node. Even more tasks are shared with the same node, the node count increases. Instead, try limit by cpu. Is cpu for cores or threades? Experiments: cpu in qos context is by cores, say `cpu=28` may limit to 56 threads. It is worth noting however, `--cpus-per-task` is given by threads (not sure now, there are conflicting evidence...)! Slurm seems to have a mix conception of cpu.
+
+QOS limit is more flexible to fine tune than account which cannot be changed unless deleting the user. Or by `sacctmgr modify user where user=example set defaultaccount=groupb`, to at least change the default group.
 
 ### PAM module
 
@@ -100,6 +102,14 @@ Node QOS is weird. It seems the system takes each task as a node. Even more task
   ```
 
 Issue: seems always fail to ssh even if there is some task on the corresponding nodes. Though it is not a big issue that there is always a slurm version of ssh works. **Solved:** this issue is due to the mismatch between pam slurm and pam slurm adopt.
+
+### scontrol
+
+`scontrol show node c1`, to see how many cores are really allocated.
+
+`scontrol show job 237`, to see the status of give job.
+
+`sacct -a`, see all users' jobs, past and current
 
 ### misc
 

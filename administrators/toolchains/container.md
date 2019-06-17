@@ -93,3 +93,5 @@ reference: <https://www.sylabs.io/2019/04/the-singularity-kubernetes-integration
 [k8s meets HPC](https://kubernetes.io/blog/2017/08/kubernetes-meets-high-performance/)
 
 For current status, no open source solution that can integerate k8s and slurm well in HPC setup. You can have slurm over container or k8s over mpi, but you have to choose one work load manager.
+
+### Helm

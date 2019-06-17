@@ -32,7 +32,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
   - [x] qos in slurm
   - [x] pam in slrum
 - [x] sshfs
-- [ ] *rclone*
+- [x] *rclone*
 - [x] *rsyslog forward* (by ELK stack)
 - [ ] *gitlab*
 - [ ] *syncthing*

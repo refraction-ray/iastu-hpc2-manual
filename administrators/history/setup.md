@@ -63,6 +63,10 @@ Please see the ansible playbooks in HPC2. The playbooks went opensource, see [he
 
 Just see the practice on [spack](../toolchains/spack.md). Combine spack with lmod to provide consitent interface on package management.
 
+#### some spack things to note
+
+* spack install rclone, and there is a go folder on the home directory, outside the spack folder!! Seems because `GOPATH` is by default instead of set within spack folder. See [this blog](https://blog.csdn.net/zwqjoy/article/details/78788918) for more info on go project and package organization in fs level.
+
 ### intel parallel studio XE
 
 Since the cluster is in an air-gapped enviroment, and the rpm downloading seems not work well through http and ftp proxy, so one can directly download all rpms in another computer which has web connections by the online installer provided by intel and rsync the final tar to the cluster to finish the installing. And I prefer the intelpython as the favored version of python since it is very fast.
