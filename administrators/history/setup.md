@@ -65,7 +65,7 @@ Just see the practice on [spack](../toolchains/spack.md). Combine spack with lmo
 
 #### some spack things to note
 
-* spack install rclone, and there is a go folder on the home directory, outside the spack folder!! Seems because `GOPATH` is by default instead of set within spack folder. See [this blog](https://blog.csdn.net/zwqjoy/article/details/78788918) for more info on go project and package organization in fs level.
+* spack install rclone, and there is a go folder on the home directory, outside the spack folder!! Seems because `GOPATH` is by default instead of set within spack folder. See [this blog](https://blog.csdn.net/zwqjoy/article/details/78788918) for more info on go project and package organization in fs level. **Solved** by [this commit](https://github.com/tldahlgren/spack/commit/d2e22d95e7b50a9e94b4ebc0f9bc25fb61ca3cdc).
 
 ### intel parallel studio XE
 
@@ -239,7 +239,49 @@ sudo cgconfigparser -l /etc/cgconfig.conf
 sudo cgrulesengd
 ```
 
+### tinc
 
+`sudo apt install tinc`
+
+combine tinc vpn with http proxy, such that http proxy ip is not public to everyone.
+
+```bash
+## /etc/netname/tinc.conf
+Name = wst
+Interface = tinc
+ConnectTo = of
+ConnectTo = smart
+AddressFamily = any
+GraphDumpFile = /var/log/tinc-peer.log
+
+## /etc/netname/tinc-up
+#! /bin/bash
+ip link set $INTERFACE up
+ip addr add {{ tinc_ip }}/16 dev $INTERFACE
+
+## /etc/netname/tinc-down
+#! /bin/bash
+ip link set $INTERFACE down
+
+## /etc/netname/hosts/wst
+Subnet =  10.x.y.2/32
+
+-----BEGIN RSA PUBLIC KEY-----
+pubkey-wst
+-----END RSA PUBLIC KEY-----
+
+## /etc/netname/hosts/of
+Subnet =  10.x.y.1/32
+Address = public ip
+
+-----BEGIN RSA PUBLIC KEY-----
+pubkey-of
+-----END RSA PUBLIC KEY-----
+```
+
+`tincd -n netname -K` to generate key pairs, and `tincd -n netname` to start the daemon. For debug usage, try `tincd -n netname -d5 -D`  for a foregroud d with verbose output.
+
+`sudo iptables -t nat -I POSTROUTING 1 -o tinc -s 192.168.48.0/24 ! -d 192.168.48.0/24 -j SNAT --to-source 10.26.11.1` on master node, make compute nodes available without any modification on them. (this new SNAT line is hopefully also managed by ansible playbooks). `sudo iptables -t nat -nLv` check current iptables.
 
 ## some benchmarks
 
