@@ -109,6 +109,12 @@ To utilize remote kernel launching with a better interface, add tunnel.m at Kern
 
 One liner for user to be accessible `ansible -i /home/ubuntu/hpc/hosts all -m command -a "/usr/bin/python3 /home/ubuntu/softwares/mmaact/automma.py '/opt/mathematica/11.0.1/bin/math'" --become-user=<user> -Kvv --become`.
 
+### matlab
+
+mount iso to a dir, and use `ssh -X` to install by X11 forwarding. Remember umount and mount iso2.
+
+It is worth noting, that matlab installer supports -X for forwarding. While for matlab itself, only `ssh -Y` works for remote desktop scheme.
+
 ### singularity
 
 `spack install singularity`, remember to check `spack edit singularity`, there is an after install warn prompt asking you run a script which would change the permission of some files with s bit. It is crucial for singularity run by normal users.
@@ -243,7 +249,7 @@ sudo cgrulesengd
 
 `sudo apt install tinc`
 
-combine tinc vpn with http proxy, such that http proxy ip is not public to everyone.
+combine tinc vpn with http proxy, such that http proxy ip is not public to everyone. Make http proxy only listen to the tinc ip interface.
 
 ```bash
 ## /etc/netname/tinc.conf
@@ -279,7 +285,7 @@ pubkey-of
 -----END RSA PUBLIC KEY-----
 ```
 
-`tincd -n netname -K` to generate key pairs, and `tincd -n netname` to start the daemon. For debug usage, try `tincd -n netname -d5 -D`  for a foregroud d with verbose output.
+`tincd -n netname -K` to generate key pairs, and `tincd -n netname` to start the daemon. For debug usage, try `tincd -n netname -d5 -D`  for a foregroud d with verbose output. On each Tinc daemon debug window, quit the daemon by pressing `CTRL-\`.
 
 `sudo iptables -t nat -I POSTROUTING 1 -o tinc -s 192.168.48.0/24 ! -d 192.168.48.0/24 -j SNAT --to-source 10.26.11.1` on master node, make compute nodes available without any modification on them. (this new SNAT line is hopefully also managed by ansible playbooks). `sudo iptables -t nat -nLv` check current iptables.
 
@@ -333,3 +339,4 @@ All in master nodes, keep the bottom line that all tasks on compute node should 
 * spack packages install by specs and spack env maintenance (continuing work) (no need to install before any roles)
 * sacctmgr cluster, qos and account add (continuing work for advanced scenario, minimum setup required before **user roles** after slurm roles)
 * two line of commands to final set up ELK stack on master (should find some more elegant way in the future)
+* tinc vpn set up on master node

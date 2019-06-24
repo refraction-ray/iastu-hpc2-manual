@@ -111,6 +111,8 @@ Issue: seems always fail to ssh even if there is some task on the corresponding 
 
 `sacct -a`, see all users' jobs, past and current
 
+bring node from down: back to service, restart slurmctld or slurmd wont work, see [this post](https://bitsanddragons.wordpress.com/2016/08/25/slurm-node-state-control/). `scontrol update nodename=c2 state=IDLE`.
+
 ### misc
 
 * No conf to randomize node assignment: [post](https://serverfault.com/questions/881099/randomize-slurm-node-allocation), somewhat hard to believe
@@ -118,6 +120,8 @@ Issue: seems always fail to ssh even if there is some task on the corresponding 
 * In some system, squeue is aliased to `alias squeue="squeue -u <user>"`, therefore you cannot directly view others' jobs. But you can `unalias squeue`, and then `squeue` can check all jobs by all users.
 
 * singularity plugin [readme](https://github.com/sylabs/singularity/blob/master/docs/2.x-slurm/README.md)
+
+* srun -n parameter seems working well, mathematica `LaunchKernels`  or numpy with mkl multi thread speed both cannot excced the limit by -n.
 
 * PrivateData controls whether some info is accessible to normal users
 
