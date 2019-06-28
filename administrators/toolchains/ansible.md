@@ -36,6 +36,7 @@ In this section, some aspects on ansible is discussed.
 * some moudules directly support list argument
 * register of a loop task, has attr `results` as a list
 * `with_items`, register.results is automatically a list, see [this post](https://stackoverflow.com/questions/29512443/register-variables-in-with-items-loop-in-ansible-playbook/29564339)
+* nested loop, use jinja template as `"{{ ['alice', 'bob'] |product(['clientdb', 'employeedb', 'providerdb'])|list }}"`, see [here](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html#iterating-over-nested-lists).
 
 ### Useful keywords
 
@@ -104,22 +105,15 @@ tasks:
 ### Cautions
 
 * In template system, just use `{{}}` instead of quote `""` outside.
-
 * indent in jinja template config files: [blog](https://tech.just-imho.net/2016/06/09/ansible-indenting-in-templates/)
-
 * `ansible_facts`, the key should rip the ansible part off, which is ...
-
 * but for `host_vars[hostname]` to access the facts, the ansible prefix is must, which is in contrast with `ansible_facts`...
-
 * lookup plugin dont take `become: yes` as a thing, it just cannot cat other user's file….
-
 * for `copy` to copy files without permission, use remote_src: yes option, otherwise `become` is also useless...
-
 * the dest path cannot be a relative one, but use `{{role_path}}` instead
-
 * each task has it own ssh session and shell: [how source work with ansible](https://stackoverflow.com/questions/22256884/not-possible-to-source-bashrc-with-ansible/27541856#27541856). The default shell of ansible is `sh`, while source is a bash builtin instead of sh.
-
 * `{{ D['key']|default ('undefined') }}` can be used as default value for non existing keys of dict
+* differece between command and shell module: [blog](https://blog.confirm.ch/ansible-modules-shell-vs-command/). Command is weaker, it doesn't support evaluation on env vars and no support for `|`, `&` like things in shell.
 
 ### My comments
 

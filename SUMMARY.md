@@ -10,6 +10,7 @@
   * [softwares](users/softwares/README.md)
     * [python](users/softwares/python.md)
     * [mathematica](users/softwares/mathematica.md)
+    * [matlab](users/softwares/matlab.md)
     * [spark](users/softwares/spark.md)
     * [singularity](users/softwares/singularity.md)
     * [fortran, C, C++](users/softwares/fc.md)

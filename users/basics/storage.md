@@ -1,5 +1,7 @@
 **Note:** User files have no backup and no guaranteen unless special request to the administrator. So never ever store valuable files only in the cluster.
 
+**Update:** Currently all files stored in `/home/<user>` folder would have backup in daily basis by default. **However, we still have no promise on the data in the cluster, they might be lost.** Backup important file by your own.
+
 No matter where your files stored, it is highly recommend that all of your files are save in a directory named after your user name.
 
 **TL;DR**
@@ -15,9 +17,13 @@ No matter where your files stored, it is highly recommend that all of your files
 
 All user directories in home dir are in the ssd of master node. And home directory is shared via nfs to all computation nodes. The SSD is in size of **500GB** in total which should be shared with OS and all users, so only small tasks are recommeded to IO within home dir. Never ever store large datafiles in home dir! The home dir is under control of quota which automatically limit users' disk usage. The current soft limit and hard limit of home disk usage is 60GB and **80GB**. When the disk usage is reaching the soft limit, it is ok to continue using for another 7 days.
 
+The default permission on `/home/<user>` is 700, therefore, others cannot view the user's file, code and data.
+
 ## /DATA
 
 /DATA dir is in the hdd of master node, which has size of **2T** in total. Every users has read and write permission in this dir.  This dir is also shared via NFS and accessible to all computation nodes. The best practice is to firstly create a subdir in /DATA with the username for later use. Large data file should be stored in this dir. Currently there is no quota limit on the usage for /DATA.
+
+Note that the default permission on `/DATA/<user>` is 755, which means that other users have permission to read your files in this directory. This feature is designed to facilitate the data share within research group, whose data can directly acquired from DATA folder. If you don't want to share your data with others, you can mkdir within `/DATA/<user>`, such as `/DATA/<user>/private` and `chmod 700` on such folder. Then all data files stored within such private folder is not available to other users.
 
 ## /tmp
 
