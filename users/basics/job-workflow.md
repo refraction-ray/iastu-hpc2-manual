@@ -15,13 +15,13 @@ Use master node to edit src code and compile your binary. You may want to `spack
 * Since you may need to compile some projects again and again, we strongly recommend the users write up their own Makefile to speed up and reduce error.
 
 
-* When intel mkl is utilized in the code, explicitly or implicitly via dependences, we strongly recommended to use intel compiler to avoid boring and fragile linking flags for gcc.
+* When intel mkl is utilized in the code, explicitly or implicitly via dependences, we strongly recommended to use intel compilers to avoid boring and fragile linking flags for gcc.
 
 ## submit jobs
 
 **Warning:** Login nodes [master] are not for running computation intensive jobs in general. But since the cluster has very limited computation nodes, it is ok to run some tasks on master node without affecting others. But always be careful when you decided to run some tasks on master, it is taken as the last sort. Use computation nodes first if available.
 
-Before arranging your jobs on the cluster, you should first learn about hardware specs (CPU and memory info in particular) for each nodes to better utilize the computation resource. See hardware specs [here](../../administrators/hardwares/README.md). A very quick summary, for each nodes in the HPC available to normal users, there are 56 CPU threads and a minimum of 128G memory.
+Before arranging your jobs on the cluster, you should first learn about hardware specs (CPU and memory info in particular) for each nodes to better utilize the computation resource. See hardware specs [here](../../administrators/hardwares/README.md). A very quick summary, for each nodes in the HPC available to normal users, there are 56 CPU threads and a minimum of 128G memory. You could also use `sinfo -Nel` to check node info and availability.
 
 In our cluster, we use SLURM as resource and job managers. Ideally, all jobs should be submitted via slurm.
 

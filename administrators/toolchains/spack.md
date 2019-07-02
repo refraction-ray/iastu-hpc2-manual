@@ -54,6 +54,10 @@ then you can use `spack load` and module system. Somehow spack system require py
 
 Default path of module files of installed softwares: `$PREFIX/share/spack/modules/`
 
+Use `lmod/7.8.15/libexec$ ./sh_to_modulefile` to generate module files for source script. Better not directly use script in module files, since it is not reversible and has side effects.
+
+Refresh module files: `spack module tcl refresh petsc`
+
 ## Customize repo and package file recipe
 
 [doc](https://spack.readthedocs.io/en/latest/tutorial_packaging.html) **recommended for careful reading**
@@ -138,5 +142,5 @@ Further summary: better also add intel-mpi and intel-mkl interface as external p
 * To use mkl, it is better to stay with icc instead of gcc, which can make the world simpler without mysteirous linking flags.
 * numactl seems to be only supported by gcc
 * an seemingly promising spec for slepc install: `spack install -v slepc ~arpack ^petsc+mpi~int64 ^intel-parallel-studio`, but the installation always stop in pestc configure part with mpi check. Actually lead to zombie process.
-* PETSC install should load intel-parallel-studio first? and external mumps not works well. Actually that should be the case? since with-mpms option wants a tar instead of an installed path of mumps. A successful spec for petsc: ` spack install -v petsc@3.11.0  ^intel-parallel-studio`, `spack  install -v  slepc ~arpack ^intel-parallel-studio ^petsc@3.11.0`. But no modules auto generated for this two packages, dont know why. The pair of softwares cannot be used, there is segmentfaut at runtime. 
+* PETSC install should load intel-parallel-studio first? and external mumps not works well. Actually that should be the case? since with-mpms option wants a tar instead of an installed path of mumps. A successful spec for petsc: ` spack install -v petsc@3.11.0  ^intel-parallel-studio`, `spack  install -v  slepc ~arpack ^intel-parallel-studio ^petsc@3.11.0`. But no modules auto generated for this two packages, dont know why. ~~The pair of softwares cannot be used, there is segmentfaut at runtime.~~ (It is due to the wrong mpicxx compiler cmake finds) 
 * singularity: after install, you need to run a script in its bin manually to make singularity work with nonsudo user. `sudo bash bin/spack_perms_fix.sh` in singularity install path.

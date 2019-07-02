@@ -117,6 +117,8 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 
 * No conf to randomize node assignment: [post](https://serverfault.com/questions/881099/randomize-slurm-node-allocation), somewhat hard to believe
 
+* asterik * in status of sinfo indicates the node is unreachable.
+
 * In some system, squeue is aliased to `alias squeue="squeue -u <user>"`, therefore you cannot directly view others' jobs. But you can `unalias squeue`, and then `squeue` can check all jobs by all users.
 
 * singularity plugin [readme](https://github.com/sylabs/singularity/blob/master/docs/2.x-slurm/README.md)
