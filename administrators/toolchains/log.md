@@ -52,4 +52,4 @@ ganglia {
 }
 ```
 
-ganglia doesn't work well with logstash
+experiment conclusion: ganglia doesn't work well with logstash

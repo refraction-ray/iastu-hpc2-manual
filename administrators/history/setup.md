@@ -215,6 +215,8 @@ node   0   1
   1:  21  10
 ```
 
+`apt install hwloc`
+
 ### cgroup
 
 `sudo apt install cgroup-tools`
@@ -344,3 +346,22 @@ All in master nodes, keep the bottom line that all tasks on compute node should 
 * sacctmgr cluster, qos and account add (continuing work for advanced scenario, minimum setup required before **user roles** after slurm roles)
 * two line of commands to final set up ELK stack on master (should find some more elegant way in the future)
 * tinc vpn set up on master node
+
+### install softwares or libraries beyond spack
+
+Installation path: large size commercial softwares: `/opt/softwarename/version/`. Open source library from source: `/home/ubuntu/softwares/softwarename`, in this dir, you may have some name+ver dir for installed versions of softwares and some dir name ended with src as source files. Hopefully, one should put a self-contained information file in each software dir. The name convention is `softwarename.info`. The content includes what each dir within for, what the notes and warnings for this software configuration and installation, most importantly, the install process details for each installed version, such as options for `./configure` and so on. One may even want to capture all stdout for configure and make on each installed version dir with name `configure.out`, `make.out` and so on.
+
+Finally, you may want to include such libraries under the control of spack. This usually involves two steps. If such library already has a position in spack repo, then you only need to add the external path for this package in spack config packages.yaml. If there is some more further fine tuning on module files to load it, you need further hacking spack config modules.yaml. (All these config change should go under ansible workflow). Besides, if the softwares is not registered in spack, then you need first add a package.py in repo as a placeholder. Something as below is enough.
+
+```python
+# placeholder for external mma
+
+from spack import *
+
+class Mathematica(Package):
+
+    homepage = "https://www.wolfram.com/mathematica/"
+
+    version('11.0')
+```
+

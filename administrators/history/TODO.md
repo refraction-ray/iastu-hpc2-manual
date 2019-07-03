@@ -79,6 +79,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 - [x] opensource the ansible playbooks in this HPC
 - [x] ansible authorized key double check
+- [ ] possible setup one more v2ray inbound which has only outbounds to 176 network, used for other users to access jupyter notebook
 
 ### tasks to explore
 
