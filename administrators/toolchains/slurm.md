@@ -51,7 +51,7 @@ See [this blog](https://yunmingzhang.wordpress.com/2015/06/29/how-to-use-srun-to
 
 `x11` forward option for srun: [doc](https://portal.supercomputing.wales/index.php/index/slurm/interactive-use-job-arrays/x11-gui-forwarding/)
 
-? Still have no clear idea on `-n` and the real number of cpu cores the job can use.
+? Still have no clear idea on `-n` and the real number of cpu cores the job can use (seems one for one thread).
 
 ## Management and Accounting
 
@@ -59,13 +59,72 @@ Use `Weight` option in NodeName line in `slurm.conf` to change the priority of a
 
 Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk/niflheim/Slurm_accounting) (better than the official doc)
 
+### partition
+
+Nodes may be in more than one partition.
+
+`scontrol show partition`
+
+`sacctmgr add user name partition=gpu`
+
+or in slurm.conf: `PartitionName=MONTHLY1 AllowAccounts=diamond Nodes=compute-0-0`. More conf paramters include `AllocNodes` (no idea the difference between `Nodes`), `Default=YES`,`Hidden`,`State`,`PreemptMode`
+
+A blank list of nodes (i.e. "Nodes= ") can be used if one wants a partition to exist, but have no resources (possibly on a temporary basis).
+
+Specify partition in user's pespective.
+
+- environment variable
+
+```
+export SBATCH_PARTITION=<partitionname>
+```
+
+- batch script option
+
+```
+#SBATCH [-p|--partition=]<partitionname>
+```
+
+- command line option
+
+```
+sbatch [-p|--partition=]<partitionname>
+```
+
+premmpted between queues. Also need global context `PreemptType=preempt/partition_prio`
+
+```
+PartitionName=DEFAULT Nodes=tux[0-9]
+PartitionName=high Default=NO Shared=FORCE:1 Priority=5 PreemptMode=off
+PartitionName=med Default=NO Shared=FORCE:1 Priority=3 PreemptMode=suspend
+PartitionName=low Default=YES Shared=NO Priority=1 PreemptMode=requeue
+```
+
+
+
+### resource manage
+
+`sacctmgr show tres`
+
+In `slurm.conf`, we have `GresTypes` as a comma delimited list of generic resources to be managed (e.g.*GresTypes=gpu,mps*). These resources may have an associated GRES plugin of the same name providing additional functionality. No generic resources are managed by default. Ensure this parameter is consistent across all nodes in the cluster for proper operation. The slurmctld daemon must be restarted for changes to this parameter to become effective.
+
+And also `gres` in node line conf in `slurm.conf` as a comma delimited list of generic resources specifications for a node. The format is:` "<name>[:<type>][:no_consume]:<number>[K|M|G]"`. The first field is the resource name, which matches the `GresType` configuration parameter name. The optional type field might be used to identify a model of that generic resource. A generic resource can also be specified as non-consumable (i.e. multiple jobs can use the same generic resource) with the optional field ":no_consume". The final field must specify a generic resources count. A suffix of "K", "M", "G", "T" or "P" may be used to multiply the number by 1024, 1048576, 1073741824, etc. respectively. (e.g."Gres=gpu:tesla:1,gpu:kepler:1,bandwidth:lustre:no_consume:4G"). By default a node has no generic resources and its maximum count is that of an unsigned 64bit integer. 
+
+More on [gres.conf man page](https://slurm.schedmd.com/gres.conf.html). The gres.conf file may be omitted completely if the configuration information in the slurm.conf file fully describes all GRES.  The file will always be located in the same directory as the **slurm.conf** file.
+
+Jobs will not be allocated any generic resources unless specifically requested at job submit time using the options:
+
+*—gres*: Generic resources required per node, recommended way, general snytax `--gres=gpu:kepler:2`
+
+*—gpu*: GPUs required per job
+
 ### QOS
 
 QOS settings by saccmgr: [ref](https://slurm.schedmd.com/qos.html). 
 
 User system hierachy: cluster-account-user, the triple system is called association.
 
-`AccountingStorageEnforce=limits,qos` This line is important for qos to work in slurm.conf. limits implies association option, indicating user who are not added to slurm cannot use slurm.
+`AccountingStorageEnforce=limits,qos` in **slurm.conf**. This line is important for qos to work in slurm.conf. limits also  implies association option, indicating user who are not added to slurm cannot use slurm.
 
 **Note**: A user's account can not be changed directly. A new association needs to be created for the user with the new account. Then the association with the old account can be deleted.
 
@@ -79,9 +138,13 @@ sacctmgr show assoc format=cluster,account,user,qos
 
 Note usename is the same for OS and slurm.
 
+GrpTRESMins=cpu=10,mem=20 would make 2 different limits 1 for 10 cpu minutes and 1 for 20 MB memory minutes. This is the case for each limit that deals with TRES. To remove the limit -1 is used i.e. GrpTRESMins=cpu=-1 would remove only the cpu TRES limit. When dealing with Memory as a TRES all limits are in MB.
+
 Node QOS is weird. It seems the system takes each task as a node. Even more tasks are shared with the same node, the node count increases. Instead, try limit by cpu. Is cpu for cores or threades? Experiments: cpu in qos context is by cores, say `cpu=28` may limit to 56 threads. It is worth noting however, `--cpus-per-task` is given by threads (not sure now, there are conflicting evidence...)! Slurm seems to have a mix conception of cpu.
 
 QOS limit is more flexible to fine tune than account which cannot be changed unless deleting the user. Or by `sacctmgr modify user where user=example set defaultaccount=groupb`, to at least change the default group.
+
+`sacctmgr add coord names=blah`, users that can modify other users qos and so on.
 
 ### PAM module
 
@@ -113,9 +176,23 @@ Issue: seems always fail to ssh even if there is some task on the corresponding 
 
 bring node from down: back to service, restart slurmctld or slurmd wont work, see [this post](https://bitsanddragons.wordpress.com/2016/08/25/slurm-node-state-control/). `scontrol update nodename=c2 state=IDLE`.
 
+`scontrol ping` check the status of master and backup node for slurmctld
+
 ### misc
 
 * No conf to randomize node assignment: [post](https://serverfault.com/questions/881099/randomize-slurm-node-allocation), somewhat hard to believe
+
+* `sdiag` to check scheduling relevant info
+
+* `sattach jobid` directly see stdout and stderr of the running job
+
+* `sshare`
+
+* `strigger`:  event trigger. eg. `strigger --set --node --down --program=/usr/sbin/slurm_admin_notify`
+
+* `sacctmgr show stats` on RPC call statistics on sacctmgr
+
+* `scontrol reconfigure` can let slurmctld to reload the conf, thought some parameters may be valid only after restart. `scontrol show config`
 
 * asterik * in status of sinfo indicates the node is unreachable.
 
@@ -125,6 +202,8 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 
 * srun -n parameter seems working well, mathematica `LaunchKernels`  or numpy with mkl multi thread speed both cannot excced the limit by -n.
 
+* A job's expected start time can be seen using the `squeue —start` command.
+
 * PrivateData controls whether some info is accessible to normal users
 
   > **PrivateData**
@@ -132,6 +211,32 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
   >  This controls what type of information is hidden from regular users. By default, all information is visible to all users. User **SlurmUser** and **root** can always view all information. Multiple values may be specified with a comma separator. Acceptable values include: 
   >
   > accounts, jobs, nodes, users and so on.
+
+* Test legal nodelist syntax
+
+  ```bash
+  $ yhcontrol show hostlist cn0,cn1,cn2,cn3,cn6,cn7
+  cn[0-3,6-7]
+  $ yhcontrol show hostnames cn[0-3,6-7]
+  cn0
+  cn1
+  cn2
+  cn3
+  cn6
+  cn7
+  ```
+
+* `sinfo -R` reasons for node status, completing for long time is a indication that something is wrong, most probable case is disconnected between master and the node somehow.
+
+### More reference
+
+* Network topology in slurm: [doc](https://slurm.schedmd.com/topology.html)
+* Schduling configuration: [doc](https://slurm.schedmd.com/sched_config.html)
+* Job premmption guide: [doc](http://slurm.schedmd.com/preempt.html)
+* High throughput guide: namely fine tuning on burst of short jobs for slurm: [doc](https://slurm.schedmd.com/high_throughput.html)
+* Gres: [doc](https://slurm.schedmd.com/gres.html)
+* Shuguang doc on slurm: [doc](https://www.hpccube.com/wiki/index.php/SLURM%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B)
+* Tianhe doc on slurm in admin's perspective: [doc](https://www.csrc.ac.cn/upload/file/20151014/1444804067282511.pdf)
 
 ## Working with other tools
 
@@ -141,7 +246,7 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 
 Directly access to jupyter server in compute nodes. [doc](https://docs.ycrc.yale.edu/clusters-at-yale/guides/jupyter/)
 
-SSH forward with four machines: [post](https://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/index.html). Solution for jupyter in computation nodes
+SSH forward with four machines: [post](https://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/index.html). Solution for jupyter in computation nodes.
 
 #### mpi4py
 
@@ -220,4 +325,4 @@ export PYSPARK_PYTHON=`which python`
 
 ### database
 
-use database instance in HPC: [doc](https://www.sherlock.stanford.edu/docs/software/using/mariadb/)
+Use database instance in HPC: [doc](https://www.sherlock.stanford.edu/docs/software/using/mariadb/)
