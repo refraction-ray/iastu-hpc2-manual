@@ -291,6 +291,22 @@ pubkey-of
 
 `sudo iptables -t nat -I POSTROUTING 1 -o tinc -s 192.168.48.0/24 ! -d 192.168.48.0/24 -j SNAT --to-source 10.26.11.1` on master node, make compute nodes available without any modification on them. (this new SNAT line is hopefully also managed by ansible playbooks). `sudo iptables -t nat -nLv` check current iptables.
 
+### backup 
+
+```bash
+crontab -l
+# user home dirs, more are omitted
+20 2 * * * /usr/bin/rsync -avz /home/ubuntu/ /BACKUP/ubuntu/
+# softwares
+20 5 * * 2 /usr/bin/rsync -avz /opt/ /BACKUP/opt/
+# ganglia rrd files
+20 5 * * 4 /usr/bin/rsync -avz /var/lib/ganglia/rrds/ /BACKUP/database/rrds/
+# configs
+20 4 * * * /usr/bin/rsync -avz /etc/ /BACKUP/etc/
+# database files for slurmdbd
+10 5 * * 3 /usr/bin/rsync -avz /var/lib/mysql/ /BACKUP/database/mysql/
+```
+
 ## some benchmarks
 
 ### network
@@ -330,6 +346,7 @@ Available frequency is 2400, though the param is 2666, the speed is limited by C
 * It is highly suggested that all ansible playbooks to be executed once reboot.
 * config cgroup as `sudo cgconfigparser -l /etc/cgconfig.conf && sudo cgrulesengd`.
 * start tinc vpn (maybe auto start as I observed).
+* for computer nodes, ansible is must, since we need mounts on NFS.
 
 ### summary on works beyond ansible workflow
 

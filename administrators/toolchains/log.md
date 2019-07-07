@@ -23,6 +23,10 @@ Pipeline from log to elastic search, see [this blog](https://www.cnblogs.com/yin
 
 * [ubuntu16.04](https://hostpresto.com/community/tutorials/how-to-install-and-configure-ganglia-monitor-on-ubuntu-16-04/)
 
+### Backend
+
+rrdtool: round robin database
+
 ## ELK
 
 ~~Elasticsearch + logstash+kibana, to be dployed soon, firstly install on VM environment~~

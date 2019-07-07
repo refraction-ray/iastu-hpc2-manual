@@ -49,6 +49,10 @@ alternatives to modules, merged to the main workflow under spack
 
 file system for HPC
 
+Lustre: need patch on kernel, not considering for mini clusters.
+
+Some configuration reference on lustre: [post](https://wangmingjun.com/2018/06/13/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BAlustre%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/)
+
 ## Desktop 
 
 ### ThinLinc
@@ -62,6 +66,16 @@ See [here](http://bicmr.pku.edu.cn/~wenzw/pages/gui.html). Merged to the main wo
 ## Globus
 
 *large file transfer service*
+
+## Name Service Switch
+
+`man NSSWITCH.CONF`
+
+## LDAP
+
+openLDAP for user management: [tutorial](https://www.ibm.com/developerworks/cn/linux/l-openldap/index.html)
+
+openLDAP configure: [post](https://juejin.im/entry/5aec6ac46fb9a07ac3635884)
 
 ## Scheme beyond MPI
 

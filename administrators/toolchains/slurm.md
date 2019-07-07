@@ -12,7 +12,7 @@ Note the program is compiled by `mpicxx`, which depends on the PMI implementatio
 
 To make them consistent, there are two approaches. Firstly, compile slurm with more PMI support or secondly, compile corresponding mpi implementation with slurm PMI support. Note the supported PMI is very limited for `apt install`ed slurm and the pmi header file is also missing for a standard package installation indicating compiling mpi implmentations with slurm PMI support is also subtle. 
 
-Therefore, the best practice with minimal maintence effort here is always using `mpirun` within sbatch script and avoid `srun`. But sbatch script is still highly recommended way to submit tasks instead of directly using `mpirun -host <hostname,list>`. Firstly, the sbatch task management is under the control and accounting of slurm, and the task would be running even after logout. Secondly, the enviroment variables in the master node would broadcast to the computing nodes before the task is beginning which is very handy.
+Therefore, the best practice with minimal maintence effort here is always using `mpirun` within sbatch script and avoid `srun`. But sbatch script is still highly recommended way to submit tasks instead of directly using `mpirun -host <hostname,list>`. Firstly, the sbatch task management is under the control and accounting of slurm, and the task would be running even after logout. Secondly, the enviroment variables in the master node would broadcast to the computing nodes before the task is beginning which is very handy. Besides, for mpirun to be available on compute node, ORTE need ssh connection, which is closed by pam plugin of slurm, so the only way to run jobs on compute nodes is via slurm interface.
 
 ### MPI and OPENMP hybrid
 
@@ -59,6 +59,16 @@ Use `Weight` option in NodeName line in `slurm.conf` to change the priority of a
 
 Details and roles on `sacctmgr` family commands: [ref](https://wiki.fysik.dtu.dk/niflheim/Slurm_accounting) (better than the official doc)
 
+### billing
+
+[Tres doc](https://slurm.schedmd.com/tres.html)
+
+In slurm.conf, `AccountingStorageTRES=gres/gpu,gres/gpu:tesla`. And in partitial line, `TRESBillingWeights="CPU=1.0,Mem=0.25G,GRES/gpu=2.0"`. If TRESBillingWeights is not defined then the job is billed against the total number of allocated CPUs.
+
+`shares` in user of `sacctmgr`
+
+Share in user's perspective: [doc](https://www.rc.fas.harvard.edu/fairshare/) 
+
 ### partition
 
 Nodes may be in more than one partition.
@@ -67,7 +77,7 @@ Nodes may be in more than one partition.
 
 `sacctmgr add user name partition=gpu`
 
-or in slurm.conf: `PartitionName=MONTHLY1 AllowAccounts=diamond Nodes=compute-0-0`. More conf paramters include `AllocNodes` (no idea the difference between `Nodes`), `Default=YES`,`Hidden`,`State`,`PreemptMode`
+or in slurm.conf: `PartitionName=MONTHLY1 AllowAccounts=diamond Nodes=compute-0-0`. More conf paramters include `AllocNodes` (no idea the difference between `Nodes`), `Default=YES`,`Hidden`,`State`,`PreemptMode`,`TRESBillingWeights`
 
 A blank list of nodes (i.e. "Nodes= ") can be used if one wants a partition to exist, but have no resources (possibly on a temporary basis).
 
@@ -100,8 +110,6 @@ PartitionName=med Default=NO Shared=FORCE:1 Priority=3 PreemptMode=suspend
 PartitionName=low Default=YES Shared=NO Priority=1 PreemptMode=requeue
 ```
 
-
-
 ### resource manage
 
 `sacctmgr show tres`
@@ -114,7 +122,7 @@ More on [gres.conf man page](https://slurm.schedmd.com/gres.conf.html). The gres
 
 Jobs will not be allocated any generic resources unless specifically requested at job submit time using the options:
 
-*—gres*: Generic resources required per node, recommended way, general snytax `--gres=gpu:kepler:2`
+*—gres*: Generic resources required per node, recommended way, general snytax for job submission  `--gres=gpu:kepler:2`
 
 *—gpu*: GPUs required per job
 
@@ -172,6 +180,8 @@ Issue: seems always fail to ssh even if there is some task on the corresponding 
 
 `scontrol show job 237`, to see the status of give job.
 
+`scontrol show assoc`, to check all details of users, accounts and qos.
+
 `sacct -a`, see all users' jobs, past and current
 
 bring node from down: back to service, restart slurmctld or slurmd wont work, see [this post](https://bitsanddragons.wordpress.com/2016/08/25/slurm-node-state-control/). `scontrol update nodename=c2 state=IDLE`.
@@ -228,6 +238,8 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 
 * `sinfo -R` reasons for node status, completing for long time is a indication that something is wrong, most probable case is disconnected between master and the node somehow.
 
+* If `SelectType=select/linear` is configured, all resources on the selected nodes will be allocated to the job/step. If SelectType=select/cons_res is configured, individual sockets, cores and threads may be allocated from the selected nodes
+
 ### More reference
 
 * Network topology in slurm: [doc](https://slurm.schedmd.com/topology.html)
@@ -237,6 +249,8 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 * Gres: [doc](https://slurm.schedmd.com/gres.html)
 * Shuguang doc on slurm: [doc](https://www.hpccube.com/wiki/index.php/SLURM%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B)
 * Tianhe doc on slurm in admin's perspective: [doc](https://www.csrc.ac.cn/upload/file/20151014/1444804067282511.pdf)
+* Heterogeneous job  submission: [doc](https://slurm.schedmd.com/heterogeneous_jobs.html) (Including block, plane and cylic allocation)
+* Job status and info to elasticsearch: [doc](https://slurm.schedmd.com/elasticsearch.html)
 
 ## Working with other tools
 
