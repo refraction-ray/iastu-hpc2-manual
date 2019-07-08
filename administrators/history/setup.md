@@ -291,6 +291,16 @@ pubkey-of
 
 `sudo iptables -t nat -I POSTROUTING 1 -o tinc -s 192.168.48.0/24 ! -d 192.168.48.0/24 -j SNAT --to-source 10.26.11.1` on master node, make compute nodes available without any modification on them. (this new SNAT line is hopefully also managed by ansible playbooks). `sudo iptables -t nat -nLv` check current iptables.
 
+### jumbo frame
+
+`ip link set eth0 mtu 9000`
+
+Test: `ping -M do -s 8972 master`, do: fragmentation forbiden, there is head bytes auto added, so -s 9000 is unaccessible, see [this post](https://zhuanlan.zhihu.com/p/30020463).
+
+MTU setting in netplan has issues in ubuntu18.04, so basically it doesn't work by netplan apply. See one [possible solution by add mac address match in netplan](https://hoppsjots.org/?p=229)
+
+The benchmarks shows little gain in enabling jumbo frames.
+
 ### backup 
 
 ```bash

@@ -69,6 +69,8 @@ In slurm.conf, `AccountingStorageTRES=gres/gpu,gres/gpu:tesla`. And in partitial
 
 Share in user's perspective: [doc](https://www.rc.fas.harvard.edu/fairshare/) 
 
+`GrpTRESMins` in sacct modify user's total running time, and multifactor priority plugin to check the raw usage by sshare.
+
 ### partition
 
 Nodes may be in more than one partition.
@@ -239,6 +241,10 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 * `sinfo -R` reasons for node status, completing for long time is a indication that something is wrong, most probable case is disconnected between master and the node somehow.
 
 * If `SelectType=select/linear` is configured, all resources on the selected nodes will be allocated to the job/step. If SelectType=select/cons_res is configured, individual sockets, cores and threads may be allocated from the selected nodes
+
+* `sbatch --mem` limit seems not work. The task can easily go over the memory limit without any problem.
+
+* `PropagateResourceLimits` or `PropagateResourceLimitsExcept` parameters are configured in slurm.conf and avoid propagation of specified limits. Configure on these two parameters unless you want to ulimit be effective on compute nodes.
 
 ### More reference
 

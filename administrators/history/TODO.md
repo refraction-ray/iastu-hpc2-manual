@@ -4,8 +4,8 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 ### Network related
 
-- [ ] Enable **jumboframe** in LAN
-    - [ ] config on MTU of servers
+- [x] Enable **jumboframe** in LAN
+    - [x] config on MTU of servers
     - [ ] config on MTU of switches, Jumbo
 - [x] Divide S1720 switch into two **VLAN**
 - [x] DHCP on the master node with very long lease time
@@ -30,7 +30,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
   - [x] disk limit in home
   - [x] resource limit in master
   - [x] qos in slurm
-  - [x] pam in slrum
+  - [x] pam in slurm
 - [x] sshfs
 - [x] *rclone*
 - [x] *rsyslog forward* (by ELK stack)
@@ -65,7 +65,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] *SLEPc PETSc and external linear and eigen solver packages*
 - [ ] *Julia*
 - [x] ipyparallel
-- [ ] *Matlab*
+- [x] *Matlab*
 
 ### Modern cloud and distributed system tools
 
