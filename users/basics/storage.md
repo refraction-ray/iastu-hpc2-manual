@@ -15,7 +15,7 @@ No matter where your files stored, it is highly recommend that all of your files
 
 ## /home
 
-All user directories in home dir are in the ssd of master node. And home directory is shared via nfs to all computation nodes. The SSD is in size of **500GB** in total which should be shared with OS and all users, so only small tasks are recommeded to IO within home dir. Never ever store large datafiles in home dir! The home dir is under control of quota which automatically limit users' disk usage. The current soft limit and hard limit of home disk usage is 60GB and **80GB**. When the disk usage is reaching the soft limit, it is ok to continue using for another 7 days.
+All user directories in home dir are in the ssd of master node. And home directory is shared via nfs to all computation nodes. The SSD is in size of **500GB** in total which should be shared with OS and all users, so only small tasks are recommeded to IO within home dir. Never ever store large datafiles in home dir! The home dir is under control of quota which automatically limit users' disk usage. The current soft limit and hard limit of home disk usage is 45GB and 6**0GB**. When the disk usage is reaching the soft limit, it is ok to continue using for another 7 days. Use `quota -u $USER` to check the status of your disk quota.
 
 The default permission on `/home/<user>` is 700, therefore, others cannot view the user's file, code and data.
 

@@ -67,3 +67,7 @@ experiment conclusion: ganglia doesn't work well with logstash
 Theorectial Flop value for CPU: [post](https://software.intel.com/en-us/forums/software-tuning-performance-optimization-platform-monitoring/topic/761046)
 
 > All of the Gold 6000 processors have two AVX512 units, so they are capable of 32 DP FLOPS/cycle.  The Gold 5000 processors have one AVX512 unit (except for the Gold 5122, which has two), so they are capable of 16 DP FLOPS/cycle.
+
+Simply linpack directly from intel parallel studio: [blog](http://blog.chonor.cn/index.php/hplhigh-performance-linpack/)
+
+Results: 580Gflop on single machine in normal env without fine tuning

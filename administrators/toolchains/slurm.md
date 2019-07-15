@@ -16,7 +16,7 @@ Therefore, the best practice with minimal maintence effort here is always using 
 
 ### MPI and OPENMP hybrid
 
-Remember the `-fopenmp` flag for `mpicc`,(use `-openmp` for the Intel compiler and `-mp` for the PGI compiler) the others are similar to mpi workflow. See [here](https://rcc.uchicago.edu/docs/running-jobs/hybrid/index.html) for a demo.
+Remember the `-fopenmp` flag for `mpicc`,(use `-openmp` for the Intel compiler and `-mp` for the PGI compiler) the others are similar to mpi workflow. See [here](https://rcc.uchicago.edu/docs/running-jobs/hybrid/index.html) and [here](https://researchcomputing.princeton.edu/faq/how-to-use-openmpi-with-o) for script demos.
 
 ### cron like job
 
