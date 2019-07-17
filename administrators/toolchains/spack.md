@@ -134,7 +134,7 @@ Further summary: better also add intel-mpi and intel-mkl interface as external p
 ## Issues with specific packages
 
 * Intel family [doc](https://spack.readthedocs.io/en/latest/build_systems/intelpackage.html), better to also set up intel-mpi and intel-mkl for flexibility
-* Possible issue for some packages in air gapped computers. [issue](https://github.com/spack/spack/issues/7848). Solution: `git config --global url.https://github.com/.insteadOf git://github.com/`
+* Possible issue for some packages in air gapped computers. [issue](https://github.com/spack/spack/issues/7848). Solution: `git config --global url.https://github.com/.insteadOf git://github.com/`. General configuration on git proxy: [so](https://stackoverflow.com/questions/128035/how-do-i-pull-from-a-git-repository-through-an-http-proxy).
 * virtual management on external non-existing mathematica module
 * jdk: spack seems to have issue for installing jdk for certain old versions. Dont want to comment on Oracle...
 * m4: install issue with non gcc compiler: [issue](https://github.com/spack/spack/issues/4883), workaround: always use `^m4%gcc` in spack syntax

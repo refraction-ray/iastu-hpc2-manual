@@ -51,6 +51,8 @@ The backup crontab and fstab mount config have not included into ansible workflo
 
 In terms of network and nfs, ntp,apt setups, please see relevant section in [Virtual Machine](./VM.md) part.
 
+For proxy part, note there are softwares not following http_proxy and need to set proxy in their own way. Such apps include apt, and git.
+
 ### ansible
 
 `sudo apt install ansible` on master node.
@@ -355,7 +357,8 @@ Available frequency is 2400, though the param is 2666, the speed is limited by C
 
 * It is highly suggested that all ansible playbooks to be executed once reboot.
 * config cgroup as `sudo cgconfigparser -l /etc/cgconfig.conf && sudo cgrulesengd`.
-* start tinc vpn (maybe auto start as I observed).
+* start tinc vpn by `sudo tincd -n debug`.
+* hostname is not persistent by hostname module of ansible!! [see issue](https://github.com/ansible/ansible/issues/54755)
 * for computer nodes, ansible is must, since we need mounts on NFS.
 
 ### summary on works beyond ansible workflow

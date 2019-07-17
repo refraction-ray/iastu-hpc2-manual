@@ -89,6 +89,7 @@ server ntp.tuna.tsinghua.edu.cn prefer
 
 * ` ntpq -p` or `ntpstat` to check the current state of ntp service and upstream
 * for node1, also config ntp service, but with server as master
+* Caution: for NFS disconnect, you may experien hang on ls and df -H, try solution in [this post](https://blog.csdn.net/NULL_LLUN/article/details/80169107). Basically combination of umount and nfs service restart. [Reference](https://blog.csdn.net/lanranguidao/article/details/81484421)
 
 ### SSH
 

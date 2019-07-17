@@ -1,5 +1,3 @@
-**
-
 In this part, we will give brief tutorial on some useful CLI tools.
 
 ## tmux

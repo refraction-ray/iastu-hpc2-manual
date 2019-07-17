@@ -1,5 +1,3 @@
-**
-
 ## Use pyspark in jupyter notebook
 
 Firstly, please refer to the conda workflow in python section.

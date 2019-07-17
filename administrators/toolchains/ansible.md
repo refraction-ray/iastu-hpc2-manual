@@ -114,6 +114,7 @@ tasks:
 * each task has it own ssh session and shell: [how source work with ansible](https://stackoverflow.com/questions/22256884/not-possible-to-source-bashrc-with-ansible/27541856#27541856). The default shell of ansible is `sh`, while source is a bash builtin instead of sh.
 * `{{ D['key']|default ('undefined') }}` can be used as default value for non existing keys of dict
 * differece between command and shell module: [blog](https://blog.confirm.ch/ansible-modules-shell-vs-command/). Command is weaker, it doesn't support evaluation on env vars and no support for `|`, `&` like things in shell.
+* Hostname is not persistent due to cloud init system in ubuntu, see [solution here](https://askubuntu.com/questions/1028633/host-name-reverts-to-old-name-after-reboot-in-18-04-lts/1028750#1028750).
 
 ### My comments
 
