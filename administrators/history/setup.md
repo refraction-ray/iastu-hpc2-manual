@@ -51,7 +51,7 @@ The backup crontab and fstab mount config have not included into ansible workflo
 
 In terms of network and nfs, ntp,apt setups, please see relevant section in [Virtual Machine](./VM.md) part.
 
-For proxy part, note there are softwares not following http_proxy and need to set proxy in their own way. Such apps include apt, and git.
+For proxy part, note there are softwares not following http_proxy and need to set proxy in their own way. Such apps include apt, and git and [crontab](https://unix.stackexchange.com/questions/390974/how-should-i-set-http-proxy-variable-for-cron-jobs). (Maybe /etc/enviroment is a better place for http proxy variables)
 
 ### ansible
 

@@ -11,11 +11,10 @@ No matter where your files stored, it is highly recommend that all of your files
 * Source code and small scripts -> `/home/<user>`
 * Data files as output of program -> `/DATA`
 * Data files as output of program but IO speed is critical -> `/tmp`
-* Very large and unimportant files -> `/DATA2`
 
 ## /home
 
-All user directories in home dir are in the ssd of master node. And home directory is shared via nfs to all computation nodes. The SSD is in size of **500GB** in total which should be shared with OS and all users, so only small tasks are recommeded to IO within home dir. Never ever store large datafiles in home dir! The home dir is under control of quota which automatically limit users' disk usage. The current soft limit and hard limit of home disk usage is 45GB and 6**0GB**. When the disk usage is reaching the soft limit, it is ok to continue using for another 7 days. Use `quota -u $USER` to check the status of your disk quota.
+All user directories in home dir are in the ssd of master node. And home directory is shared via nfs to all computation nodes. The SSD is in size of **500GB** in total which should be shared with OS and all users, so only small tasks are recommeded to IO within home dir. Never ever store large datafiles in home dir! The home dir is under control of quota which automatically limit users' disk usage. The current soft limit and hard limit of home disk usage is 45GB and **60GB**. When the disk usage is reaching the soft limit, it is ok to continue using for another 7 days. Use `quota -u $USER` to check the status of your disk quota.
 
 The default permission on `/home/<user>` is 700, therefore, others cannot view the user's file, code and data.
 
@@ -34,6 +33,8 @@ In general, the data files for task IO are recommended to save in `/DATA/<user>`
 This dir is in another hdd of master node, which also has **2T** size in total. This dir is for important backups and normal users only have read permissions without write permission. For normal users, they shouldn't care about this dir. And if users have some need to backup locally, they can contact the administrator for the backup, and the backup files will go here.
 
 ## /DATA2
+
+*Currently no disk for DATA2, below is here for historical reasons.*
 
 This directory is shared by nfs, and lives in an old machine with **9T** space in total (by hardware raid controller). Therefore, all IO in this dir would go through NFS no matter in master or computation nodes. So it is slow. Besides, the disk is aged and not under good maintenance, so the risk of data lost is high.  Moreover, the account system is different in /DATA2, so all files would lose owner attributes, and the permission control is somewaht chaotic.
 

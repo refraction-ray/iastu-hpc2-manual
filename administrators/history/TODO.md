@@ -6,7 +6,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 - [x] Enable **jumboframe** in LAN
     - [x] config on MTU of servers
-    - [ ] config on MTU of switches, Jumbo
+    - [x] config on MTU of switches, Jumbo
 - [x] Divide S1720 switch into two **VLAN**
 - [x] DHCP on the master node with very long lease time
 
@@ -79,11 +79,12 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 - [x] opensource the ansible playbooks in this HPC
 - [x] ansible authorized key double check
-- [ ] possible setup one more v2ray inbound which has only outbounds to 176 network, used for other users to access jupyter notebook
-- [ ] spack install hpl for linpack benchmark
+- [x] possible setup one more v2ray inbound which has only outbounds to 176 network, used for other users to access jupyter notebook
+- [x] spack install hpl for linpack benchmark(just use mkl one)
 - [x] backup mysql database a
 - [ ] ? backup elastic database
 - [x] bootstrap setup for new machines by curl scripts
+- [ ] more careful division on playbooks, new roles comes in! gpu partition and shared storage on compute nodes
 
 ### tasks to explore
 

@@ -71,3 +71,5 @@ Theorectial Flop value for CPU: [post](https://software.intel.com/en-us/forums/s
 Simply linpack directly from intel parallel studio: [blog](http://blog.chonor.cn/index.php/hplhigh-performance-linpack/)
 
 Results: 580Gflop on single machine in normal env without fine tuning
+
+Intel mkl linpack documentation: [intel](https://software.intel.com/en-us/mkl-windows-developer-guide-intel-distribution-for-linpack-benchmark)

@@ -16,7 +16,7 @@ Therefore, the best practice with minimal maintence effort here is always using 
 
 ### MPI and OPENMP hybrid
 
-Remember the `-fopenmp` flag for `mpicc`,(use `-openmp` for the Intel compiler and `-mp` for the PGI compiler) the others are similar to mpi workflow. See [here](https://rcc.uchicago.edu/docs/running-jobs/hybrid/index.html) and [here](https://researchcomputing.princeton.edu/faq/how-to-use-openmpi-with-o) for script demos.
+Remember the `-fopenmp` flag for `mpicc`,(use `-openmp` for the Intel compiler and `-mp` for the PGI compiler) the others are similar to mpi workflow. See [here](https://rcc.uchicago.edu/docs/running-jobs/hybrid/index.html) and [here](https://researchcomputing.princeton.edu/faq/how-to-use-openmpi-with-o) for script demos. Also see nice c code explicity using MPI and pthreads [here](https://computing.llnl.gov/tutorials/pthreads/samples/mpithreads_both.c). Remember adjusting enviroment variables `OMP_NUM_THREADS` and `KMP_AFFINITY` for a better performance, see [intel doc](https://software.intel.com/en-us/cpp-compiler-developer-guide-and-reference-thread-affinity-interface-linux-and-windows) for affinity config.
 
 ### cron like job
 
