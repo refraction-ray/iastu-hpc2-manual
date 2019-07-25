@@ -14,8 +14,10 @@ The very basics of tmux (for more information and commands, please google or `ma
 
 `tmux ls`: list all active tmux sessions
 
-`tmux attach [-t no]`: go back to tmux session given no.
+`tmux attach [-t no or name]`: go back to tmux session given no.
 
 `Ctrl+B [`: move the screen in tmux session, enter vim mode
 
 `q`: quit the above vim mode
+
+`Ctrl+B $`: rename current session
