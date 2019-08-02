@@ -9,11 +9,11 @@ In this section, some aspects on ansible is discussed.
 * debug: `msg` info to be printed
 * user
 * service
-* setup: get basic facts as variables collecting from nodes
+* setup: get basic facts as variables collecting from nodes, note the key prefix ansible_ is not used
 * template: backup=yes
 * authorized_keys
 * [git](https://docs.ansible.com/ansible/latest/modules/git_module.html)
-* lineinfile
+* lineinfile: When modifying a line the regexp should typically match both the initial state of the line as well as its state after replacement by `line` to ensure idempotence.
 * apt
 * [apt_key](https://docs.ansible.com/ansible/2.5/modules/apt_key_module.html)
 * [apt repository](https://docs.ansible.com/ansible/2.5/modules/apt_repository_module.html)
@@ -115,6 +115,10 @@ tasks:
 * `{{ D['key']|default ('undefined') }}` can be used as default value for non existing keys of dict
 * differece between command and shell module: [blog](https://blog.confirm.ch/ansible-modules-shell-vs-command/). Command is weaker, it doesn't support evaluation on env vars and no support for `|`, `&` like things in shell.
 * Hostname is not persistent due to cloud init system in ubuntu, see [solution here](https://askubuntu.com/questions/1028633/host-name-reverts-to-old-name-after-reboot-in-18-04-lts/1028750#1028750).
+
+### More references
+
+* [Some advance tricks on ansible](https://www.ibm.com/developerworks/cn/linux/1608_lih_ansible/index.html)
 
 ### My comments
 

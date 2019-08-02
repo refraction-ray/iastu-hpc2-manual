@@ -26,6 +26,8 @@ Nvidia RTX 2080Ti
 
 We currently have **3** R740 as our computation nodes.
 
+We are going to have 6 more.
+
 #### specs
 
 Intel XEON Gold 5120 14 cores 28 threads * 2

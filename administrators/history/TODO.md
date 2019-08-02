@@ -84,7 +84,9 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] backup mysql database a
 - [ ] ? backup elastic database
 - [x] bootstrap setup for new machines by curl scripts
-- [ ] more careful division on playbooks, new roles comes in! gpu partition and shared storage on compute nodes
+- [ ] more careful division on playbooks, new roles comes in! gpu partition and shared storage on compute nodes, backup manage node
+- [ ] change mount logic to more robust and support on [sn]
+- [x] make hostname consistent by ansible on ubuntu18.04, (a detailed study on cloud init subsystem)
 
 ### tasks to explore
 
@@ -95,6 +97,11 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 - [x] name system with version number
 - [x] ?try install all useful things in opt or home which is going to be export
+
+### Future directions
+
+- [ ] combination of k8s and slurm
+- [ ] hybrid HPC/cloud setup and elastic scaling
 
 ### design principle
 
