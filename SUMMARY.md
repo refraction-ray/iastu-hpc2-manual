@@ -37,5 +37,6 @@
     * [ToDo](administrators/history/TODO.md)
     * [VM Test](administrators/history/VM.md)
     * [Real Setup](administrators/history/setup.md)
+    * [Admin Workflow](administrators/history/workflow.md)
 
 

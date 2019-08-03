@@ -58,6 +58,8 @@ ganglia {
 
 experiment conclusion: ganglia doesn't work well with logstash
 
+[elasticalert](https://elastalert.readthedocs.io/en/latest/elastalert.html): combine ELK stack and email alert
+
 ## Benchmark
 
 ### Linpack (hpl)

@@ -53,6 +53,16 @@ Lustre: need patch on kernel, not considering for mini clusters.
 
 Some configuration reference on lustre: [post](https://wangmingjun.com/2018/06/13/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BAlustre%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/)
 
+Small files benchmarking on distrubuted FS [post](https://www.jdieter.net/posts/2017/08/14/benchmarking-small-file-performance-on-distributed-filesystems/)
+
+[Analysis of Six Distributed File Systems](https://hal.inria.fr/file/index/docid/789086/filename/a_survey_of_dfs.pdf)
+
+### GlusterFS
+
+Seems very promising and easy to configure, also more suitable for a small cluster. But after some reading, it seems not to be a good choice as the main fs for HPC.
+
+[Discussion on the comparison between gluster and lustre](https://lustre-discuss.lustre.narkive.com/lE17VMmK/glusterfs-and-lustre)
+
 ## Desktop 
 
 ### ThinLinc
@@ -77,7 +87,7 @@ openLDAP for user management: [tutorial](https://www.ibm.com/developerworks/cn/l
 
 openLDAP configure: [post](https://juejin.im/entry/5aec6ac46fb9a07ac3635884)
 
-## Scheme beyond MPI
+## Parallel Scheme beyond MPI
 
 * [Nice blog reflects the drawbacks of MPI style and compare it to spark or chapel](https://www.dursi.ca/post/hpc-is-dying-and-mpi-is-killing-it.html)
 
