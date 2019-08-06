@@ -20,4 +20,12 @@ The very basics of tmux (for more information and commands, please google or `ma
 
 `q`: quit the above vim mode
 
-`Ctrl+B $`: rename current session
+`Ctrl+B $`: rename current session.
+
+`Ctrl+B %`: to split the session
+
+`Ctrl+B O`: move focus on different sessions.
+
+`Ctrl+B :setw synchronize-panes`: input the same command on multiple panels, [ref](https://sanctum.geek.nz/arabesque/sync-tmux-panes/)
+
+One can also further customize the configuration of tmux, one conf example can be found [here](https://github.com/gpakosz/.tmux#enabling-the-powerline-look), remember using `tmux source-file ~/.tmux.conf` to reload the config.

@@ -14,6 +14,7 @@ List of typical HPCs:
 *  [UIOWA](https://wiki.uiowa.edu/display/hpcdocs)
 *  [Yale](https://docs.ycrc.yale.edu/clusters-at-yale/)
 *  [Sheffield](http://docs.hpc.shef.ac.uk/)
+*  [Odyssey-Harvard](https://www.rc.fas.harvard.edu/resources/odyssey-architecture/)
 
 ## OpenHPC
 

@@ -20,6 +20,8 @@ $ conda init bash  # after this, intel python is by default when log in
 
 The python3 intepreter in this conda env is still provided by Intel.
 
+One can install packages in conda env by `conda install --file requirements.txt`.
+
 For packages only available to pip, please refer to [this article](https://www.anaconda.com/using-pip-in-a-conda-environment/) on possible conflict issues and solution workflows.
 
 ### Advanced usage on conda

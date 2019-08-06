@@ -75,3 +75,11 @@ Simply linpack directly from intel parallel studio: [blog](http://blog.chonor.cn
 Results: 580Gflop on single machine in normal env without fine tuning
 
 Intel mkl linpack documentation: [intel](https://software.intel.com/en-us/mkl-windows-developer-guide-intel-distribution-for-linpack-benchmark)
+
+### MPI benchmarks
+
+* An example using spack installed stack for mpi bandwidth benchmark: [blog](https://jiaweizhuang.github.io/blog/mpi-tcp-ec2/#mpi-bandwidth-test-with-osu-mirco-benchmarks)
+
+### IO benchmarks
+
+* An example using spack installed stack for io benchmark: [blog](https://jiaweizhuang.github.io/blog/fsx-experiments/#i-o-benchmark-by-ior)

@@ -258,6 +258,20 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 * Heterogeneous job  submission: [doc](https://slurm.schedmd.com/heterogeneous_jobs.html) (Including block, plane and cylic allocation)
 * Job status and info to elasticsearch: [doc](https://slurm.schedmd.com/elasticsearch.html)
 
+## Elastic scaling on cloud
+
+[slurm doc on cloud bursting](https://slurm.schedmd.com/elastic_computing.html). seems already having some support for hybrid hpc scheme
+
+### AWS
+
+* aws approch to achieve auto up and down for compute nodes by slurm with plugins: [blog](https://aws.amazon.com/cn/blogs/compute/deploying-a-burstable-and-event-driven-hpc-cluster-on-aws-using-slurm-part-1/)
+
+* [aws slurm plugin repo](https://github.com/aws-samples/aws-plugin-for-slurm), quoted as
+
+  >  burst from an on-prem SLURM headnode that is managining an on-prem compute cluster. You need to ensure that you can resolve AWS private address either through an AWS DirectConnect and/or VPN layer.
+
+  So the hybrid scheme is indeed available now.
+
 ## Working with other tools
 
 ### Python

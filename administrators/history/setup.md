@@ -172,12 +172,16 @@ gmetric can be customized to report certain spec. See temperature example [here]
 
 Apache password protected sites: [digitalocean](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04)
 
+gmetric expire invalid metric: [mailist](https://sourceforge.net/p/ganglia/mailman/message/23458211/): add a finite int for -d flag in gmetric cli. Also see [this post](https://qingwen-chen.blogspot.com/2011/03/remove-unused-metrics-from-ganglia.html)
+
+GPU monitoring part, from beginning, I was thinking about incoporate nvidia plugin for ganglia [github](https://github.com/ganglia/gmond_python_modules/tree/master/gpu/nvidia). But the solution is too invasive and no guranteen on the sucess based on search results in the internet. So finally I decided to write a small script to collect gpu data given by nvidia-smi and send them to gmond by gmetric command. Just as what I have done on cpu temperature.
+
 ### ELK
 
 *into ansible workflow*
 
 * add elastic repo and key
-* apt install elasticsearch
+* apt install elasticsearch, es binding to localhost instead of master
 * apt install kibana and configure nginx reverse proxy
 * apt install logstash and configure the pipe, note the ip binding of beat input configure (there are `""` for string ip)
 * apt install filebeat (on all nodes)
@@ -192,8 +196,25 @@ Apache password protected sites: [digitalocean](https://www.digitalocean.com/com
 * For debug test on es, curl will go proxy!!
 * no specified JAVA_HOME warning in es service log doesn't matter
 * logstash config [intro](https://www.elastic.co/guide/en/logstash/current/advanced-pipeline.html#configuring-geoip-plugin), grok [official guide](https://www.elastic.co/guide/en/logstash/7.1/plugins-filters-grok.html)
-* actually it is ok, but the log from compute node is just too small compared to master…. It is not an issue due to ELK stack, but issue of non uptodate syslog.
+* actually it is ok for missing hostname, but the log from compute node is just too small compared to master…. It is not an issue due to ELK stack, but issue of non uptodate syslog.
 * [timezone issue of syslog](https://stackoverflow.com/questions/22853026/ubuntu-change-timezone-to-utc-does-not-affect-the-time-of-syslog): every damon can see the timezone issue only solved by service restart! **case solved**
+* ES basic query syntax: [doc](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+
+#### elastalert
+
+*into ansible workflow*
+
+In general, a cool, reasonable and east-to-follow tools. The logical flow is better compared to the tools as middlewares in the logstash. Here we just query the ES database periodically, and sent alert accordingly based on some predefined rules.
+
+~~`pip3 install elastalert`~~
+
+~~`pip3 install "elasticsearch>=5.0.0"`~~
+
+`apt install elastalert`
+
+For mail configuration, see [this issue](https://github.com/Yelp/elastalert/issues/627). It is better to use campus mail as From, since the cluster is air gapped with the Internet. But it could also be done for other smtp servers, just setup a port forwarding on the proxy server.
+
+**Note:** to use `elastalert-test-rule`, first `unset http_proxy` to make it accessible to localhost ES.
 
 ### quota
 
@@ -332,6 +353,20 @@ The benchmarks shows little gain in enabling jumbo frames.
 * change default docker image path to /DATA: [ref](https://linuxconfig.org/how-to-move-docker-s-default-var-lib-docker-to-another-directory-on-ubuntu-debian-linux)
 
 **Warning**: only trusted used can be add to docker group to directly communicate with docker deamon. It is not desinged for normal users but only resever for the administrator to debug. See [security issues of docker](https://docs.docker.com/engine/security/security/#/docker-daemon-attack-surface) and [also this post](https://fosterelli.co/privilege-escalation-via-docker.html). For normal use of containers, please try sigularity instead.
+
+### mail
+
+currently no configuration right now.
+
+```bash
+$ sudo apt install mailutils
+Postfix (main.cf) was not set up.  Start with
+  cp /usr/share/postfix/main.cf.debian /etc/postfix/main.cf
+.  If you need to make changes, edit /etc/postfix/main.cf (and others) as
+needed.  To view Postfix configuration values, see postconf(1).
+After modifying main.cf, be sure to run 'service postfix reload'.
+
+```
 
 ### backup 
 

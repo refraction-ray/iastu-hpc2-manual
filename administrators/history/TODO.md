@@ -73,7 +73,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] *Spark*
 - [ ] *Kubernetes*
 - [x] *Elasticsearch*
-- [ ] *ceph*
+- [ ] *?ceph*
 
 ## Miscs
 
@@ -88,11 +88,15 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [ ] change mount logic to more robust and support on [sn]
 - [ ] add a debug partition queue for slurm
 - [x] make hostname consistent by ansible on ubuntu18.04, (a detailed study on cloud init subsystem)
+- [ ] ganglia incomplete metric collection
+- [x] ganglia gpu plugin
+- [x] elastalert for mail alerting
+- [ ] MPI benchmark
 
 ### tasks to explore
 
 - [x] unifomity of user
-- [x] uniformity of environment variables
+- [x] uniformity of environment variables (propagate by sbatch)
 
 ### warning
 
@@ -106,6 +110,6 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 
 ### design principle
 
-* more on master, less on slave, everything is slave should be included in ansible workflows
+* more on master, less on slave, everything in slave should be included in ansible workflows
 * more on ansible playbooks, less by hand
 

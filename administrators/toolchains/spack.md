@@ -131,6 +131,8 @@ packages:
 
 Further summary: better also add intel-mpi and intel-mkl interface as external packages. intel-parallel-studio will automatically activate intel python. The PS1 is still missing as the activation script coming with the vendor (still dont know why this line exist). Add `tcl:intel-parallel-studio:filter: environment_blacklist:: [PS1]` to avoid this change in loading.
 
+**Further warning**: to use intel compiler building apps in spack, one may also add one more rpath in compilers.yaml, see [this issue](https://github.com/spack/spack/issues/8315#issuecomment-393160339). Not sure wether this is a must currently but just leave a note here.
+
 ## Issues with specific packages
 
 * Intel family [doc](https://spack.readthedocs.io/en/latest/build_systems/intelpackage.html), better to also set up intel-mpi and intel-mkl for flexibility

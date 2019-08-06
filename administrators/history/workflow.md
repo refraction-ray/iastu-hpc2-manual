@@ -13,9 +13,9 @@ This section reviews some general workflow for daily administration on the clust
 * Activate mathematica by ansible one-liner. **Unincluded**
 * Add backup crontab for user home directory. **Unincluded**
 
-### reboot
+### after reboot
 
-* It is highly suggested that all ansible playbooks to be executed once reboot.
+* It is highly suggested that all ansible playbooks to be executed once reboot (at least network and basic for compute node reboot).
 * config cgroup as `sudo cgconfigparser -l /etc/cgconfig.conf && sudo cgrulesengd`.
 * start tinc vpn by `sudo tincd -n debug`.
 * iptables (nat rules) on master is not persistent, see [this issue](https://github.com/ansible/ansible/issues/25149) for further develpment of ansible to incorporate persistence of iptables.
@@ -25,17 +25,17 @@ This section reviews some general workflow for daily administration on the clust
 
 ### summary on works beyond ansible workflow
 
-All in master nodes, keep the bottom line that all tasks on compute node should merged into ansible workflow.
+All extras in master nodes, keep the bottom line that all tasks on compute node should be merged into ansible workflow.
 
 * hard disk mount and fstab configure (one time forever, required before **basic roles**, actually can easily merged into basic role)
-* Possible nvidia drivers install and reboot if GPU is available. (one time forever) Cuda and cudnn can be managed by spack.
+* ~~Possible nvidia drivers install and reboot if GPU is available. ~~(already merged into ansible workflow) Cuda and cudnn can be managed by spack.
 * quota initial configure (one time forever, required before **user roles)**
 * intel parallel studio install (one time forever) (no need to install before any roles, possible issue for python path maybe in **python roles**)
-* mathematica install and add virtual mathematica packages in spack (one time forever) (no need to install before any roles)
+* mathematica install and add virtual mathematica packages in spack (one time forever) (no need to install before any roles). Similar for Matlab (but it has a predefined recipe).
 * backup crontabs (one time forever? maybe find some more advanced tools) (no need to configure before any roles)
 * python packages install and jupyter configure (continuing work) (no need to install before any roles)
 * spack packages install by specs and spack env maintenance (continuing work) (no need to install before any roles)
-* sacctmgr cluster, qos and account add (continuing work for advanced scenario, minimum setup required before **user roles** after slurm roles)
+* sacctmgr cluster, qos, priority and account add (continuing work for advanced scenario, minimum setup required before **user roles** after slurm roles)
 * two line of commands to final set up ELK stack on master (should find some more elegant way in the future)
 * tinc vpn set up on master node
 * docker set up on master node
@@ -62,7 +62,7 @@ The insipration of standard workflow on software installation is from [this post
 
 ## Known Issues
 
-* MTU cannot be set by netplan yml file, even after we included the mac:address line in the yml.
+* MTU cannot be set by netplan yml file, even after we have included the mac:address line in the yml.
 
   Current Workaround: Include directly command on ip in ansible playbooks.
 
@@ -83,4 +83,8 @@ The insipration of standard workflow on software installation is from [this post
 
 * Error log of ganglia client claiming that some python module won't work `/usr/sbin/gmond[2358]: [PYTHON] Can't call the metric handler function for [tcpext_tcploss_percentage] in the python module [netstats]`. But this is not true, a reboot can make these error vanishing and every loaded module is workable for gmond.
 
-  Current Workaround: Further investigation shall be arranged. Rebooting is the only solution known for now.
+  Current Workaround: Restarting ganglia-monitor service should be enough.
+
+* Sometimes, after restart of gmond, it cannot collect all metric, some are missed.
+
+  Current Workaround: No idea why. Just try restarting gmond service, but it may still not work. In sum, gmond status is somewhat fragile and tend to miss some metric. Maybe related to this [so](https://serverfault.daytorrents.com/a/422273/25640), try configuring `send_metadata_interval` to nonzero if one use unicast for gmond.
