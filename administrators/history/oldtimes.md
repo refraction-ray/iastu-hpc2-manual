@@ -1,4 +1,4 @@
-In this section, the command and settings in old machines are given.
+In this section, the command and settings in old machines are given. (It currently went offline)
 
 ## d1
 
