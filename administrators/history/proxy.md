@@ -2,6 +2,14 @@ In this section, I will give some reviews and setups on the upfront machine. Thi
 
 In the below, we may call this machine r1.
 
+## Hardware specs
+
+Actually it is not important how powerful the hardware is for such a machine. Anyway, the specs are below.
+
+* Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+* 16G Memory
+* 256G+1T storage
+
 ## Software setups
 
 ### V2RAY
@@ -10,6 +18,24 @@ Web proxy is very vital for the cluster to run. Since master of the cluster only
 
 ### Misc
 
-Unlike the cluster utillizing purely ipv4 stacks, this relay host has ipv6 address. Actually, there is no ipv6 access in IASTU network. But one can setup ipv6 by following [this tutorial](https://github.com/tuna/ipv6.tsinghua.edu.cn/blob/master/isatap.md), which create a 6in4 tunnel to the server on campus.
+* ipv6
 
-A ddns crontab task is also configured, which has the flask server on my digital ocean VPS. The ddns infrastructure in implemented by me as in [this repo](https://github.com/refraction-ray/simple-ddns).
+  Unlike the cluster utillizing purely ipv4 stacks, this relay host has ipv6 address. Actually, there is no ipv6 access in IASTU network. But one can setup ipv6 by following [this tutorial](https://github.com/tuna/ipv6.tsinghua.edu.cn/blob/master/isatap.md), which create a 6in4 tunnel to the server on campus. To ensure the tunnel is persistent, I added one line in root's crontab as `@reboot /bin/bash .../.ipv6.sh`. I think this approach is more elegant and simpler than hacking rc.local thing.
+
+* ddns
+
+  A ddns crontab task is also configured, which has the flask server on my digital ocean VPS. The ddns infrastructure in implemented by me as in [this repo](https://github.com/refraction-ray/simple-ddns).
+
+### Mail
+
+`apt install mailutils`
+
+Issue: cannot tune the from address beyond hostname, postfix cannot control `mail` in this. One need to tune the hostname in the form of domains, with dot between to make mails acceptable by other smtp servers. Even though, only campus mail server accept the mail, because the domain is of course illegal from the beginning. Another route is to install `ssmtp` instead of postfix, which can configured easily to send mails by other smtp server at first place (bu using pasword and account on other mail service). And ssmtp is also compatible with `mail` frontend. However, to keep things on r1 the most simple, we still take the former route: using postfix with hostname set to `hostname.localdomain` form. Then `mail` can send alert mail to university emails. In this approach, no personal mail credential need to be stored on r1.
+
+### Monitoring
+
+Just use a homemade super lightweighted monitoring script (add into crontab), instead of any sophisticate monitor systems. See a demo script [on the gist](https://gist.github.com/refraction-ray/4904205f157bd79cd23b4a11c5ac2428).
+
+## Design principles
+
+The ultimate design goal or r1 is security. The aim is that even r1 is hacked, the hacker cannot get enough useful informations to threatened the security of the real cluster.
