@@ -46,7 +46,7 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
     - [x] apt tools install
     - [x] service state management
     - [x] network configuration (dhcp server with fix ip on master and dhcp auto on nodes and nat)
-- [ ] *nagios*
+- [ ] *?nagios*
 - [x] ganglia
 - [x] *modules*
 - [x] backup tools
@@ -86,9 +86,9 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] bootstrap setup for new machines by curl scripts
 - [ ] more careful division on playbooks, new roles comes in! gpu partition and shared storage on compute nodes, backup manage node (backup of slurmctld slurmdbd and possible elastic node)
 - [ ] change mount logic to more robust and support on [sn]
-- [ ] add a debug partition queue for slurm
+- [ ] add a debug partition queue and a gpu queue for slurm
 - [ ] replication of ES
-- [ ] authetication of ES
+- [x] authetication of ES
 - [x] make hostname consistent by ansible on ubuntu18.04, (a detailed study on cloud init subsystem)
 - [ ] ganglia incomplete metric collection
 - [x] ganglia gpu plugin

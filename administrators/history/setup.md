@@ -222,7 +222,7 @@ GPU monitoring part, from beginning, I was thinking about incoporate nvidia plug
 
   *Coming back to the second type of log files, like syslog and authlog in ubuntu, they have timestamps but have no indication whether such timestamps is UTC or localtime. Actually rsyslog can run on UTC even if OS is set to some other timezones. This could persists to the restart of rsyslog service. So to parse these logs and write UTC timestamps to ES, filebeat must has a way to specify whetehr we need to convert the lietral time strings in syslog by some timezone and write another literal timestamps to ES. This is in principle configured by /etc/filbeat/modules.d/system.yml. There is a variable in the file called var.convert_timezone, turn it to be true (seems default false), and in principle, you can get the correct time view in kibana now.*
 
-  *The mechanism behind convert_timezone in a ingest pipeline of ES. Namely the conversion is happening in ES side instead of handling by filebeat itself.*
+  *The mechanism behind convert_timezone in a ingest pipeline ([pipeline basic](https://www.elastic.co/cn/blog/new-way-to-ingest-part-1)) of ES. Namely the conversion is happening in ES side instead of handling by filebeat itself.*
 
   *But reconfiguring filebeat turns out not that easy. There are two totally different cases. The first one is the output of filebeat is directly some ES, which seems to be the default support case from the doc. In this case, one should first stop filebeat service, and delete all previou pipeline by curl, and then start filebeat service again, everything should be fine now, easy. In this case, restaring filebeat will automatically generate new pipelines in ES, which you dont need to care.*
 
@@ -241,12 +241,18 @@ GPU monitoring part, from beginning, I was thinking about incoporate nvidia plug
   * run the two setup steps in the summray
   * service filebeat start
 
+* `sudo /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive` (Thanks to elastic guys, xpack security now comes to free for 6.8.0+).
+
+* configure on password in logstash need quote.
+
+* To query es with user authetication, just add `-u esuser:espass` option in curl commands.
+
 **Misc note:**
 
 * For debug test on es, curl will go proxy!!
 * no specified JAVA_HOME warning in es service log doesn't matter
 * logstash config [intro](https://www.elastic.co/guide/en/logstash/current/advanced-pipeline.html#configuring-geoip-plugin), grok [official guide](https://www.elastic.co/guide/en/logstash/7.1/plugins-filters-grok.html)
-* actually it is ok for missing hostname, but the log from compute node is just too small compared to master…. It is not an issue due to ELK stack, but issue of non uptodate syslog.
+* actually it is ok for missing hostname, but the log from compute node is just too small compared to master…. It is not an issue due to ELK stack, but issue of non uptodate syslog. (time mismatch)
 * [timezone issue of syslog](https://stackoverflow.com/questions/22853026/ubuntu-change-timezone-to-utc-does-not-affect-the-time-of-syslog): every damon can see the timezone issue only solved by service restart! **case solved**
 * ES basic query syntax: [doc](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
 * pipline doesn't exsit error when modules is enabled for filebeat: [post](https://discuss.elastic.co/t/fitebeat-6-3-1-system-module-issue/141587/2). Run `curl -XDELETE "http://localhost:9200/_ingest/pipeline/filebeat-*"`, to resolve conflict with possible old pipelines?
@@ -264,6 +270,8 @@ In general, a cool, reasonable and east-to-follow tools. The logical flow is bet
 ~~`pip3 install "elasticsearch>=5.0.0"`~~
 
 `apt install elastalert`
+
+`elastalert-create-index`
 
 For mail configuration, see [this issue](https://github.com/Yelp/elastalert/issues/627). It is better to use campus mail as From, since the cluster is air gapped with the Internet. But it could also be done for other smtp servers, just setup a port forwarding on the proxy server.
 

@@ -60,6 +60,8 @@ experiment conclusion: ganglia doesn't work well with logstash
 
 [elasticalert](https://elastalert.readthedocs.io/en/latest/elastalert.html): combine ELK stack and email alert
 
+Cluster of ES [post](https://cloud.tencent.com/developer/article/1189282), to be deployed.
+
 ## Benchmark
 
 ### Linpack (hpl)

@@ -194,6 +194,8 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 
 * No conf to randomize node assignment: [post](https://serverfault.com/questions/881099/randomize-slurm-node-allocation), somewhat hard to believe
 
+* sinfo state for nodes: [doc](https://slurm.schedmd.com/sinfo.html#lbAG) `~` power save modes
+
 * `sdiag` to check scheduling relevant info
 
 * `sattach jobid` directly see stdout and stderr of the running job
@@ -261,6 +263,10 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 ## Elastic scaling on cloud
 
 [slurm doc on cloud bursting](https://slurm.schedmd.com/elastic_computing.html). seems already having some support for hybrid hpc scheme
+
+[post](https://bugs.schedmd.com/show_bug.cgi?id=4039) slurmctld will check the boottime to make sure resume works, use `-b` for slurmd local test on elastic feature of slurm.
+
+Nodename should always be consistent with local hostname for newly provisioned machine.
 
 ### AWS
 
