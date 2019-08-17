@@ -22,6 +22,7 @@ In this section, some aspects on ansible is discussed.
 * [mysql_user](https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html): mysql-python package missing issue: [post](https://github.com/geerlingguy/ansible-role-mysql/issues/42), `apt: name=python3-mysqldb state=present` is enough, however `pip install mysql-python` wouldn't work.
 * pip
 * [supervisorctl](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html)
+* set_fact: set varible per host and used later in playbooks
 
 ## General syntax in playbooks
 
@@ -60,6 +61,8 @@ In this section, some aspects on ansible is discussed.
 * host pattern in ansible adhoc: [doc](https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html). As quoted "You can refer to hosts within the group by adding a subscript to the group name", that is to say, the pattern is group[1:2] instead of c[1:2] as host names.
 
   eg. ` ansible -i ./hosts cn[1:2] -m service -a "name=ganglia-monitor state=restarted" --become -K`
+
+* [check mode](https://docs.ansible.com/ansible/2.5/user_guide/playbooks_checkmode.html), `--check` in cli args, no real change happen but only reported as a simulation
 
 ## Jinja Template Extension in Ansible
 

@@ -28,10 +28,10 @@ Arguments to MLOpen: `-LinkMode Listen -LinkProtocol TCPIP -LinkOptions MLDontIn
 Launch command: 
 
 ```
-"`userbaseDirectory`/FrontEnd/tunnel.sh" "<user>:<passwd>@<cluster_ip>" "/opt/mathematica/11.0.1/Executables/WolframKernel" "`linkname`"
+"`userbaseDirectory`/FrontEnd/tunnel.sh" "<user>:<passwd>@<cluster_ip>:<ssh_port>" "/opt/mathematica/11.0.1/Executables/WolframKernel" "`linkname`"
 ```
 
-Click on OK, and your are ready to go, just change Evaluation-Notebook Kernel-The new kenel name.
+Click on OK, and your are ready to go, just change Evaluation-Notebook Kernel-The new kenel name. In the command above, passwd(if the public key ssh login is enabled) and ssh_port(if it is default by 22) can be omitted.
 
 You can call more kernels for parallel calculation in mathematica, just `LaunchKernels[6]`, where 6 is the number of kernels you want.
 

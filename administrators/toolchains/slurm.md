@@ -196,7 +196,9 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 
 * sinfo state for nodes: [doc](https://slurm.schedmd.com/sinfo.html#lbAG) `~` power save modes
 
-* `sdiag` to check scheduling relevant info
+* `sdiag` to check scheduling relevant info and rpc calls
+
+* `sprio` to check job priority factors and so on
 
 * `sattach jobid` directly see stdout and stderr of the running job
 
@@ -254,11 +256,14 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 * Schduling configuration: [doc](https://slurm.schedmd.com/sched_config.html)
 * Job premmption guide: [doc](http://slurm.schedmd.com/preempt.html)
 * High throughput guide: namely fine tuning on burst of short jobs for slurm: [doc](https://slurm.schedmd.com/high_throughput.html)
+* Large system fine tuning: [doc](https://slurm.schedmd.com/big_sys.html)
 * Gres: [doc](https://slurm.schedmd.com/gres.html)
 * Shuguang doc on slurm: [doc](https://www.hpccube.com/wiki/index.php/SLURM%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B)
 * Tianhe doc on slurm in admin's perspective: [doc](https://www.csrc.ac.cn/upload/file/20151014/1444804067282511.pdf)
 * Heterogeneous job  submission: [doc](https://slurm.schedmd.com/heterogeneous_jobs.html) (Including block, plane and cylic allocation)
+* Parameters on multicore multi threads controlling: [doc](https://slurm.schedmd.com/mc_support.html)
 * Job status and info to elasticsearch: [doc](https://slurm.schedmd.com/elasticsearch.html)
+* Slurm configuration explanation: way better than official doc: [doc](https://wiki.fysik.dtu.dk/niflheim/Slurm_configuration)
 
 ## Elastic scaling on cloud
 
