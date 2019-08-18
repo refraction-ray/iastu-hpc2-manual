@@ -1,4 +1,4 @@
-In this part, we will give brief tutorial on some useful CLI tools.
+In this part, we will give brief tutorials on some useful CLI tools.
 
 ## tmux
 
@@ -25,6 +25,10 @@ The very basics of tmux (for more information and commands, please google or `ma
 `Ctrl+B %`: to split the session
 
 `Ctrl+B O`: move focus on different sessions.
+
+`Ctrl+B x`: kill current panel
+
+`Ctrl+B z`: maximize current panel
 
 `Ctrl+B :setw synchronize-panes`: input the same command on multiple panels, [ref](https://sanctum.geek.nz/arabesque/sync-tmux-panes/)
 

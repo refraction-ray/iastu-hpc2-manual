@@ -89,6 +89,20 @@ openLDAP for user management: [tutorial](https://www.ibm.com/developerworks/cn/l
 
 openLDAP configure: [post](https://juejin.im/entry/5aec6ac46fb9a07ac3635884)
 
+## BACKUP and sync
+
+### Borg Backup
+
+### restic 
+
+*decided to try this in main workflow*
+
+very cool and nice softwares with friendly and clear docs!
+
+### general resources
+
+* [Arch wiki on backup programs](https://wiki.archlinux.org/index.php/Synchronization_and_backup_programs)
+
 ## Parallel Scheme beyond MPI
 
 * [Nice blog reflects the drawbacks of MPI style and compare it to spark or chapel](https://www.dursi.ca/post/hpc-is-dying-and-mpi-is-killing-it.html)

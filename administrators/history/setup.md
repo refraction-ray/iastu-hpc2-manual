@@ -431,6 +431,8 @@ $ sudo apt remove mailutils
 
 ### backup 
 
+* privacy approch (deprecated)
+
 ```bash
 crontab -l
 # user home dirs, more are omitted
@@ -444,6 +446,38 @@ crontab -l
 # database files for slurmdbd
 10 5 * * 3 /usr/bin/rsync -avz /var/lib/mysql/ /BACKUP/database/mysql/
 ```
+
+* new approach based on restic
+
+`apt install restic`
+
+```bash
+$ sudo restic init --repo /BACKUP/restic
+$ sudo restic -r /BACKUP/restic backup /home
+$ sudo RESTIC_PASSWORD= restic -r /BACKUP/restic snapshots
+$ sudo RESTIC_PASSWORD="" restic -r /BACKUP/restic check
+$ sudo RESTIC_PASSWORD="" restic -r /BACKUP/restic mount ./tmpmnt
+# RESTIC_PASSWORD="" restic -r /BACKUP/restic forget --keep-daily 5  --prune
+# RESTIC_PASSWORD="" /usr/bin/restic -r /BACKUP/restic backup --one-file-system / --exclude-file=/BACKUP/ignorefile
+```
+
+ignorefile
+
+```
+/tmp/*
+/dev/*
+/DATA*
+/BACKUP
+/run/*
+/proc/*
+/swap.img
+/lost+found/*
+/mnt/*
+/home/*
+/opt/*
+```
+
+Approach to recover the whole OS in hard disk level: [post](https://forum.restic.net/t/lack-of-documentation-on-how-to-do-a-full-system-back-up/659/18)
 
 ## some benchmarks
 

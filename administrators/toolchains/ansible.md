@@ -13,7 +13,7 @@ In this section, some aspects on ansible is discussed.
 * template: backup=yes
 * authorized_keys
 * [git](https://docs.ansible.com/ansible/latest/modules/git_module.html)
-* lineinfile: When modifying a line the regexp should typically match both the initial state of the line as well as its state after replacement by `line` to ensure idempotence.
+* lineinfile: When modifying a line the regexp should typically match both the initial state of the line as well as its state after replacement by `line` to ensure idempotence. Insert lines logic: [blog](http://www.mydailytutorials.com/ansible-add-line-to-file/)
 * apt
 * [apt_key](https://docs.ansible.com/ansible/2.5/modules/apt_key_module.html)
 * [apt repository](https://docs.ansible.com/ansible/2.5/modules/apt_repository_module.html)
