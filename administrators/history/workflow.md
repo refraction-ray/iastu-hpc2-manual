@@ -11,7 +11,11 @@ This section reviews some general workflow for daily administration on the clust
 * mkdir on /DATA path. (already merged into ansible workflow)
 * Probably add `<user> cpu usersoft/` line in `/etc/cgrules.conf`. And `sudo cgrulesengd`. (edit in roles/cgroup/files and run ansible cgroup role instead) **Unincluded**
 * Activate mathematica by ansible one-liner. **Unincluded**
-* Add backup crontab for user home directory. **Unincluded**
+* ~~Add backup crontab for user home directory. **Unincluded**~~ taken over by restic as a whole
+
+### add new compute nodes
+
+There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can open a simple http server in this dir on matser. On newly introduced nodes, just run `bash <(curl -s http://192.168.48.10:8000/bt.sh)`. And it is enough to run ansible workflows from master now.
 
 ### after reboot
 
@@ -28,17 +32,18 @@ This section reviews some general workflow for daily administration on the clust
 All extras in master nodes, keep the bottom line that all tasks on compute node should be merged into ansible workflow.
 
 * hard disk mount and fstab configure (one time forever, required before **basic roles**, actually can easily merged into basic role)
-* ~~Possible nvidia drivers install and reboot if GPU is available. ~~(already merged into ansible workflow) Cuda and cudnn can be managed by spack.
+* ~~Possible nvidia drivers install and reboot if GPU is available.~~(already merged into ansible workflow) Cuda and cudnn can be managed by spack.
 * quota initial configure (one time forever, required before **user roles)**
 * intel parallel studio install (one time forever) (no need to install before any roles, possible issue for python path maybe in **python roles**)
 * mathematica install and add virtual mathematica packages in spack (one time forever) (no need to install before any roles). Similar for Matlab (but it has a predefined recipe).
-* backup crontabs (one time forever? maybe find some more advanced tools) (no need to configure before any roles)
+* ~~backup crontabs (one time forever? maybe find some more advanced tools) (no need to configure before any roles)~~ changed to use restic for backup
 * python packages install and jupyter configure (continuing work) (no need to install before any roles)
 * spack packages install by specs and spack env maintenance (continuing work) (no need to install before any roles)
 * sacctmgr cluster, qos, priority and account add (continuing work for advanced scenario, minimum setup required before **user roles** after slurm roles)
-* two line of commands to final set up ELK stack on master (should find some more elegant way in the future)
+* ~~two line of commands to final set up ELK stack on master (should find some more elegant way in the future)~~  merged into ansible workflow
 * tinc vpn set up on master node
 * docker set up on master node
+* ~~restic backup setup on master node~~, merged into ansible workflow
 
 ### install softwares or libraries beyond spack
 

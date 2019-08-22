@@ -23,6 +23,7 @@ In this section, some aspects on ansible is discussed.
 * pip
 * [supervisorctl](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html)
 * set_fact: set varible per host and used later in playbooks
+* [gluster_volume](https://docs.ansible.com/ansible/latest/modules/gluster_volume_module.html): Using ansible to deploy gluster fs [blog](https://www.jeffgeerling.com/blog/simple-glusterfs-setup-ansible)
 
 ## General syntax in playbooks
 
@@ -111,6 +112,7 @@ tasks:
 * [practical example of modules and action plugins](https://ndemengel.github.io/2015/01/20/ansible-modules-and-action-plugins/)
 * Future plan: a spack module for ansible (settled by `changed_when` to avoid changed report of command)
 * [lots of cool posts on ansible](https://everythingshouldbevirtual.com/year-archive/)
+* molecule: full stack to test ansible
 
 ## Misc
 

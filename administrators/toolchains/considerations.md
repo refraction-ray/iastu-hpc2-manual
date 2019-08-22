@@ -65,6 +65,8 @@ Seems very promising and easy to configure, also more suitable for a small clust
 
 [Discussion on the comparison between gluster and lustre](https://lustre-discuss.lustre.narkive.com/lE17VMmK/glusterfs-and-lustre)
 
+[Install on ubuntu18.04](https://kifarunix.com/install-and-setup-glusterfs-on-ubuntu-18-04/)
+
 ## Desktop 
 
 ### ThinLinc

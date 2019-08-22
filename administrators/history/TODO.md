@@ -81,11 +81,11 @@ A list of the future tasks to be implemented on HPC2, may be brief or somewhat i
 - [x] ansible authorized key double check
 - [x] possible setup one more v2ray inbound which has only outbounds to 176 network, used for other users to access jupyter notebook
 - [x] spack install hpl for linpack benchmark(just use mkl one)
-- [x] backup mysql database a
+- [x] backup mysql database
 - [ ] ? backup elastic database
 - [x] bootstrap setup for new machines by curl scripts
 - [ ] more careful division on playbooks, new roles comes in! gpu partition and shared storage on compute nodes, backup manage node (backup of slurmctld slurmdbd and possible elastic node)
-- [ ] change mount logic to more robust and support on [sn]
+- [x] change mount logic to more robust and support on [sn]
 - [ ] add a debug partition queue and a gpu queue for slurm
 - [ ] replication of ES
 - [x] authetication of ES

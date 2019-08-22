@@ -36,6 +36,6 @@ This dir is in another hdd of master node, which also has **2T** size in total. 
 
 *Currently no disk for DATA2, below is here for historical reasons.*
 
-This directory is shared by nfs, and lives in an old machine with **9T** space in total (by hardware raid controller). Therefore, all IO in this dir would go through NFS no matter in master or computation nodes. So it is slow. Besides, the disk is aged and not under good maintenance, so the risk of data lost is high.  Moreover, the account system is different in /DATA2, so all files would lose owner attributes, and the permission control is somewaht chaotic.
+~~This directory is shared by nfs, and lives in an old machine with **9T** space in total (by hardware raid controller). Therefore, all IO in this dir would go through NFS no matter in master or computation nodes. So it is slow. Besides, the disk is aged and not under good maintenance, so the risk of data lost is high.  Moreover, the account system is different in /DATA2, so all files would lose owner attributes, and the permission control is somewaht chaotic.~~
 
-Therefore, unless you have lots of unimportant data file to save, we strongly recommend you choose /DATA as the IO dir. However if the data file of your project is beyond the size of /DATA dir, /DATA2 would be the only choice.
+~~Therefore, unless you have lots of unimportant data file to save, we strongly recommend you choose /DATA as the IO dir. However if the data file of your project is beyond the size of /DATA dir, /DATA2 would be the only choice.~~

@@ -38,6 +38,7 @@
     * [VM Test](administrators/history/VM.md)
     * [Real Setup](administrators/history/setup.md)
     * [Admin Workflow](administrators/history/workflow.md)
+    * [Softwares for scientific computations](administrators/history/specifics.md)
     * [Relay Host](administrators/history/proxy.md)
 
 
