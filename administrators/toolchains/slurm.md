@@ -128,6 +128,8 @@ Jobs will not be allocated any generic resources unless specifically requested a
 
 *—gpu*: GPUs required per job
 
+Besides, mps is a more finer way to schedule gpu jobs, where one gpu resource can be divided into small parts.
+
 ### QOS
 
 QOS settings by saccmgr: [ref](https://slurm.schedmd.com/qos.html). 

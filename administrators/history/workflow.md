@@ -31,7 +31,8 @@ There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can op
 
 All extras in master nodes, keep the bottom line that all tasks on compute node should be merged into ansible workflow.
 
-* hard disk mount and fstab configure (one time forever, required before **basic roles**, actually can easily merged into basic role)
+* local nonsytem disk partition and make filesystem
+* hard disk mount and fstab configure (one time forever, required before **basic roles**, actually can easily merged into basic role)~~ already merged into ansible workflow
 * ~~Possible nvidia drivers install and reboot if GPU is available.~~(already merged into ansible workflow) Cuda and cudnn can be managed by spack.
 * quota initial configure (one time forever, required before **user roles)**
 * intel parallel studio install (one time forever) (no need to install before any roles, possible issue for python path maybe in **python roles**)
@@ -39,7 +40,7 @@ All extras in master nodes, keep the bottom line that all tasks on compute node 
 * ~~backup crontabs (one time forever? maybe find some more advanced tools) (no need to configure before any roles)~~ changed to use restic for backup
 * python packages install and jupyter configure (continuing work) (no need to install before any roles)
 * spack packages install by specs and spack env maintenance (continuing work) (no need to install before any roles)
-* sacctmgr cluster, qos, priority and account add (continuing work for advanced scenario, minimum setup required before **user roles** after slurm roles)
+* sacctmgr ~~cluster~~, qos, priority and account add (continuing work for advanced scenario, minimum setup required before **user roles** after slurm roles)
 * ~~two line of commands to final set up ELK stack on master (should find some more elegant way in the future)~~  merged into ansible workflow
 * tinc vpn set up on master node
 * docker set up on master node

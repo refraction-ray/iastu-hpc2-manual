@@ -14,7 +14,7 @@ Using the user account and password the administrator gave to connect. For the i
 $ ssh <user>@<server_ip> -p <port>
 ```
 
-Actually there are two pairs of ip-port to login. One is only accessible within Tsinghua network (or together with Tsinghua VPN such that it can be accessed from all networks) and the other one is accessible in all networks.
+Actually there are **two pairs** of ip-port to login. One (inner ip) is only accessible within Tsinghua network (or together with Tsinghua VPN such that it can be accessed from all networks) and the other one (outer ip) is accessible in all networks. The latter one is only suitable for ssh related connection, such as ssh, sftp, rsync, sshfs and so on. To utilize web service, such as jupyter, always use the former one (inner ip).
 
 You may meet some warning prompt as below when you firstly login, just type y and continue.
 

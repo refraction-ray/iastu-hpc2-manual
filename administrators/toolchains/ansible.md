@@ -63,7 +63,7 @@ In this section, some aspects on ansible is discussed.
 
   eg. ` ansible -i ./hosts cn[1:2] -m service -a "name=ganglia-monitor state=restarted" --become -K`
 
-* [check mode](https://docs.ansible.com/ansible/2.5/user_guide/playbooks_checkmode.html), `--check` in cli args, no real change happen but only reported as a simulation
+* [check mode](https://docs.ansible.com/ansible/2.5/user_guide/playbooks_checkmode.html), `--check` in cli args, no real change happen but only reported as a simulation, also `--diff` to show difference
 
 ## Jinja Template Extension in Ansible
 

@@ -24,7 +24,7 @@ Nvidia RTX 2080Ti
 
 *2U rack server*
 
-We currently have **3** R740 as our computation nodes.
+We currently have **9** R740 as our computation nodes.
 
 We are going to have 6 more.
 
@@ -35,6 +35,10 @@ Intel XEON Gold 5120 14 cores 28 threads * 2
 128G DDR4 memory
 
 512G SSD
+
+#### extra specs
+
+for c8, we have two extra 4T HDD, and for c9, we have two extra RTX2080Ti GPU cards
 
 #### misc
 
@@ -67,6 +71,8 @@ control wire?
 
 192.168.1.253 is not a static ip. It could be assigned to other ips if there is a DHCP server on the upstream of it.
 
+We currently has two of them, one is used for the main switch of the server room, and the other one is used within our cluster.
+
 * Huawei S1700-16G-AC
 
 ### Ethernet cable
@@ -75,7 +81,7 @@ Cat6 2m or 5m
 
 ### Wireless AP
 
-TP_LINK
+TP_LINK: as an emegency Lan access.
 
 ## Hardware knowledges
 
