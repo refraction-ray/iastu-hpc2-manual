@@ -2,5 +2,6 @@ language: ruby
 rvm: 2.4.1
 before_script: gem install awesome_bot
 script:
-  - awesome_bot */*.md
-  - awesome_bot */*/*.md
+  - w=localhost,192.168.48.10,https://github.com/.insteadOf
+  - awesome_bot */*.md --allow-dupe --allow-redirect -w $w
+  - awesome_bot */*/*.md --allow-dupe --allow-redirect -w $w
