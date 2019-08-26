@@ -8,4 +8,4 @@ Anyway, google is always your first choice for help when you have troubles worki
 
 Bottom line: never type any command you have no idea of in Linux environment. Even though normal user don't have sudo permission, some really bad commands may cause troubles. Therefore, to use the HPC cluster, you at least should know every line you have typed in the terminal.
 
-**Warning:** This documentation is still in progress and is not complete yet. Go back later for more useful infomations.
+**Warning:** This documentation is still in progress and is not complete yet. Go back later for more useful informations.

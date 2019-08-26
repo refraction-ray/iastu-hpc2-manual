@@ -441,6 +441,7 @@ Approach to recover the whole OS in hard disk level: [post](https://forum.restic
 ### network
 
 * iperf, the master to compuation node bandwidth is around 940Mbit/s, which is near to the limit of the Gigabit nic.
+* iperf for ipv6: `iperf -sV`, `iperf -c <remote> -B <src> -V`
 
 ### cpu
 
