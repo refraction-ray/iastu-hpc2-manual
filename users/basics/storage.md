@@ -9,7 +9,7 @@ No matter where your files stored, it is highly recommend that all of your files
 **Rule of thumb**:
 
 * Source code and small scripts -> `/home/<user>`
-* Data files as output of program -> `/DATA`
+* Data files as output of program -> `/DATA` or `/DATA.c8`
 * Data files as output of program but IO speed is critical -> `/tmp`
 
 ## /home
@@ -23,6 +23,10 @@ The default permission on `/home/<user>` is 700, therefore, others cannot view t
 /DATA dir is in the hdd of master node, which has size of **2T** in total. Every users has read and write permission in this dir.  This dir is also shared via NFS and accessible to all computation nodes. The best practice is to firstly create a subdir in /DATA with the username for later use. Large data file should be stored in this dir. Currently there is no quota limit on the usage for /DATA.
 
 Note that the default permission on `/DATA/<user>` is 755, which means that other users have permission to read your files in this directory. This feature is designed to facilitate the data share within research group, whose data can directly acquired from DATA folder. If you don't want to share your data with others, you can mkdir within `/DATA/<user>`, such as `/DATA/<user>/private` and `chmod 700` on such folder. Then all data files stored within such private folder is not available to other users.
+
+## /DATA.c8
+
+NFS dir living in HDD in c8, which is raid1, 4T*2, so it should be more reliable that /DATA. Available size **4T** in total.
 
 ## /tmp
 

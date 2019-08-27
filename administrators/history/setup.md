@@ -45,7 +45,7 @@ The backup crontab and fstab mount config have not included into ansible workflo
 
 In terms of network and nfs, ntp, apt setups, please see relevant section in [Virtual Machine](./VM.md) part.
 
-**Note**: For proxy part, note there are softwares not following http_proxy and need to set proxy in their own way. Such apps include apt, and git and [crontab](https://unix.stackexchange.com/questions/390974/how-should-i-set-http-proxy-variable-for-cron-jobs) and [docker](https://elegantinfrastructure.com/docker/ultimate-guide-to-docker-http-proxy-configuration/) (Note there are four different types of proxies you may want to configure in terms of docker!). (Maybe /etc/enviroment is a better place for http proxy variables)
+**Note**: For proxy part, note there are softwares not following http_proxy and need to set proxy in their own way. Such apps include apt, and git and [crontab](https://unix.stackexchange.com/questions/390974/how-should-i-set-http-proxy-variable-for-cron-jobs) and [docker](https://elegantinfrastructure.com/docker/ultimate-guide-to-docker-http-proxy-configuration/) (Note there are four different types of proxies you may want to configure in terms of docker!). (Maybe /etc/enviroment is a better place for http proxy variables). Also note apt-add-repository use http_proxy env instead of apt.conf, indicating that you need `sudo -E`.
 
 ### ansible
 

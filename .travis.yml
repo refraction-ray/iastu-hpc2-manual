@@ -2,6 +2,6 @@ language: ruby
 rvm: 2.4.1
 before_script: gem install awesome_bot
 script:
-  - w=localhost,192.168.48.10,https://github.com/.insteadOf
+  - w=localhost,192.168.48.10,https://github.com/.insteadOf,127.0.0.1,blah,wiki.ubuntu.org.cn,cutler.io/2011/11/lm-sensors-on-ganglia
   - awesome_bot */*.md --allow-dupe --allow-redirect -w $w
   - awesome_bot */*/*.md --allow-dupe --allow-redirect -w $w

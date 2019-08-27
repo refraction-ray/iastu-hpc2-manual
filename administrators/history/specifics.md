@@ -46,6 +46,33 @@ $PIP install --upgrade jax  # install jax
 
 Somehow currently jaxlib cannot search for cuda bu default environment variable as `CUDA_HOME`. Instead to use GPU, we should set the following environment variable by hand `export XLA_FLAGS=--xla_gpu_cuda_data_dir=/home/ubuntu/spack/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.4.0/cuda-10.0.130-ihth6nd2vvikwyej5mufpke2sj2nhboj`, the rhs is the cuda root path by spack.
 
+### pytorch
+
+Check gpu devices, see [so](https://stackoverflow.com/questions/48152674/how-to-check-if-pytorch-is-using-the-gpu).
+
+```bash
+In [1]: import torch
+
+In [2]: torch.cuda.current_device()
+Out[2]: 0
+
+In [3]: torch.cuda.device(0)
+Out[3]: <torch.cuda.device at 0x7efce0b03be0>
+
+In [4]: torch.cuda.device_count()
+Out[4]: 1
+
+In [5]: torch.cuda.get_device_name(0)
+Out[5]: 'GeForce GTX 950M'
+
+In [6]: torch.cuda.is_available()
+Out[6]: True
+```
+
+### tensorflow
+
+**WIP:** shall check whether tensorflow-gpu is workable on cpu only device.
+
 ### spark
 
 `spack install` as described in VM part. 
