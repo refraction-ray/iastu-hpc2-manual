@@ -18,6 +18,8 @@ Therefore, the best practice with minimal maintence effort here is always using 
 
 Remember the `-fopenmp` flag for `mpicc`,(use `-openmp` for the Intel compiler and `-mp` for the PGI compiler) the others are similar to mpi workflow. See [here](https://rcc.uchicago.edu/docs/running-jobs/hybrid/index.html) and [here](https://researchcomputing.princeton.edu/faq/how-to-use-openmpi-with-o) for script demos. Also see nice c code explicity using MPI and pthreads [here](https://computing.llnl.gov/tutorials/pthreads/samples/mpithreads_both.c). Remember adjusting enviroment variables `OMP_NUM_THREADS` and `KMP_AFFINITY` for a better performance, see [intel doc](https://software.intel.com/en-us/cpp-compiler-developer-guide-and-reference-thread-affinity-interface-linux-and-windows) for affinity config.
 
+Direct mpiexec is not allowed for root.
+
 ### cron like job
 
 See [here](https://rcc.uchicago.edu/docs/running-jobs/cron/index.html), and example sbatch script below.
@@ -251,6 +253,8 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 * `sbatch --mem` limit seems not work. The task can easily go over the memory limit without any problem.
 
 * `PropagateResourceLimits` or `PropagateResourceLimitsExcept` parameters are configured in slurm.conf and avoid propagation of specified limits. Configure on these two parameters unless you want to ulimit be effective on compute nodes.
+
+* Mailprog example: [script](https://github.com/SchedMD/slurm/blob/master/contribs/seff/smail)
 
 ### More reference
 

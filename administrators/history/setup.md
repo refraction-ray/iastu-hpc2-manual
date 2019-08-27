@@ -68,6 +68,8 @@ apt list --installed|grep nvidia
 nvidia-smi
 ```
 
+driver-418 seems to be vanishing in ppa, install 430 instead on c9.
+
 ### spack
 
 *into ansible workflow*
@@ -353,7 +355,7 @@ pubkey-of
 
 `sudo iptables -t nat -I POSTROUTING 1 -o tinc -s 192.168.48.0/24 ! -d 192.168.48.0/24 -j SNAT --to-source 10.26.11.1` on master node, make compute nodes available without any modification on them. (this new SNAT line is hopefully also managed by ansible playbooks). `sudo iptables -t nat -nLv` check current iptables.
 
-### jumbo frame
+### jumbo framezsx16@mails.tsinghua.edu.cn
 
 `ip link set eth0 mtu 9000`
 
@@ -374,17 +376,13 @@ The benchmarks shows little gain in enabling jumbo frames.
 
 ### mail
 
-**currently no configuration right now**. mailutils seem to use hostname as fromto, no matter what myhostname is configured by postfix, ~~it instead use `-aFrom` in commad line~~. Workable example ` echo "hello"|mail --debug-level 3 -s "subject" -aFrom user@some.localdomain receiver@mails.tsinghua.edu.cn`. Tested on r1, no configuration on the cluster.
+mailutils seem to use hostname as fromto, no matter what myhostname is configured by postfix, ~~it instead use `-aFrom` in commad line~~. Workable example ` echo "hello"|mail --debug-level 3 -s "subject" -aFrom user@some.localdomain receiver@mails.tsinghua.edu.cn`. Or `echo "hello"|mail -s "go" user@mails.tsinghua.edu.cn -r ubuntu@master.localdomain`.
 
-```bash
-$ sudo apt install mailutils
-Postfix (main.cf) was not set up.  Start with
-  cp /usr/share/postfix/main.cf.debian /etc/postfix/main.cf
-.  If you need to make changes, edit /etc/postfix/main.cf (and others) as
-needed.  To view Postfix configuration values, see postconf(1).
-After modifying main.cf, be sure to run 'service postfix reload'.
-$ sudo apt remove mailutils
-```
+Now equipped with all nodes shipped with smartmontools.
+
+Use customized smail script for slurm to overcome the wrong send address format.
+
+Use `sudo postsuper -d ALL` to clean postqueue -p, see [here](https://sharadchhetri.com/2014/02/06/how-to-delete-mail-queue-in-postfix/).
 
 ### backup 
 
@@ -435,6 +433,14 @@ ignorefile
 ```
 
 Approach to recover the whole OS in hard disk level: [post](https://forum.restic.net/t/lack-of-documentation-on-how-to-do-a-full-system-back-up/659/18)
+
+### RAID1 on c8
+
+`sudo apt install smartmontools` on c8, it depends on postfix, which I have configured to local only (not a big fan of postfix). 
+
+/dev/sdb is hardware raid 1, can be checked by ` sudo smartctl --all -i /dev/sdb -d megaraid,1`, check Health states by `sudo smartctl -H /dev/sdb -d megaraid,2`. Foreground short self test on disk: `sudo smartctl -t short -C /dev/sdb -d megaraid,1`. Basic operations of smartctl: [ref](https://xiaoyeshiyu.github.io/storage/2018/04/11/%E4%BD%BF%E7%94%A8smartctl%E6%A3%80%E6%9F%A5%E7%A3%81%E7%9B%98/).
+
+It seems that there is also smartd enabled as service.
 
 ## some benchmarks
 

@@ -32,6 +32,7 @@ The most common way to submit jobs is by `sbatch`. First you need to create some
 ```bash
 #! /bin/bash
 #SBATCH -N 1
+#SBATCH -n 56
 source /etc/spack-load
 spack load intel-parallel-studio %intel
 mpiexec -n 56 ./helloworld /DATA/<user>/task/input.txt
@@ -41,13 +42,13 @@ Let's read the sbtach script line by line.
 
 The first line is just shebang, indication the intepreter of the script. You don't need to change it for most of the time.
 
-The second line is begin with `#SBATCH`, which indicates parameters of sbatch, there are more parameters, which can be written down line by line. But `-N` is the must-have one, it indicates how manty nodes are required for this task. Please `man sbatch` for other parameters. Some more parameters on compute resource request are recommended, such as `--cpus-per-task`, `—ntasks`, `--mem-per-cpu`.
+The second and the third line is begin with `#SBATCH`, which indicates parameters of sbatch, there are more parameters, which can be written down line by line. But `-N` is the must-have one, it indicates how manty nodes are required for this task. Besides, `-n` is also necessary to be set for using mpi without error (such as slot not enough). Please `man sbatch` for other parameters. Some more parameters on compute resource request are recommended, such as `--cpus-per-task`, `—ntasks`, `--mem-per-cpu`.
 
 The following line is to activate spack, it is required when you want to load some modules. Since it is so common, so **it would be better to always keep this line in the beginning of the script:** `source /etc/spack-load`.
 
-The fourth line implies that we want to load intel module, which includes MKL, ICC, IFORT, MPI and so on.
+The fifth line implies that we want to load intel module, which includes MKL, ICC, IFORT, MPI and so on.
 
-Finally the fifth line tells slurm to run a mpi task with 56 threads.
+Finally the last line tells slurm to run a mpi task with 56 threads.
 
 Submit the task by `sbatch run.sh`.
 

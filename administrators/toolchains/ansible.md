@@ -24,6 +24,7 @@ In this section, some aspects on ansible is discussed.
 * [supervisorctl](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html)
 * set_fact: set varible per host and used later in playbooks
 * [gluster_volume](https://docs.ansible.com/ansible/latest/modules/gluster_volume_module.html): Using ansible to deploy gluster fs [blog](https://www.jeffgeerling.com/blog/simple-glusterfs-setup-ansible)
+* [cronvar](https://docs.ansible.com/ansible/latest/modules/cronvar_module.html)
 
 ## General syntax in playbooks
 
@@ -129,6 +130,7 @@ tasks:
 * `{{ D['key']|default ('undefined') }}` can be used as default value for non existing keys of dict
 * differece between command and shell module: [blog](https://blog.confirm.ch/ansible-modules-shell-vs-command/). Command is weaker, it doesn't support evaluation on env vars and no support for `|`, `&` like things in shell.
 * Hostname is not persistent due to cloud init system in ubuntu, see [solution here](https://askubuntu.com/questions/1028633/host-name-reverts-to-old-name-after-reboot-in-18-04-lts/1028750#1028750).
+* default_ipv4 item in ansible fact could be empty, dont rely on this variable to setup networks. It seems that there is value only after `dhclient <nic>`? It is actually the default route ip, see [this post](https://medium.com/opsops/ansible-default-ipv4-is-not-what-you-think-edb8ab154b10).
 
 ### More references
 

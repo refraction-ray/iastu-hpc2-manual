@@ -26,8 +26,6 @@ Nvidia RTX 2080Ti
 
 We currently have **9** R740 as our computation nodes.
 
-We are going to have 6 more.
-
 #### specs
 
 Intel XEON Gold 5120 14 cores 28 threads * 2
@@ -38,7 +36,7 @@ Intel XEON Gold 5120 14 cores 28 threads * 2
 
 #### extra specs
 
-for c8, we have two extra 4T HDD, and for c9, we have two extra RTX2080Ti GPU cards
+for c8, we have two extra 4T HDD (as hardware raid1), and for c9, we have two extra RTX2080Ti GPU cards
 
 #### misc
 

@@ -71,7 +71,7 @@ Out[6]: True
 
 ### tensorflow
 
-**WIP:** shall check whether tensorflow-gpu is workable on cpu only device.
+**WIP:** shall check whether tensorflow-gpu is workable on cpu only device. Answer: see [so](https://stackoverflow.com/questions/42284528/how-can-i-use-tensorflow-without-cuda-on-linux), it seems that tensorflow-gpu binary can only be imported with gpu dirvers installed, let alone pre loaded cuda and cudnn. On contrast, gpu enabled torch requires none of them to exist. It is not good for tf being in this status, and it is also an unaccepteable solution for me to install gpu drivers on non-gpu nodes, this workaround is so ugly!!!
 
 ### spark
 
