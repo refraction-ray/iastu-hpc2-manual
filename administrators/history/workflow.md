@@ -22,6 +22,7 @@ There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can op
 * It is highly suggested that all ansible playbooks to be executed once reboot (at least network and basic for compute node reboot).
 * config cgroup as `sudo cgconfigparser -l /etc/cgconfig.conf && sudo cgrulesengd`.
 * start tinc vpn by `sudo tincd -n debug`.
+* `sudo ethtool -K enp0s31f6 tso off gso off` on master if you like
 * iptables (nat rules) on master is not persistent, see [this issue](https://github.com/ansible/ansible/issues/25149) for further develpment of ansible to incorporate persistence of iptables.
 * ~~hostname is not persistent by hostname module of ansible!! [see issue](https://github.com/ansible/ansible/issues/54755)~~ Solved by switch option in cloud.cfg.
 * MTU is not persistent by netplan, due to default cloud init in ubuntu (no good even after add mac match to netplan...)
@@ -94,3 +95,17 @@ The insipration of standard workflow on software installation is from [this post
 * Sometimes, after restart of gmond, it cannot collect all metric, some are missed.
 
   Current Workaround: No idea why. Just try restarting gmond service, but it may still not work. In sum, gmond status is somewhat fragile and tend to miss some metric. Maybe related to this [so](https://serverfault.daytorrents.com/a/422273/25640), try configuring `send_metadata_interval` to nonzero if one use unicast for gmond.
+
+* In some new machines c[4-8], logrotate doesn't work as expected though the conf is the same as previous machines. `/var/lib/logrotate/status` gives new rotate time while the log isn't rotated at all, this should be the reason, still no idea why status file gives wrong rotate time, though.
+
+  Current workaround: `sudo logrotate -v -f /etc/logrotate.conf`. verbose and force rotate
+
+* Assymetry network performance in LAN, master to cn direction can only run in 666Mb (2/3Gbit).
+
+  The problem is now reduced to master only. (Specifically this nic: [I219](https://ark.intel.com/content/www/us/en/ark/products/82185/intel-ethernet-connection-i219-lm.html))
+
+  Possible issue: [post](https://forum.manjaro.org/t/solved-only-half-gigabit-eth-with-intel-i219-lm-v-under-kernel-4-14-to-4-19/58886/5)
+
+  Solution: `sudo ethtool -K enp0s31f6 tso off gso off` from [here](https://wiki.hetzner.de/index.php/Low_performance_with_Intel_i218/i219_NIC/en), not very sure of side effects though. (note this command is not persistent when reboot)
+
+  Related kernel [commit](https://github.com/torvalds/linux/commit/b10effb92e272051dd1ec0d7be56bf9ca85ab927)

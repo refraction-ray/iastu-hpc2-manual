@@ -355,7 +355,7 @@ pubkey-of
 
 `sudo iptables -t nat -I POSTROUTING 1 -o tinc -s 192.168.48.0/24 ! -d 192.168.48.0/24 -j SNAT --to-source 10.26.11.1` on master node, make compute nodes available without any modification on them. (this new SNAT line is hopefully also managed by ansible playbooks). `sudo iptables -t nat -nLv` check current iptables.
 
-### jumbo framezsx16@mails.tsinghua.edu.cn
+### jumbo frame
 
 `ip link set eth0 mtu 9000`
 
@@ -448,6 +448,9 @@ It seems that there is also smartd enabled as service.
 
 * iperf, the master to compuation node bandwidth is around 940Mbit/s, which is near to the limit of the Gigabit nic.
 * iperf for ipv6: `iperf -sV`, `iperf -c <remote> -B <src> -V`
+* iperf for udp: `iperf -su`, `iperf -c <remote> -u -b 1000M`, you should specify udp bandwidth on your own, otherwise, it gives a result around 1Mbs.
+* `-r` first send then receive; `-d` both at the same time
+* frequent commands related to ethtool: [post](https://www.thegeekstuff.com/2010/10/ethtool-command)
 
 ### cpu
 
