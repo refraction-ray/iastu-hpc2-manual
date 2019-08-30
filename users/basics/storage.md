@@ -32,6 +32,8 @@ NFS dir living in HDD in c8, which is raid1, 4T*2, so it should be more reliable
 
 In general, the data files for task IO are recommended to save in `/DATA/<user>` dirs. However, these dirs are living in the master node, and other computation nodes access them via nfs, with a speed of order 100MByte/s, slower than local IO. Therefore, if IO speed is critical for your task, you can use /tmp dirs in computation nodes. These /tmp dir are living in the local SSD of each computation nodes individually which has size **500GB**. Note that /tmp in different nodes are different, they are not shared via LAN. If you choose /tmp as output file path, then after finish of the task, you need to transfer the output files back to the master nodes. Or equivalently, copy files from /tmp to /DATA.
 
+**Note:** files here get deleted automatically after 15 days!
+
 ## /BACKUP
 
 This dir is in another hdd of master node, which also has **2T** size in total. This dir is for important backups and normal users only have read permissions without write permission. For normal users, they shouldn't care about this dir. And if users have some need to backup locally, they can contact the administrator for the backup, and the backup files will go here.

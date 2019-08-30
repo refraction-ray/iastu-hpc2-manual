@@ -45,6 +45,8 @@ The backup crontab and fstab mount config have not included into ansible workflo
 
 In terms of network and nfs, ntp, apt setups, please see relevant section in [Virtual Machine](./VM.md) part.
 
+Note the netplan config logic is merging instead of overwrting, so one must add dhcp4: false into config.yaml to make sure no dhcp is utilized.
+
 **Note**: For proxy part, note there are softwares not following http_proxy and need to set proxy in their own way. Such apps include apt, and git and [crontab](https://unix.stackexchange.com/questions/390974/how-should-i-set-http-proxy-variable-for-cron-jobs) and [docker](https://elegantinfrastructure.com/docker/ultimate-guide-to-docker-http-proxy-configuration/) (Note there are four different types of proxies you may want to configure in terms of docker!). (Maybe /etc/enviroment is a better place for http proxy variables). Also note apt-add-repository use http_proxy env instead of apt.conf, indicating that you need `sudo -E`.
 
 ### ansible
@@ -69,6 +71,8 @@ nvidia-smi
 ```
 
 driver-418 seems to be vanishing in ppa, install 430 instead on c9.
+
+nvlink commands from nvidia-smi: [post](https://blog.exxactcorp.com/exploring-nvidia-nvlink-nvidia-smi-commands/)
 
 ### spack
 
@@ -134,6 +138,8 @@ Apache password protected sites: [digitalocean](https://www.digitalocean.com/com
 gmetric expire invalid metric: [mailist](https://sourceforge.net/p/ganglia/mailman/message/23458211/): add a finite int for -d flag in gmetric cli. Also see [this post](https://qingwen-chen.blogspot.com/2011/03/remove-unused-metrics-from-ganglia.html)
 
 GPU monitoring part, from beginning, I was thinking about incoporate nvidia plugin for ganglia [github](https://github.com/ganglia/gmond_python_modules/tree/master/gpu/nvidia). But the solution is too invasive and no guranteen on the sucess based on search results in the internet. So finally I decided to write a small script to collect gpu data given by nvidia-smi and send them to gmond by gmetric command. Just as what I have done on cpu temperature.
+
+The default apt package for ganglia webfront has no default view of cluster, fix by [this](https://bugs.launchpad.net/ubuntu/+source/ganglia-web/+bug/1822048) and reported by [this issue](https://github.com/ganglia/ganglia-web/issues/324).
 
 ### ELK
 
@@ -357,6 +363,8 @@ pubkey-of
 
 ### jumbo frame
 
+*merged into ansible*
+
 `ip link set eth0 mtu 9000`
 
 Test: `ping -M do -s 8972 master`, do: fragmentation forbiden, there is head bytes auto added, so -s 9000 is unaccessible, see [this post](https://zhuanlan.zhihu.com/p/30020463).
@@ -364,6 +372,8 @@ Test: `ping -M do -s 8972 master`, do: fragmentation forbiden, there is head byt
 MTU setting in netplan has issues in ubuntu18.04, so basically it doesn't work by netplan apply. See one [possible solution by add mac address match in netplan](https://hoppsjots.org/?p=229)
 
 The benchmarks shows little gain in enabling jumbo frames.
+
+Using mtu 8500 instead of 9000 due to issue in Intel I219LM.
 
 ### docker
 
@@ -373,6 +383,10 @@ The benchmarks shows little gain in enabling jumbo frames.
 * change default docker image path to /DATA: [ref](https://linuxconfig.org/how-to-move-docker-s-default-var-lib-docker-to-another-directory-on-ubuntu-debian-linux)
 
 **Warning**: only trusted used can be add to docker group to directly communicate with docker deamon. It is not desinged for normal users but only resever for the administrator to debug. See [security issues of docker](https://docs.docker.com/engine/security/security/#/docker-daemon-attack-surface) and [also this post](https://fosterelli.co/privilege-escalation-via-docker.html). For normal use of containers, please try sigularity instead.
+
+### tmpreaper
+
+`sudo apt install tmpreaper`, see [usage](https://codeyarns.com/2017/11/06/how-to-install-and-use-tmpreaper/).
 
 ### mail
 
@@ -386,7 +400,7 @@ Use `sudo postsuper -d ALL` to clean postqueue -p, see [here](https://sharadchhe
 
 ### backup 
 
-* legacy approch (deprecated)
+* legacy approach (deprecated)
 
 ```bash
 crontab -l
@@ -403,6 +417,8 @@ crontab -l
 ```
 
 * new approach based on restic
+
+  *merged into ansible*
 
 `apt install restic`
 

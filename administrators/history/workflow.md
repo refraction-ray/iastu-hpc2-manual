@@ -47,6 +47,13 @@ All extras in master nodes, keep the bottom line that all tasks on compute node 
 * docker set up on master node
 * ~~restic backup setup on master node~~, merged into ansible workflow
 
+### some checks by hand in a lower frequency
+
+There might be some checks running in week or month basis. These checks should be run manually.
+
+* Smartctl related hard disk healthy check
+* restic backup integration and snapshots check
+
 ### install softwares or libraries beyond spack
 
 Installation path: large size commercial softwares: `/opt/softwarename/version/`. Open source library from source: `/home/ubuntu/softwares/softwarename`, in this dir, you may have some name+ver dir for installed versions of softwares and some dir name ended with src as source files. Hopefully, one should put a self-contained information file in each software dir. The name convention is `softwarename.info`. The content includes what each dir within for, what the notes and warnings for this software configuration and installation, most importantly, the install process details for each installed version, such as options for `./configure` and so on. One may even want to capture all stdout for configure and make on each installed version dir with name `configure.out`, `make.out` and so on. To record this stdout more easily, using `script cmake.out` and then run `cmake`, remember ctrl-d or exit to stop the recording. See [more](https://www.geeksforgeeks.org/script-command-in-linux-with-examples/) on script command in linux.
@@ -90,22 +97,28 @@ The insipration of standard workflow on software installation is from [this post
 
 * Error log of ganglia client claiming that some python module won't work `/usr/sbin/gmond[2358]: [PYTHON] Can't call the metric handler function for [tcpext_tcploss_percentage] in the python module [netstats]`. But this is not true, a reboot can make these error vanishing and every loaded module is workable for gmond.
 
-  Current Workaround: Restarting ganglia-monitor service should be enough.
+  Current Workaround: Restarting ganglia-monitor service should be enough. But it may still happen in a regular basis.
 
 * Sometimes, after restart of gmond, it cannot collect all metric, some are missed.
 
   Current Workaround: No idea why. Just try restarting gmond service, but it may still not work. In sum, gmond status is somewhat fragile and tend to miss some metric. Maybe related to this [so](https://serverfault.daytorrents.com/a/422273/25640), try configuring `send_metadata_interval` to nonzero if one use unicast for gmond.
 
-* In some new machines c[4-8], logrotate doesn't work as expected though the conf is the same as previous machines. `/var/lib/logrotate/status` gives new rotate time while the log isn't rotated at all, this should be the reason, still no idea why status file gives wrong rotate time, though.
+* In some new machines c[4-8], logrotate doesn't work as expected though the conf is the same as previous machines. `/var/lib/logrotate/status` gives new rotate time while the log isn't rotated at all, this should be the reason, still no idea why status file gives wrong rotate time, though (may be related with cron not sync time with timezone due to lack of restart service).
 
   Current workaround: `sudo logrotate -v -f /etc/logrotate.conf`. verbose and force rotate
 
-* Assymetry network performance in LAN, master to cn direction can only run in 666Mb (2/3Gbit).
+  Possible related to cron service, which need to ve restarted to have the same clock with new timezone setted on the machine.
 
-  The problem is now reduced to master only. (Specifically this nic: [I219](https://ark.intel.com/content/www/us/en/ark/products/82185/intel-ethernet-connection-i219-lm.html))
+* (*Fully solved*) Assymetry network performance in LAN, master to cn direction can only run in 666Mb (2/3Gbit).
+
+  The problem is now reduced to master only. (Specifically this nic: [I219](https://ark.intel.com/content/www/us/en/ark/products/82185/intel-ethernet-connection-i219-lm.html)) 
 
   Possible issue: [post](https://forum.manjaro.org/t/solved-only-half-gigabit-eth-with-intel-i219-lm-v-under-kernel-4-14-to-4-19/58886/5)
 
   Solution: `sudo ethtool -K enp0s31f6 tso off gso off` from [here](https://wiki.hetzner.de/index.php/Low_performance_with_Intel_i218/i219_NIC/en), not very sure of side effects though. (note this command is not persistent when reboot)
 
   Related kernel [commit](https://github.com/torvalds/linux/commit/b10effb92e272051dd1ec0d7be56bf9ca85ab927)
+
+* (*Fully solved*) Apache2 module in filebeat doesn't support convert time var for pipelines even by explicitly calling it, thus leaving a time mismatch for apache2/error.log. 
+
+  Current workaround: the support is merged into filebeat very recently later than 6.8.0 release. But you can hack it on your own, see [this issue](https://github.com/elastic/beats/issues/3898).

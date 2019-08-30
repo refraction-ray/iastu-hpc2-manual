@@ -85,6 +85,12 @@ spack load intel-parallel-studio %intel
 python calculate.py output-${SLURM_ARRAY_TASK_ID}.txt
 ```
 
+### more options for sbatch and srun
+
+* specify partition
+* specify account
+* specify qos
+
 ### interactive sessions on compute nodes
 
 1. `srun -N 1 -n 1 -w c3 --pty bash -i`，run a bash shell on c3 node with one node and one cpu core.
