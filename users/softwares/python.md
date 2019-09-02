@@ -57,3 +57,23 @@ The use of sbatch script for python is similar for usual scripts, just use `pyth
 ### Tensorflow
 
 If you want to use tensorflow-gpu in python, just add `/home/ubuntu/spack/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.4.0/python-3.6.5-63x2grpokc4ax6mgyfilhyjnm5ersc3w/lib/python3.6/site-packages` this path into `sys.path`. And this path is auto included for default python base enviroment provided by intel. It is worth noting that this tensorflow is not compatible with CPU-only machines. To try tf on cpu-only machines, you can create your own conda env, and `conda install tensorflow`.
+
+It is highly recommended that you add the following lines before you import tensorflow with gpu backend, unless you know exactly what you are attempting (without this line you will eat up all GPU memories).
+
+```python
+import os
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = "true"
+```
+
+To sum up, the prepration lines for using gpu tensorflow would be
+
+```python
+import sys
+sys.path.append("/home/ubuntu/spack/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.4.0/python-3.6.5-63x2grpokc4ax6mgyfilhyjnm5ersc3w/lib/python3.6/site-packages")
+import os
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = "true"
+import numpy as np
+import tensorflow as tf
+tf.enable_eager_execution()
+```
+

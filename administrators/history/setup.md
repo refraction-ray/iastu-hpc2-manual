@@ -224,6 +224,10 @@ The default apt package for ganglia webfront has no default view of cluster, fix
 * Actual problem: one should load pipeline for all modules in one line, otherwise, the latter one would overwrite the former one.
 * Timestamp in ES is always UTC, but kibana show them with broswer default timezone.
 
+**cluster conf**
+
+* ssl is must `sudo /usr/share/elasticsearch/bin/elasticsearch-certutil ca --pass "" --out elastic-stack-ca.p12`, `sudo /usr/share/elasticsearch/bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12 --pass "" --out elastic-certificates.p12 --ca-pass ""`, we only need the final certifactes.p12 file.
+
 #### elastalert
 
 *into ansible workflow*
@@ -388,6 +392,8 @@ Using mtu 8500 instead of 9000 due to issue in Intel I219LM.
 
 `sudo apt install tmpreaper`, see [usage](https://codeyarns.com/2017/11/06/how-to-install-and-use-tmpreaper/).
 
+Ubuntu18.04 seems to have a default cleaner: [so](https://askubuntu.com/questions/1086034/which-process-cleans-tmp-under-systemd-on-18-04lts-answered-here-no-duplicat), see `man tmpfiles.d` Age: If omitted or set to "-", no automatic clean-up is done. Seems no default auto delete?
+
 ### mail
 
 mailutils seem to use hostname as fromto, no matter what myhostname is configured by postfix, ~~it instead use `-aFrom` in commad line~~. Workable example ` echo "hello"|mail --debug-level 3 -s "subject" -aFrom user@some.localdomain receiver@mails.tsinghua.edu.cn`. Or `echo "hello"|mail -s "go" user@mails.tsinghua.edu.cn -r ubuntu@master.localdomain`.
@@ -397,6 +403,8 @@ Now equipped with all nodes shipped with smartmontools.
 Use customized smail script for slurm to overcome the wrong send address format.
 
 Use `sudo postsuper -d ALL` to clean postqueue -p, see [here](https://sharadchhetri.com/2014/02/06/how-to-delete-mail-queue-in-postfix/).
+
+Create aliases.db by `sudo newaliases` see [here](https://www.linuxquestions.org/questions/linux-server-73/how-to-create-etc-aliases-db-4175413770/).
 
 ### backup 
 

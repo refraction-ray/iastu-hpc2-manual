@@ -49,10 +49,11 @@ All extras in master nodes, keep the bottom line that all tasks on compute node 
 
 ### some checks by hand in a lower frequency
 
-There might be some checks running in week or month basis. These checks should be run manually.
+There might be some checks running in week basis. These checks should be run manually.
 
 * Smartctl related hard disk healthy check
 * restic backup integration and snapshots check
+* check `postqueue -p` on each node, to see whether some mails may be stalled.
 
 ### install softwares or libraries beyond spack
 
@@ -101,7 +102,7 @@ The insipration of standard workflow on software installation is from [this post
 
 * Sometimes, after restart of gmond, it cannot collect all metric, some are missed.
 
-  Current Workaround: No idea why. Just try restarting gmond service, but it may still not work. In sum, gmond status is somewhat fragile and tend to miss some metric. Maybe related to this [so](https://serverfault.daytorrents.com/a/422273/25640), try configuring `send_metadata_interval` to nonzero if one use unicast for gmond.
+  Current Workaround: No idea why. Just try restarting gmond service, but it may still not work. In sum, gmond status is somewhat fragile and tend to miss some metric. Maybe related to this [so](https://serverfault.daytorrents.com/a/422273/25640), try configuring `send_metadata_interval` to nonzero if one use unicast for gmond. And be patient after restart, gmond may begin collect missing metric several minutes or hours later.
 
 * In some new machines c[4-8], logrotate doesn't work as expected though the conf is the same as previous machines. `/var/lib/logrotate/status` gives new rotate time while the log isn't rotated at all, this should be the reason, still no idea why status file gives wrong rotate time, though (may be related with cron not sync time with timezone due to lack of restart service).
 

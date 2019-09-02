@@ -60,7 +60,7 @@ experiment conclusion: ganglia doesn't work well with logstash
 
 [elasticalert](https://elastalert.readthedocs.io/en/latest/elastalert.html): combine ELK stack and email alert
 
-Cluster of ES [post](https://cloud.tencent.com/developer/article/1189282), to be deployed.
+Cluster of ES [post](https://cloud.tencent.com/developer/article/1189282), to be deployed. One also need to configure ssl for es cluster if authetication is enabled. see [this doc](https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-tls.html).
 
 ## Benchmark
 

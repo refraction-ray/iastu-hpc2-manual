@@ -87,9 +87,9 @@ python calculate.py output-${SLURM_ARRAY_TASK_ID}.txt
 
 ### more options for sbatch and srun
 
-* specify partition
-* specify account
-* specify qos
+* specify partition: `-p gpu`
+* specify account: `-A <account>`
+* specify qos: `-q <qos>`
 
 ### interactive sessions on compute nodes
 
