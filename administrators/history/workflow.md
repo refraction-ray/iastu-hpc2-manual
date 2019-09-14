@@ -123,3 +123,5 @@ The insipration of standard workflow on software installation is from [this post
 * (*Fully solved*) Apache2 module in filebeat doesn't support convert time var for pipelines even by explicitly calling it, thus leaving a time mismatch for apache2/error.log. 
 
   Current workaround: the support is merged into filebeat very recently later than 6.8.0 release. But you can hack it on your own, see [this issue](https://github.com/elastic/beats/issues/3898).
+
+* docker pull might have permission issue in tmux.

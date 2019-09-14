@@ -20,9 +20,13 @@ $ conda init bash  # after this, intel python is by default when log in
 
 The python3 intepreter in this conda env is still provided by Intel.
 
+It is recommended that pip is included in the default `<package_list>` for conda env create.
+
 One can install packages in conda env by `conda install --file requirements.txt`.
 
 For packages only available to pip, please refer to [this article](https://www.anaconda.com/using-pip-in-a-conda-environment/) on possible conflict issues and solution workflows.
+
+To use conda env in sbatch, one only need call python binary as `/home/<user>/.conda/envs/<conda-env>/bin/python`, this is enough for activate the conda env.
 
 ### Advanced usage on conda
 
@@ -65,7 +69,7 @@ import os
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = "true"
 ```
 
-To sum up, the prepration lines for using gpu tensorflow would be
+To sum up, the prepration lines in jupyter for using gpu tensorflow would be
 
 ```python
 import sys
@@ -77,3 +81,15 @@ import tensorflow as tf
 tf.enable_eager_execution()
 ```
 
+In sbatch and py scirpt mode, a possible header for tensorflow cpu would be something like below
+
+```python
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # or any {'0', '1', '2'}
+os.environ['MKL_VERBOSE'] = ''
+import numpy as np
+import tensorflow as tf
+tf.enable_eager_execution()
+```
+
+Note the enviroment variables controlling log level. Somehow, sbatch python task has very verbose ouput for mkl and tensorflow by default. One should turn off them for a small slurm.out file. See [this post](https://stackoverflow.com/questions/38073432/how-to-suppress-verbose-tensorflow-logging) for turning off tf logs.

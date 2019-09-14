@@ -31,3 +31,9 @@ If you indeed have the need to access the Internet from the cluster and the corr
 ### Why I have used up my disk space?
 
 Use `quota` to check your disk quota on home, in general, it is as small as several dozen of GBs. So never put large datafile and outputs in your home folder. Instead, put these large files into /DATA dir. Please refer to [storage](/users/basics/storage.md) documentation carefully before using the cluster.
+
+### How can I check which file occupied too much of my space?
+
+To avoid storage in home being used up and delete unecessary large files, find them by
+
+`find /home/<user> -type f -size +500M`.
