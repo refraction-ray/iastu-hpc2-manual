@@ -37,3 +37,9 @@ Use `quota` to check your disk quota on home, in general, it is as small as seve
 To avoid storage in home being used up and delete unecessary large files, find them by
 
 `find /home/<user> -type f -size +500M`.
+
+### Why my task is way more slower than expected
+
+The most possible reason is memory consumptions. Only 128G memory in compute nodes and more memory need would go to swap, which is unaccepteable for most of the softwares and tasks. So be sure ssh to the nodes you are running jobs and check the memory usage by `free`.
+
+If your job requires lots of memory, it would be better to allocate the full node for computation no matter how many cpu cores are actually utilized, in case the memory is used up by others. `#SBATCH --exclusive`

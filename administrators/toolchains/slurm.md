@@ -145,7 +145,7 @@ User system hierachy: cluster-account-user, the triple system is called associat
 ```bash
 sacctmgr show tres
 sacctmgr add qos limited
-sacctmgr modify qos limited set MaxTRESPerUser=node=1
+sacctmgr modify qos limited set MaxTRESPerUser=node=1 priority=1000
 sacctmgr modify user test set qos=limited
 sacctmgr show assoc format=cluster,account,user,qos
 ```
@@ -256,6 +256,8 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 
 * Mailprog example: [script](https://github.com/SchedMD/slurm/blob/master/contribs/seff/smail)
 
+* resource resevation by scontrol: [doc](https://wiki.fysik.dtu.dk/niflheim/SLURM#resource-reservation)
+
 ### More reference
 
 * Network topology in slurm: [doc](https://slurm.schedmd.com/topology.html)
@@ -270,6 +272,7 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 * Parameters on multicore multi threads controlling: [doc](https://slurm.schedmd.com/mc_support.html)
 * Job status and info to elasticsearch: [doc](https://slurm.schedmd.com/elasticsearch.html)
 * Slurm configuration explanation: way better than official doc: [doc](https://wiki.fysik.dtu.dk/niflheim/Slurm_configuration)
+* sbatch script examples: [more to explore](https://www.nersc.gov/users/computational-systems/retired-systems/edison-retired-on-5132019/running-jobs/example-batch-scripts/)
 
 ## Elastic scaling on cloud
 

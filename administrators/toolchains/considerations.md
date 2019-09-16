@@ -16,6 +16,7 @@ List of typical HPCs:
 *  [Sheffield](http://docs.hpc.shef.ac.uk/)
 *  [Odyssey-Harvard](https://www.rc.fas.harvard.edu/resources/odyssey-architecture/)
 *  [Niflheim](https://wiki.fysik.dtu.dk/niflheim/niflheim)
+*  [nersc](https://www.nersc.gov/)
 
 ## OpenHPC
 

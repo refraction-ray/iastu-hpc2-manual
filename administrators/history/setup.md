@@ -49,6 +49,20 @@ Note the netplan config logic is merging instead of overwrting, so one must add 
 
 **Note**: For proxy part, note there are softwares not following http_proxy and need to set proxy in their own way. Such apps include apt, and git and [crontab](https://unix.stackexchange.com/questions/390974/how-should-i-set-http-proxy-variable-for-cron-jobs) and [docker](https://elegantinfrastructure.com/docker/ultimate-guide-to-docker-http-proxy-configuration/) (Note there are four different types of proxies you may want to configure in terms of docker!). (Maybe /etc/enviroment is a better place for http proxy variables). Also note apt-add-repository use http_proxy env instead of apt.conf, indicating that you need `sudo -E`.
 
+### swap partition
+
+The swap partition on c4 to c9 is a bit annoying for its large size which may slow down the program without notice with high IO. Turn off them by `sudo swapoff /dev/sda3`. Also note delete the swap line in /etc/fstab. However, the swap partition is before the root partition, so no idea how to utilize the disk space easily. Form personal perspective, I always recommend using swap.img file as swap, which is much more flexible than swap partition( see [this](https://askubuntu.com/questions/70989/need-to-move-my-swap-partition-to-let-my-root-partition-grow-how) for swap file config).
+
+Temporary way to utilize the empty swap partition: mount them locally under /tmp/extra dir in c4 to c9.
+
+`ansible -i hosts cn[3:8] -m filesystem -a "dev=/dev/sda3 fstype=ext4 force=yes" --become -K`
+
+`ansible -i hosts cn[3:8]  -m file -a "path=/tmp/extra state=directory mode=01777" --become -K`
+
+`ansible -i hosts  cn[3:8] -m mount -a "path=/tmp/extra src=/dev/sda3 fstype=ext4 state=mounted" --become -K`
+
+Note how cn[3:8] corresponding to c4 to c9.
+
 ### ansible
 
 `sudo apt install ansible` on master node.

@@ -2,7 +2,7 @@ We strongly suggest all users use intelpython for better speed and builtin conda
 
 ## Pip
 
-We don't recommand to use pip in the bare enviroment. instead, you should use conda to manage your python workflow as below.
+We don't recommand to use pip in the bare enviroment. instead, you should use conda to manage your python workflow as below. When using pip, always check by `which pip`, make sure the pip is provided by some conda env (`/home/<user>/.conda/envs/<env-name>/bin/pip`) instead of local pip `/opt/intel/intelpython3/bin/pip` or `/usr/bin/pip`.
 
 ## Conda
 
@@ -60,7 +60,13 @@ The use of sbatch script for python is similar for usual scripts, just use `pyth
 
 ### Tensorflow
 
-If you want to use tensorflow-gpu in python, just add `/home/ubuntu/spack/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.4.0/python-3.6.5-63x2grpokc4ax6mgyfilhyjnm5ersc3w/lib/python3.6/site-packages` this path into `sys.path`. And this path is auto included for default python base enviroment provided by intel. It is worth noting that this tensorflow is not compatible with CPU-only machines. To try tf on cpu-only machines, you can create your own conda env, and `conda install tensorflow`.
+* preinstalled gpu tensorflow
+
+If you want to use tensorflow-gpu in python, just add `/home/ubuntu/spack/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.4.0/python-3.6.5-63x2grpokc4ax6mgyfilhyjnm5ersc3w/lib/python3.6/site-packages` this path into `sys.path`. And this path is auto included for default python base enviroment provided by intel. Also remember spack loading cuda and cudnn for gpu tf to work.
+
+It is worth noting that this tensorflow is not compatible with CPU-only machines. To try tf on cpu-only machines, you can create your own conda env, and `conda install tensorflow`.
+
+* GPU memory allocate
 
 It is highly recommended that you add the following lines before you import tensorflow with gpu backend, unless you know exactly what you are attempting (without this line you will eat up all GPU memories).
 
@@ -81,6 +87,8 @@ import tensorflow as tf
 tf.enable_eager_execution()
 ```
 
+* verbose log output
+
 In sbatch and py scirpt mode, a possible header for tensorflow cpu would be something like below
 
 ```python
@@ -92,4 +100,10 @@ import tensorflow as tf
 tf.enable_eager_execution()
 ```
 
-Note the enviroment variables controlling log level. Somehow, sbatch python task has very verbose ouput for mkl and tensorflow by default. One should turn off them for a small slurm.out file. See [this post](https://stackoverflow.com/questions/38073432/how-to-suppress-verbose-tensorflow-logging) for turning off tf logs.
+Note the enviroment variables controlling log level. Somehow, sbatch python task has very verbose ouput for mkl and tensorflow by default (these stuff will eat all of your disk space in output file!). One should turn off them for a small slurm.out file. See [this post](https://stackoverflow.com/questions/38073432/how-to-suppress-verbose-tensorflow-logging) for turning off tf logs.
+
+* ulimit -u limit
+
+Also note that tensorflow may need very large number of processes (actually threads, linux made no big difference on these two things, see [so](https://stackoverflow.com/questions/344203/maximum-number-of-threads-per-process-in-linux) for more info). So if one want to utilize tensorflow with multiprocessing for some naive parallel programming, it might be necessary to turn up the ulimit on max user process, which has soft limit ~~2048~~ by default (default value already changed to 8192) to avoid fork bomb. Namely run `ulimit -u 16384` on terminal (or in sbatch script for a slurm job), so that one can run more tf instances at the same time. `cat /proc/<pid>/limits` see whether the new ulimit is valid for pid program.
+
+However even by doing this, you cannot re login to the shell, since the default ulimit isn't changed. You may need to add corresponding line into user's bash_profile, otherwise you may NEVER to login the cluster unless the heavy tf task is finished.
