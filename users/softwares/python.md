@@ -52,6 +52,28 @@ $ ssh -N -L <local_port>:<remote_hostname>:<remote_port> <ssh_user>@<ssh_server_
 
 Such an ssh tunnel can make us visit both jupyter server in master node and in compute nodes.
 
+*A more specific step by step example for using jupyter on compute nodes:*
+
+Say you want to run your jupyter notebook on c9 and access it by your laptop.
+
+* SSH log into hpc2 master, and `salloc -p gpu -w c9` to allocate c9.
+
+* `ssh c9` from master.
+
+* In c9, `tmux` and prepare the conda env as well as `jupyter notebook --ip="0.0.0.0"`, say the allocated port is 8888.
+
+* `ctrl-B d` to detach tmux and `ctrl-d` to log out c9 (remember cancel the allocate job after finishing using jupyter).
+
+* In your own laptop terminal, use `ssh -N -L 9000:c9:8888 ias`, then you can visit jupyter in your own laptop broswer as `http://127.0.0.1:9000`. Note ias here is register in your `~/.ssh/config` on your laptop, something as 
+
+  ```bash
+  # this file is in ~/.ssh/config on your laptop
+  Host ias
+      Hostname <hpc2 ip addr>
+  	User <user name @ hpc2>
+  	Port <hpc2 server port>
+  ```
+
 ## sbatch
 
 The use of sbatch script for python is similar for usual scripts, just use `python some.py` is enough (and remember `source /etc/spack-load` and prepare the environment).
@@ -62,11 +84,15 @@ The use of sbatch script for python is similar for usual scripts, just use `pyth
 
 * preinstalled gpu tensorflow
 
+*tf-gpu cannot be imported on cpu only machines though sharing the same python namespace*
+
 If you want to use tensorflow-gpu in python, just add `/home/ubuntu/spack/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.4.0/python-3.6.5-63x2grpokc4ax6mgyfilhyjnm5ersc3w/lib/python3.6/site-packages` this path into `sys.path`. And this path is auto included for default python base enviroment provided by intel. Also remember spack loading cuda and cudnn for gpu tf to work.
 
 It is worth noting that this tensorflow is not compatible with CPU-only machines. To try tf on cpu-only machines, you can create your own conda env, and `conda install tensorflow`.
 
 * GPU memory allocate
+
+*tf may eat up all your GPU memory*
 
 It is highly recommended that you add the following lines before you import tensorflow with gpu backend, unless you know exactly what you are attempting (without this line you will eat up all GPU memories).
 
@@ -89,6 +115,8 @@ tf.enable_eager_execution()
 
 * verbose log output
 
+*tf may eat up all your disks*
+
 In sbatch and py scirpt mode, a possible header for tensorflow cpu would be something like below
 
 ```python
@@ -104,6 +132,14 @@ Note the enviroment variables controlling log level. Somehow, sbatch python task
 
 * ulimit -u limit
 
+*tf may eat up all your processes*
+
 Also note that tensorflow may need very large number of processes (actually threads, linux made no big difference on these two things, see [so](https://stackoverflow.com/questions/344203/maximum-number-of-threads-per-process-in-linux) for more info). So if one want to utilize tensorflow with multiprocessing for some naive parallel programming, it might be necessary to turn up the ulimit on max user process, which has soft limit ~~2048~~ by default (default value already changed to 8192) to avoid fork bomb. Namely run `ulimit -u 16384` on terminal (or in sbatch script for a slurm job), so that one can run more tf instances at the same time. `cat /proc/<pid>/limits` see whether the new ulimit is valid for pid program.
 
 However even by doing this, you cannot re login to the shell, since the default ulimit isn't changed. You may need to add corresponding line into user's bash_profile, otherwise you may NEVER to login the cluster unless the heavy tf task is finished.
+
+* memory leak in tf2.0
+
+*tf may eat up all your memories*
+
+Somehow, there is memory leak issue in tf2.0 nightly release. The same code has no problem when running on tf1.13. So be careful about tf2.0, not recommend to use it for now. If you insist attempt tf2.0, be super careful about the possible memory usage!
