@@ -399,6 +399,8 @@ Using mtu 8500 instead of 9000 due to issue in Intel I219LM.
 * Add relevant user to docker group: [ref](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)
 * proxy settings on docker server: [ref](https://elegantinfrastructure.com/docker/ultimate-guide-to-docker-http-proxy-configuration/)
 * change default docker image path to /DATA: [ref](https://linuxconfig.org/how-to-move-docker-s-default-var-lib-docker-to-another-directory-on-ubuntu-debian-linux)
+* install nvidia docker runtime: [ref](https://github.com/NVIDIA/nvidia-docker). Note test case [in tf doc](https://www.tensorflow.org/install/docker) doesn't work, `--runtime` flag should be changed to `--gpus all`.
+* docker hub image speedup [post](https://juejin.im/post/5cd2cf01f265da0374189441)
 
 **Warning**: only trusted used can be add to docker group to directly communicate with docker deamon. It is not desinged for normal users but only resever for the administrator to debug. See [security issues of docker](https://docs.docker.com/engine/security/security/#/docker-daemon-attack-surface) and [also this post](https://fosterelli.co/privilege-escalation-via-docker.html). For normal use of containers, please try sigularity instead.
 

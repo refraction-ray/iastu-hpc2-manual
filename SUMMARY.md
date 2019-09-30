@@ -16,6 +16,7 @@
     * [fortran, C, C++](users/softwares/fc.md)
     * [java](users/softwares/java.md)
     * [commond line tools](users/softwares/cli-tools.md)
+    * [tensorflow](users/softwares/tensorflow.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)
 
