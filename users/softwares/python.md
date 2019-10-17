@@ -56,7 +56,7 @@ Such an ssh tunnel can make us visit both jupyter server in master node and in c
 
 Say you want to run your jupyter notebook on c9 and access it by your laptop.
 
-* SSH log into hpc2 master, and `salloc -p gpu -w c9` to allocate c9.
+* SSH log into hpc2 master, and `salloc -p gpu -w c9` to allocate c9. Note: salloc can be relinquished under exit or ctrl-D or logout of the session, so it is unstable for long run work. And it is interesting to see how the job can continue to run in compute node tmux session while the job is officially ended in slurm...
 
 * `ssh c9` from master.
 
@@ -73,6 +73,8 @@ Say you want to run your jupyter notebook on c9 and access it by your laptop.
   	User <user name @ hpc2>
   	Port <hpc2 server port>
   ```
+
+See [this post](https://alexanderlabwhoi.github.io/post/2019-03-08_jpn-slurm/) for a simpilar workflow to use jupyter on HPC.
 
 ## sbatch
 

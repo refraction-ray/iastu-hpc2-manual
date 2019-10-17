@@ -43,3 +43,9 @@ To avoid storage in home being used up and delete unecessary large files, find t
 The most possible reason is memory consumptions. Only 128G memory in compute nodes and more memory need would go to swap, which is unaccepteable for most of the softwares and tasks. So be sure ssh to the nodes you are running jobs and check the memory usage by `free`.
 
 If your job requires lots of memory, it would be better to allocate the full node for computation no matter how many cpu cores are actually utilized, in case the memory is used up by others. `#SBATCH --exclusive`
+
+### Why I cannot ssh to compute nodes
+
+By default the compute nodes can not be sshed unless you have some job on it. You can first `salloc -w c[n]` and then ssh into it.
+
+If you are asked about password, it is highly possible that you have messed up things in `~/.ssh`. Try generate a new pair of ssh keys by `ssh-keygen` and copy the id_rsa_pub content to add it in authorized_keys file in the same folder.
