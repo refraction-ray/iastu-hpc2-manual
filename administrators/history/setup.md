@@ -508,3 +508,7 @@ Available frequency is 2400, though the param is 2666, the speed is limited by C
   * master ssd:  1.3 GB/s
   * master /DATA, sdb1: 1.3GB/s (? cannot understand), similar results for sdc in master, it is weird though. (maybe due to disk controller or cache therein?)
   * dn1: sdb2 557MB/s, similar result for sdb, sda (under lvm): 471MB/s
+
+### electrical consumption
+
+For c[1-8], the peak power is about 260W and 1.5A. For c9 with two 2080Ti, it is about 700W and 3A.

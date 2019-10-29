@@ -15,12 +15,18 @@ The general term: BMC (Baseboard Management Controller). See [this post](https:/
 
 iDRAC might be configure by LCD if the server has. [Basic on iDRAC config](https://www.dell.com/support/article/us/en/04/sln129356/start-up-page-for-dell-poweredge-server-of-12th-and-13th-generation-r620-r630?lang=en), [default username and password for iDRAC](https://www.dell.com/support/article/us/en/04/sln306783/dell-poweredge-what-is-the-default-username-and-password-for-idrac?lang=en)
 
-It has its own ip assigned (though not a fan of this feature)
+It has its own ip assigned (though not a fan of this feature), (actually dhcp supported)
 
 Share port with OS: [post](https://www.dell.com/community/PowerEdge-Hardware-General/iDRAC-8-NIC-Port-Sharing/td-p/5078061)
+
+Just use via web, idrac port support dhcp.
+
+Reset idrac password: [post](https://www.dell.com/community/Systems-Management-General/Reset-Lost-DRAC-Password-without-resetting-IP-Configs/m-p/5122979#M23584)
 
 ### CLI tool - racadm
 
  [Basic command of racadm](https://blog.51cto.com/wuyanc/1864022)
 
 ### Life Cycle Controler
+
+Seems an integrated part of idrac.

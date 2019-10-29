@@ -8,6 +8,15 @@ If you want to use tensorflow-gpu in python, just add `/home/ubuntu/spack/opt/sp
 
 It is worth noting that this tensorflow is not compatible with CPU-only machines. To try tf on cpu-only machines, you can create your own conda env, and `conda install tensorflow`.
 
+* pick GPU device
+
+```python
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
+```
+
+[ref](https://stackoverflow.com/questions/37893755/tensorflow-set-cuda-visible-devices-within-jupyter)
+
 ## TensorFlow issues
 
 * GPU memory allocate
@@ -69,3 +78,5 @@ Somehow, there is memory leak issue in tf2.0 nightly release. The same code has 
 Preinstalled GPU version tf, tensorboard bin path is `/home/ubuntu/spack/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.4.0/python-3.6.5-63x2grpokc4ax6mgyfilhyjnm5ersc3w/bin/tensorboard`.
 
 To open a server remotely to view tensorboard, try `tensorboard --host 0.0.0.0 --logdir ./`. Then you can visit it by `http://<cluster_ip>:<tb_port>` from your laptop's broswer.
+
+In the code side, if what you want is just the static graph, then one line `train_writer = tf.summary.FileWriter( './logs/train ', sess.graph)` is enough.

@@ -27,6 +27,7 @@ There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can op
 * ~~hostname is not persistent by hostname module of ansible!! [see issue](https://github.com/ansible/ansible/issues/54755)~~ Solved by switch option in cloud.cfg.
 * MTU is not persistent by netplan, due to default cloud init in ubuntu (no good even after add mac match to netplan...)
 * may need to set `scontrol update nodename=cx state=IDLE` by hand to make them online again in slurm
+* for cn nodes, run `ansible-playbook -l cn[x-1] -Kvv site.yml` (non-persistent ones: start ntp, start filebeat, stop snap, enbale jumbo frame)
 
 ### summary on works beyond ansible workflow
 
