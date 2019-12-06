@@ -32,6 +32,8 @@ To use conda env in sbatch, one only need call python binary as `/home/<user>/.c
 
 * Conda channels explained: [so](https://stackoverflow.com/questions/42309333/explanation-of-different-conda-channels). Better use default channel, where intel builtin packages are installed by default.
 * Fix package to certain version in conda enviroment: [so](https://stackoverflow.com/questions/48726621/is-it-possible-to-lock-versions-of-packages-in-anaconda). Add a requirement style like file as `~/.conda/envs/test/conda-meta/pinned`.
+* remove unnessary envs: `conda remove --name myenv --all`
+* Using tuna mirror to speed up conda install: see [help](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/). `conda install blah -c https://tuna-channel-url` The anaconda main repo url is `https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main` 
 
 ## Jupyter notebooks
 

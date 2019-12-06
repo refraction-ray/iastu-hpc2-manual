@@ -55,6 +55,7 @@ There might be some checks running in week basis. These checks should be run man
 * Smartctl related hard disk healthy check
 * restic backup integration and snapshots check
 * check `postqueue -p` on each node, to see whether some mails may be stalled.
+* check the usage of localdisk: `ansible all -m shell -a "df -HT|grep /dev/sda"`
 
 ### install softwares or libraries beyond spack
 
@@ -109,7 +110,7 @@ The insipration of standard workflow on software installation is from [this post
 
   Current workaround: `sudo logrotate -v -f /etc/logrotate.conf`. verbose and force rotate
 
-  Possible related to cron service, which need to ve restarted to have the same clock with new timezone setted on the machine.
+  Possible related to cron service, which need to be restarted to have the same clock with new timezone setted on the machine.
 
 * (*Fully solved*) Assymetry network performance in LAN, master to cn direction can only run in 666Mb (2/3Gbit).
 
@@ -126,3 +127,5 @@ The insipration of standard workflow on software installation is from [this post
   Current workaround: the support is merged into filebeat very recently later than 6.8.0 release. But you can hack it on your own, see [this issue](https://github.com/elastic/beats/issues/3898).
 
 * docker pull might have permission issue in tmux.
+
+* C9 automatically enter drian state due to the reason "batch job complete failure".

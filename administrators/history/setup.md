@@ -406,7 +406,7 @@ Using mtu 8500 instead of 9000 due to issue in Intel I219LM.
 
 ### tmpreaper
 
-`sudo apt install tmpreaper`, see [usage](https://codeyarns.com/2017/11/06/how-to-install-and-use-tmpreaper/).
+`sudo apt install tmpreaper`, see [usage](https://codeyarns.com/2017/11/06/how-to-install-and-use-tmpreaper/). Autoconfigured as crontab task.
 
 Ubuntu18.04 seems to have a default cleaner: [so](https://askubuntu.com/questions/1086034/which-process-cleans-tmp-under-systemd-on-18-04lts-answered-here-no-duplicat), see `man tmpfiles.d` Age: If omitted or set to "-", no automatic clean-up is done. Seems no default auto delete?
 
