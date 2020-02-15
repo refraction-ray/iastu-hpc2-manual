@@ -190,7 +190,7 @@ Issue: seems always fail to ssh even if there is some task on the corresponding 
 
 `sacct -a`, see all users' jobs, past and current
 
-bring node from down: back to service, restart slurmctld or slurmd wont work, see [this post](https://bitsanddragons.wordpress.com/2016/08/25/slurm-node-state-control/). `scontrol update nodename=c2 state=IDLE`.
+bring node from down: back to service, restart slurmctld or slurmd wont work, see [this post](https://bitsanddragons.wordpress.com/2016/08/25/slurm-node-state-control/). `scontrol update nodename=c2 state=IDLE`. `scontrol update nodename=node10 state=resume` use resume if there is job running on the node!! [so](https://stackoverflow.com/questions/29535118/how-to-undrain-slurm-nodes-in-drain-state)
 
 `scontrol ping` check the status of master and backup node for slurmctld
 

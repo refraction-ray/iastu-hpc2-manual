@@ -19,7 +19,7 @@ There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can op
 
 ### after reboot
 
-* It is highly suggested that all ansible playbooks to be executed once reboot (at least network and basic for compute node reboot).
+* It is highly suggested that all ansible playbooks to be executed once reboot (at least network and basic and elk for compute node reboot).
 * config cgroup as `sudo cgconfigparser -l /etc/cgconfig.conf && sudo cgrulesengd`.
 * start tinc vpn by `sudo tincd -n debug`.
 * `sudo ethtool -K enp0s31f6 tso off gso off` on master if you like
@@ -54,7 +54,7 @@ There might be some checks running in week basis. These checks should be run man
 
 * Smartctl related hard disk healthy check
 * restic backup integration and snapshots check
-* check `postqueue -p` on each node, to see whether some mails may be stalled.
+* check `postqueue -p` on each node, to see whether some mails may be stalled. (`sudo postsuper -d ALL` to clear all stalled mails in the queue)
 * check the usage of localdisk: `ansible all -m shell -a "df -HT|grep /dev/sda"`
 
 ### install softwares or libraries beyond spack
@@ -104,7 +104,7 @@ The insipration of standard workflow on software installation is from [this post
 
 * Sometimes, after restart of gmond, it cannot collect all metric, some are missed.
 
-  Current Workaround: No idea why. Just try restarting gmond service, but it may still not work. In sum, gmond status is somewhat fragile and tend to miss some metric. Maybe related to this [so](https://serverfault.daytorrents.com/a/422273/25640), try configuring `send_metadata_interval` to nonzero if one use unicast for gmond. And be patient after restart, gmond may begin collect missing metric several minutes or hours later.
+  Current Workaround: No idea why. Just try restarting gmond service, but it may still not work. In sum, gmond status is somewhat fragile and tend to miss some metric. Maybe related to this [so](https://serverfault.daytorrents.com/a/422273/25640), try configuring `send_metadata_interval` to nonzero if one use unicast for gmond. And be patient after restart, gmond may begin to collect missing metric several minutes or hours later.
 
 * In some new machines c[4-8], logrotate doesn't work as expected though the conf is the same as previous machines. `/var/lib/logrotate/status` gives new rotate time while the log isn't rotated at all, this should be the reason, still no idea why status file gives wrong rotate time, though (may be related with cron not sync time with timezone due to lack of restart service).
 
@@ -126,6 +126,14 @@ The insipration of standard workflow on software installation is from [this post
 
   Current workaround: the support is merged into filebeat very recently later than 6.8.0 release. But you can hack it on your own, see [this issue](https://github.com/elastic/beats/issues/3898).
 
-* docker pull might have permission issue in tmux.
+* docker pull might have permission issue in tmux shell.
 
-* C9 automatically enter drian state due to the reason "batch job complete failure".
+* C9 automatically enter drian state due to the reason "batch job complete failure". In syslog, `slurmstepd: error: Domain socket directory /tmp/slurmd: No such file or directory`. `mkdir /tmp/slurmd` in c9 seems to mitigate the problem. There will be a new warning: `slurmstepd error: Unable to get current working directory: No such file or directory` but slurm works ok.
+
+* Kibana and possibly its backend ES server become extremely slow to response in recent months. ES node may fail due to no obvious reason.
+
+* Sometimes, ansible could render template host[0] as m instead of master, but it is not something wrong in template writing, since it happens nondeterminsticly! (pay attention to this, a wrong rendering may lead to crash of ES cluster)
+
+* `mail` fails to send mail to tsinghua email from local. It is highly possible that tsinghua mta starts restricting this ip, since other ips can send mail successfully via the same command. And also elastaleart send from tsinghua mail also fails with the error `ERROR:root:Error while running alert email: Error connecting to SMTP host: SMTP AUTH extension not supported by server.`. It seems that tsinghua mail service block the cluster ip and deny service.
+
+  Current workaround: Using relay machine to port forward, linking tsinghua mail 25 to relay 26 (25 is listened by relay local mail service), and set up smtp host as the relay machine in the cluster master with port 26. This works and indeed shows that master ip is on the blacklist of tsinghua mail service. (And relay seems to be blocked now...)

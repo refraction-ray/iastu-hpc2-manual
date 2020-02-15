@@ -86,3 +86,7 @@ TODO: add `SPARK_HOME` to spark module file.
 *only test on user conda env*
 
  `conda install dask`. Fix tornado version in a pinned file at conda-meta dir for conda virtual enviroment. Otherwise, dask would upgrade tornado which break down jupyter notebook! See [this issue](https://github.com/jupyter/notebook/issues/3595) for jupyter notebook breakdown.
+
+### bazel
+
+~~Follow [this](https://docs.bazel.build/versions/master/install-ubuntu.html) to add bazel repo into apt.~~ version too high for building tensorflow, the version window available to build tf i s RIDICULOUS narrow.

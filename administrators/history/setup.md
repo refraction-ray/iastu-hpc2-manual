@@ -226,6 +226,11 @@ The default apt package for ganglia webfront has no default view of cluster, fix
 
 * To query es with user authetication, just add `-u esuser:espass` option in curl commands.
 
+**Basic debug:**
+
+* `unset http_proxy`, `curl -v --user <user>:<pass> -XGET 'http://master:9200/_cluster/health?pretty'`
+* for ES cluster, failure of some es node may lead to http authetication error 401. It may has nothing to do with user passwrod and authentication things.
+
 **Misc note:**
 
 * For debug test on es, curl will go proxy!!
