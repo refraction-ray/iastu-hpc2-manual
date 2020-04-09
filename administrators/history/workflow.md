@@ -29,6 +29,12 @@ There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can op
 * may need to set `scontrol update nodename=cx state=IDLE` by hand to make them online again in slurm
 * for cn nodes, run `ansible-playbook -l cn[x-1] -Kvv site.yml` (non-persistent ones: start ntp, start filebeat, stop snap, enbale jumbo frame)
 
+### renew intel licence
+
+Actually there is nothing as renew, just get a new serial number  is enough.<https://registrationcenter.intel.com/en/products>
+
+After apply for a new serial number, you can obtain the licence file following the instruction here: <https://software.intel.com/en-us/articles/resend-license-file>. Just put this licence file in ``/opt/intel/licenses/``. the relevant link: <https://registrationcenter.intel.com/en/products/license>. <https://registrationcenter.intel.com/en/products/>
+
 ### summary on works beyond ansible workflow
 
 All extras in master nodes, keep the bottom line that all tasks on compute node should be merged into ansible workflow.
@@ -128,11 +134,13 @@ The insipration of standard workflow on software installation is from [this post
 
 * docker pull might have permission issue in tmux shell.
 
-* C9 automatically enter drian state due to the reason "batch job complete failure". In syslog, `slurmstepd: error: Domain socket directory /tmp/slurmd: No such file or directory`. `mkdir /tmp/slurmd` in c9 seems to mitigate the problem. There will be a new warning: `slurmstepd error: Unable to get current working directory: No such file or directory` but slurm works ok.
+* (*Fully solved*) C9 automatically enter drian state due to the reason "batch job complete failure". In syslog, `slurmstepd: error: Domain socket directory /tmp/slurmd: No such file or directory`. `mkdir /tmp/slurmd` in c9 seems to mitigate the problem. There will be a new warning: `slurmstepd error: Unable to get current working directory: No such file or directory` but slurm works ok. (Update: c6 also seems going through this issue)
+
+  Workaround: the reason for this issue is missing /tmp/slurmd, which is deleted by tmpreaper if not used for a long time and this will lead failure of slumrd in these nodes. So just add ``TMPREAPER_PROTECT_EXTRA='/tmp/slurm*'`` in ``/etc/tmpreaper.conf``.
 
 * Kibana and possibly its backend ES server become extremely slow to response in recent months. ES node may fail due to no obvious reason.
 
-* Sometimes, ansible could render template host[0] as m instead of master, but it is not something wrong in template writing, since it happens nondeterminsticly! (pay attention to this, a wrong rendering may lead to crash of ES cluster)
+* Sometimes, ansible could render template host[0] as m instead of master, but it is not something wrong in template writing, since it happens nondeterminsticly! (pay attention to this, **a wrong rendering may lead to crash of ES cluster**)
 
 * `mail` fails to send mail to tsinghua email from local. It is highly possible that tsinghua mta starts restricting this ip, since other ips can send mail successfully via the same command. And also elastaleart send from tsinghua mail also fails with the error `ERROR:root:Error while running alert email: Error connecting to SMTP host: SMTP AUTH extension not supported by server.`. It seems that tsinghua mail service block the cluster ip and deny service.
 

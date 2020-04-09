@@ -194,6 +194,11 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 
 `scontrol ping` check the status of master and backup node for slurmctld
 
+### Usage preparation for subway
+
+*  Use jobname as idetifier, in sbtach use: `#SBATCH --job-name uuid`. Job can be canceled by `scancel -n uuid`. check history job `sacct --name=ab345-98iy6-iu7-10299 --format=User,JobID,Jobname%30,partition,state,time,start,end,elapsed,MaxRss,MaxVMSize,nnodes,ncpus,nodelist`.
+* However, by default, `scontrol` can only access that information for about five minutes after the job finishes, after which it is purged from memory. Namely, scontrol can be only used for view on info of current running jobs.
+
 ### misc
 
 * No conf to randomize node assignment: [post](https://serverfault.com/questions/881099/randomize-slurm-node-allocation), somewhat hard to believe
@@ -207,6 +212,8 @@ bring node from down: back to service, restart slurmctld or slurmd wont work, se
 * `sattach jobid` directly see stdout and stderr of the running job
 
 * `sshare`
+
+* more on sacct usage to check history job status: [post](https://ubccr.freshdesk.com/support/solutions/articles/5000686909-how-to-retrieve-job-history-and-accounting)
 
 * `strigger`:  event trigger. eg. `strigger --set --node --down --program=/usr/sbin/slurm_admin_notify`
 
