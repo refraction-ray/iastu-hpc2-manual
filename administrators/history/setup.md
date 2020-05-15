@@ -242,6 +242,7 @@ The default apt package for ganglia webfront has no default view of cluster, fix
 * pipline doesn't exsit error when modules is enabled for filebeat: [post](https://discuss.elastic.co/t/fitebeat-6-3-1-system-module-issue/141587/2). Run `curl -XDELETE "http://localhost:9200/_ingest/pipeline/filebeat-*"`, to resolve conflict with possible old pipelines?
 * Actual problem: one should load pipeline for all modules in one line, otherwise, the latter one would overwrite the former one.
 * Timestamp in ES is always UTC, but kibana show them with broswer default timezone.
+* metric monitoring and optimization: [blog](https://blog.laisky.com/p/elasticsearch-monitor/). Pay attention to heap size.
 
 **cluster conf**
 

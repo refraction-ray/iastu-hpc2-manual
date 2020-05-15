@@ -17,6 +17,7 @@
     * [java](users/softwares/java.md)
     * [command line tools](users/softwares/cli-tools.md)
     * [tensorflow](users/softwares/tensorflow.md)
+    * [jax](users/softwares/jax.md)
   * [FAQ](users/misc/FAQ.md)
 * [Administrator's Manual](administrators/README.md)
 

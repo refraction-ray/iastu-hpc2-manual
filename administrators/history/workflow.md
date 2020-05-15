@@ -138,7 +138,7 @@ The insipration of standard workflow on software installation is from [this post
 
   Workaround: the reason for this issue is missing /tmp/slurmd, which is deleted by tmpreaper if not used for a long time and this will lead failure of slumrd in these nodes. So just add ``TMPREAPER_PROTECT_EXTRA='/tmp/slurm*'`` in ``/etc/tmpreaper.conf``.
 
-* Kibana and possibly its backend ES server become extremely slow to response in recent months. ES node may fail due to no obvious reason.
+* Kibana and possibly its backend ES server become extremely slow to response in recent months. ES node may fail due to no obvious reason. (maybe due to small heap size memory limitation)
 
 * Sometimes, ansible could render template host[0] as m instead of master, but it is not something wrong in template writing, since it happens nondeterminsticly! (pay attention to this, **a wrong rendering may lead to crash of ES cluster**)
 
