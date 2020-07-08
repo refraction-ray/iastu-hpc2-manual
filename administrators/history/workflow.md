@@ -40,7 +40,7 @@ After apply for a new serial number, you can obtain the licence file following t
 All extras in master nodes, keep the bottom line that all tasks on compute node should be merged into ansible workflow.
 
 * local nonsytem disk partition and make filesystem
-* hard disk mount and fstab configure (one time forever, required before **basic roles**, actually can easily merged into basic role)~~ already merged into ansible workflow
+* ~~hard disk mount and fstab configure (one time forever, required before **basic roles**, actually can easily merged into basic role)~~ already merged into ansible workflow
 * ~~Possible nvidia drivers install and reboot if GPU is available.~~(already merged into ansible workflow) Cuda and cudnn can be managed by spack.
 * quota initial configure (one time forever, required before **user roles)**
 * intel parallel studio install (one time forever) (no need to install before any roles, possible issue for python path maybe in **python roles**)
@@ -145,3 +145,9 @@ The insipration of standard workflow on software installation is from [this post
 * `mail` fails to send mail to tsinghua email from local. It is highly possible that tsinghua mta starts restricting this ip, since other ips can send mail successfully via the same command. And also elastaleart send from tsinghua mail also fails with the error `ERROR:root:Error while running alert email: Error connecting to SMTP host: SMTP AUTH extension not supported by server.`. It seems that tsinghua mail service block the cluster ip and deny service.
 
   Current workaround: Using relay machine to port forward, linking tsinghua mail 25 to relay 26 (25 is listened by relay local mail service), and set up smtp host as the relay machine in the cluster master with port 26. This works and indeed shows that master ip is on the blacklist of tsinghua mail service. (And relay seems to be blocked now...)
+
+* ulimit -u is still 2048 in tmux sessions, [so](https://stackoverflow.com/questions/37779824/processes-running-from-tmux-session-have-different-resource-limit/38932685). Maybe restart works, to be checked.
+
+* c3 offline slurm due to no explicit reason, slurmd cannot started due to ``slurmd-c3: error: Unable to register: Zero Bytes were transmitted or receivedslurmd-c3: debug:  Unable to register with slurm controller, retrying slurmd-c3: debug:  slurm_recv_timeout at 0 of 4, recv zero bytes``. Currently no clues.
+
+  Current workaround: reboot c3 solves this.

@@ -73,6 +73,8 @@ Out[6]: True
 
 **WIP:** shall check whether tensorflow-gpu is workable on cpu only device. Answer: see [so](https://stackoverflow.com/questions/42284528/how-can-i-use-tensorflow-without-cuda-on-linux), it seems that tensorflow-gpu binary can only be imported with gpu dirvers installed, let alone pre loaded cuda and cudnn. On contrast, gpu enabled torch requires none of them to exist. It is not good for tf being in this status, and it is also an unaccepteable solution for me to install gpu drivers on non-gpu nodes, this workaround is so ugly!!!
 
+**Update:** for tensorflow 2.0, GPU support is already included in usual pip release. And such pip version can be run in cpu alone machines, too. Therefore, to enable tf2.0+ with GPU support, just conda install corresponding tensorflow binary and spack load cuda@10.1 spack load cudnn@7.6, and you are all set.
+
 ### spark
 
 `spack install` as described in VM part. 
@@ -89,4 +91,4 @@ TODO: add `SPARK_HOME` to spark module file.
 
 ### bazel
 
-~~Follow [this](https://docs.bazel.build/versions/master/install-ubuntu.html) to add bazel repo into apt.~~ version too high for building tensorflow, the version window available to build tf i s RIDICULOUS narrow.
+~~Follow [this](https://docs.bazel.build/versions/master/install-ubuntu.html) to add bazel repo into apt.~~ version too high for building tensorflow, the version window available to build tf is RIDICULOUS narrow.
