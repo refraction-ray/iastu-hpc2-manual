@@ -92,3 +92,9 @@ TODO: add `SPARK_HOME` to spark module file.
 ### bazel
 
 ~~Follow [this](https://docs.bazel.build/versions/master/install-ubuntu.html) to add bazel repo into apt.~~ version too high for building tensorflow, the version window available to build tf is RIDICULOUS narrow.
+
+### Qiskit
+
+``pip install qiskit[visualization]`` in a new conda env, it requires around 100 third party package, so dont try installing it on your main env, some of the pakage may break. with visualization option, jupyter is automatically installed. And ``spack load intel-parallel-studio%intel`` may be necessary before pip install, otherwise qiskit may complain about blas not founding (though shouldn't be case). And one may meet all kinds of errors in the installation, just remove the env and create new one, then pip install again. There is no intrisic errors for the installation, but some thing may went wrong here and there...
+
+The default python version maybe 3.6.0 which has incomplete typing support and may induce error when using jupyter. One need make sure python in such conda env is no older than 3.6.8!

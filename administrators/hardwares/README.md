@@ -49,6 +49,24 @@ product no., the second digit is for the generation of Dell servers. 4 here is f
 
 Quicksync is optional for this version of server. Seems no quicksync in our machines.
 
+### Dell PowerEdge R640
+
+*1U rack server*
+
+We currently have **5** R640 server as our computation servers. (introduced on 2020.09.23)
+
+c10-c14
+
+#### specs
+
+Intel XEON 6238R 2.2 GHZ 28 cores 56 threads 38.5M \*2 
+
+12*32 G 2666 memory
+
+SSD 480G
+
+HDD 4T
+
 ## Others
 
 ### Rack

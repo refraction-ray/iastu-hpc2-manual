@@ -30,9 +30,13 @@ NFS dir living in HDD in c8, which is raid1, 4T*2, so it should be more reliable
 
 ## /tmp
 
-In general, the data files for task IO are recommended to save in `/DATA/<user>` dirs. However, these dirs are living in the master node, and other computation nodes access them via nfs, with a speed of order 100MByte/s, slower than local IO. Therefore, if IO speed is critical for your task, you can use /tmp dirs in computation nodes. These /tmp dir are living in the local SSD of each computation nodes individually which has size **500GB**. Note that /tmp in different nodes are different, they are not shared via LAN. If you choose /tmp as output file path, then after finish of the task, you need to transfer the output files back to the master nodes. Or equivalently, copy files from /tmp to /DATA.
+In general, the data files for task IO are recommended to save in `/DATA/<user>` dirs. However, these dirs are living in the master node, and other computation nodes access them via nfs, with a speed of order 100MByte/s, slower than local IO. Therefore, if IO speed is critical for your task, you can use /tmp dirs in computation nodes. 
 
-**Note:** files here get deleted automatically after 15 days!
+For c1 to c9 in general partition, these /tmp dir are living in the local SSD of each computation nodes individually which has size **500GB**. Note that /tmp in different nodes are different, they are not shared via LAN. If you choose /tmp as output file path, then after finish of the task, you need to transfer the output files back to the master nodes. Or equivalently, copy files from /tmp to /DATA.
+
+For c10 to c14 in hyper partition, /tmp is mounted as 4T local HDD with no recover guarantee (no raid setup). These /tmp are all local and cannot be accessed via master.
+
+**Note:** files here get deleted automatically after 15 days! Also note not to write the disk to full via /tmp write access, otherwise, your tmp file may be get deleted immediately.
 
 ## /BACKUP
 

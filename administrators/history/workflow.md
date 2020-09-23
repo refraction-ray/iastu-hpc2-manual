@@ -15,11 +15,11 @@ This section reviews some general workflow for daily administration on the clust
 
 ### add new compute nodes
 
-There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can open a simple http server in this dir on matser. On newly introduced nodes, just run `bash <(curl -s http://192.168.48.10:8000/bt.sh)`. And it is enough to run ansible workflows from master now.
+There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can open a simple http server in this dir on matser. On newly introduced nodes, `mkdir .ssh` as ubuntu user and just run `bash <(curl -s http://192.168.48.10:8000/bt.sh)` as root user. And it is enough to run ansible workflows from master now.
 
 ### after reboot
 
-* It is highly suggested that all ansible playbooks to be executed once reboot (at least network and basic and elk for compute node reboot).
+* It is highly suggested that all ansible playbooks to be executed once reboot (at least network and basic and elk for compute node reboot). 
 * config cgroup as `sudo cgconfigparser -l /etc/cgconfig.conf && sudo cgrulesengd`.
 * start tinc vpn by `sudo tincd -n debug`.
 * `sudo ethtool -K enp0s31f6 tso off gso off` on master if you like
@@ -27,7 +27,7 @@ There is bootstrap script hosted on master in /home/ubuntu/bootstrap. You can op
 * ~~hostname is not persistent by hostname module of ansible!! [see issue](https://github.com/ansible/ansible/issues/54755)~~ Solved by switch option in cloud.cfg.
 * MTU is not persistent by netplan, due to default cloud init in ubuntu (no good even after add mac match to netplan...)
 * may need to set `scontrol update nodename=cx state=IDLE` by hand to make them online again in slurm
-* for cn nodes, run `ansible-playbook -l cn[x-1] -Kvv site.yml` (non-persistent ones: start ntp, start filebeat, stop snap, enbale jumbo frame)
+* for cn nodes, run `ansible-playbook -l cn[x-1] -Kvv site.yml` (non-persistent ones: start ntp, start filebeat[?], stop snap, enbale jumbo frame)
 
 ### renew intel licence
 
