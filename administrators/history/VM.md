@@ -71,12 +71,13 @@ Final decision: change python under spack manage.
 
 ### NFS and NTP
 
-*NTP part can be controled by ansible later in production*
+*NTP part can be controlled by ansible later in production*
 
 * on master, `sudo apt install nfs-kernel-server`.
 * config `/etc/exports`, note there should not be any space after comma. `/opt 192.168.48.0/24 (rw,sync)`.
 * on node1, `sudo apt install nfs-common`, and `sudo showmount -e master`
 * `sudo mount -t nfs master:/opt /opt`
+* nfs config file path in ubuntu: ``/etc/default/nfs-kernel-server`` where one can change the number of daemons for nfs server.
 * remember to export PYTHONPATH in this node, and use python3, the external package works.
 * on master, `sudo install ntp ntpstat`, note there is a new toolset called timedatectl in ubuntu, be cautious.
 * edit `/etc/ntp.conf`, `sudo service ntp restart`

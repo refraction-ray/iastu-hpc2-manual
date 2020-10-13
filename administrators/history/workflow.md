@@ -138,7 +138,7 @@ The insipration of standard workflow on software installation is from [this post
 
   Workaround: the reason for this issue is missing /tmp/slurmd, which is deleted by tmpreaper if not used for a long time and this will lead failure of slumrd in these nodes. So just add ``TMPREAPER_PROTECT_EXTRA='/tmp/slurm*'`` in ``/etc/tmpreaper.conf``.
 
-* Kibana and possibly its backend ES server become extremely slow to response in recent months. ES node may fail due to no obvious reason. (maybe due to small heap size memory limitation)
+* Kibana and possibly its backend ES server become extremely slow to response in recent months. ES node may fail due to no obvious reason. (maybe due to small heap size memory limitation, **validated**)
 
 * Sometimes, ansible could render template host[0] as m instead of master, but it is not something wrong in template writing, since it happens nondeterminsticly! (pay attention to this, **a wrong rendering may lead to crash of ES cluster**)
 
@@ -146,8 +146,14 @@ The insipration of standard workflow on software installation is from [this post
 
   Current workaround: Using relay machine to port forward, linking tsinghua mail 25 to relay 26 (25 is listened by relay local mail service), and set up smtp host as the relay machine in the cluster master with port 26. This works and indeed shows that master ip is on the blacklist of tsinghua mail service. (And relay seems to be blocked now...)
 
-* ulimit -u is still 2048 in tmux sessions, [so](https://stackoverflow.com/questions/37779824/processes-running-from-tmux-session-have-different-resource-limit/38932685). Maybe restart works, to be checked.
+* ulimit -u is still 2048 in tmux sessions, [so](https://stackoverflow.com/questions/37779824/processes-running-from-tmux-session-have-different-resource-limit/38932685). Maybe restart works, to be checked. (**Validated**)
 
 * c3 offline slurm due to no explicit reason, slurmd cannot started due to ``slurmd-c3: error: Unable to register: Zero Bytes were transmitted or receivedslurmd-c3: debug:  Unable to register with slurm controller, retrying slurmd-c3: debug:  slurm_recv_timeout at 0 of 4, recv zero bytes``. Currently no clues.
 
   Current workaround: reboot c3 solves this.
+  
+* ``ureadahead[948]: ureadahead:..: Ignored relative path`` floods in syslog when restart, according to [stackoverflow](https://askubuntu.com/questions/749224/92-of-syslog-is-filled-with-message-regarding-ureadahead-ignoring-relative-pa) , it is normal that it occurs for a machine rebooting after more than 1 year which is common in HPC. such module make no sense and can be disabled in system service, but not tried since rebooting thing is not so common.
+
+* Possible stall in nfs client in compute nodes (cannot ssh since ``/home`` inaccessible and floods of log as ``RPC request reserved 108 but used 356``) such logs are often reported in nfs community, it is like a big bug happens for no reason and no explicit triggers but no solution have I found. 
+
+  Current workaround: hardware reboot corresponding node. This issue is extremely danagerous as it floods the log in master instead of compute node! and thus it may eat up all disks in master which is very dangerous, in case of that, we have explicitly set ``sudo setquota -u syslog 30G 50G 0 0 /`` on master to limit the max size of log files.
