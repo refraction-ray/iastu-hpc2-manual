@@ -36,6 +36,10 @@ Issue: cannot tune the from address beyond hostname, postfix cannot control `mai
 
 Just use a homemade super lightweighted monitoring script (add into crontab), instead of any sophisticate monitor systems. See a demo script [on the gist](https://gist.github.com/refraction-ray/4904205f157bd79cd23b4a11c5ac2428). In case, r1 is disconnected to the campus network such that the email cannot be sent, we also implementa curl to the cluster nginx, as `curl -XWARN` to record these warnings in nginx log and can be later viewed on kibana and the whole ELK stack on the cluster.
 
+### Fail2ban
+
+Have ``apt install fail2ban`` and apply sshd filters since ssh retry is too much in this machine
+
 ## Design principles
 
 The ultimate design goal or r1 is security. The aim is that even r1 is hacked, the hacker cannot get enough useful informations to threatened the security of the real cluster.

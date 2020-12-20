@@ -49,3 +49,7 @@ If your job requires lots of memory, it would be better to allocate the full nod
 By default the compute nodes can not be sshed unless you have some job on it. You can first `salloc -w c[n]` and then ssh into it.
 
 If you are asked about password, it is highly possible that you have messed up things in `~/.ssh`. Try generate a new pair of ssh keys by `ssh-keygen` and copy the id_rsa_pub content to add it in authorized_keys file in the same folder.
+
+### import numpy cause segment fault in c10-14
+
+Somehow the Ubuntu version is slightly different in new installed nodes c10-14. You may try create a new conda env with python3.8 and the following version of numpy ``conda install -c conda-forge numpy=1.19.4``
