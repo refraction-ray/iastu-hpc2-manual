@@ -290,6 +290,14 @@ ulimit config file in `/etc/security/limit.d`, see [demo](https://access.redhat.
 
 check by `ulimit -a` for individual users.
 
+### fail2ban
+
+https://hostadvice.com/how-to/how-to-setup-fail2ban-on-your-ubuntu-18-04-vps-server-or-dedicated-server/
+
+sudo apt install fail2ban
+
+``sudo fail2ban-client set sshd unbanip 166.``
+
 ### numa
 
 `apt install numactl`
@@ -457,6 +465,7 @@ $ sudo restic init --repo /BACKUP/restic
 $ sudo restic -r /BACKUP/restic backup /home
 $ sudo RESTIC_PASSWORD= restic -r /BACKUP/restic snapshots
 $ sudo RESTIC_PASSWORD="" restic -r /BACKUP/restic check
+$ sudo RESTIC_PASSWORD="" restic -r /BACKUP/restic unlock # if there is some stalled lock when check
 $ sudo RESTIC_PASSWORD="" restic -r /BACKUP/restic mount ./tmpmnt
 # RESTIC_PASSWORD="" restic -r /BACKUP/restic forget --keep-daily 5  --prune
 # RESTIC_PASSWORD="" /usr/bin/restic -r /BACKUP/restic backup --one-file-system / --exclude-file=/BACKUP/ignorefile
