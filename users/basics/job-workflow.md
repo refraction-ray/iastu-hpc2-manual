@@ -87,7 +87,7 @@ python calculate.py output-${SLURM_ARRAY_TASK_ID}.txt
 
 ### more options for sbatch and srun
 
-* specify partition: `-p gpu`
+* specify partition: `-p gpu/bigmem` (default is `general`)
 * specify account: `-A <account>`
 * specify qos: `-q <qos>`
 

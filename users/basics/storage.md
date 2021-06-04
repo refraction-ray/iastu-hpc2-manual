@@ -9,7 +9,7 @@ No matter where your files stored, it is highly recommend that all of your files
 **Rule of thumb**:
 
 * Source code and small scripts -> `/home/<user>`
-* Data files as output of program -> `/DATA` or `/DATA.c8`
+* Data files as output of program -> `/DATA` or `/DATA.c8` or `/DATA.c9`
 * Data files as output of program but IO speed is critical -> `/tmp`
 
 ## /home
@@ -27,6 +27,10 @@ Note that the default permission on `/DATA/<user>` is 755, which means that othe
 ## /DATA.c8
 
 NFS dir living in HDD in c8, which is raid1, 4T*2, so it should be more reliable that /DATA. Available size **4T** in total.
+
+## /DATA.c9
+
+NFS dir living in HDD in c9, which is raid5, 8T*6, so it should be more reliable that /DATA (less reliable than /DATA.c9). Available size **40T** in total.
 
 ## /tmp
 

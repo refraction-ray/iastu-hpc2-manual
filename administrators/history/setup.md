@@ -497,6 +497,10 @@ Approach to recover the whole OS in hard disk level: [post](https://forum.restic
 
 It seems that there is also smartd enabled as service.
 
+### RAID5 on c9
+
+(June 4, 2021) Six 8T HDD as hardware RAID5 are added in c9. It is mounted at /DATA.c9 and shared with other nodes via NFS. Remember to check the disk health in this RAID5 frequently (may be once a month) in case one disk is down in RAID5.
+
 ## some benchmarks
 
 ### network

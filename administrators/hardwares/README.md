@@ -30,13 +30,15 @@ We currently have **9** R740 as our computation nodes.
 
 Intel XEON Gold 5120 14 cores 28 threads * 2
 
-128G DDR4 memory
+128G DDR4 memory for [c1 - c3, c9], 256G DDR4 memory for [c4-c7], 512G DDR4 memory for c8
 
 512G SSD
 
 #### extra specs
 
-for c8, we have two extra 4T HDD (as hardware raid1), and for c9, we have two extra RTX2080Ti GPU cards
+for c8, we have two extra 4T HDD (as hardware raid1)
+
+ for c9, we have two extra RTX2080Ti GPU cards and 6 extra 8T HDD (as hardware raid5)
 
 #### misc
 
